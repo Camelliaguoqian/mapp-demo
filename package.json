@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "fastclick": "^1.0.6",
+    "vant": "^2.2.6",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"
   },
@@ -17,10 +19,11 @@
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.12.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.10"
   }
 }
