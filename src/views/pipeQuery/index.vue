@@ -1,5 +1,5 @@
 <template>
-  <div class="task-query-page page">
+  <div class="page">
     <van-nav-bar title="任务查询" 
     fixed 
     :zIndex="100" 
@@ -61,31 +61,6 @@
           />
         </van-popup>        
 
-        <van-field 
-          readonly
-          clickable
-          label="工单状态"
-          :value="status"
-          placeholder="请选择工单状态"
-          @click="showStatusPicker = true"
-        />
-        <van-popup v-model="showStatusPicker" position="bottom">
-          <van-picker 
-            show-toolbar
-            :columns="statusColumns"
-            @cancel="showStatusPicker = false"
-            @confirm="onConfirmStatus"
-          />
-        </van-popup>
-
-        <van-field
-          v-model="orderCode"
-          clearable
-          label="工单编码"
-          right-icon="question-o"
-          placeholder="请输入工单编码"
-          @click-right-icon="$toast('包含巡检任务和维修任务的工单编码')"
-        />
       </van-cell-group>
     </div>
 
@@ -101,7 +76,6 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from '@/utils/DateUtil'
 import { NavBar,
  Cell, 
  CellGroup,  
@@ -139,13 +113,9 @@ export default {
       endDate: new Date(),
       showStartDatePicker: false,
       showEndDatePicker: false,
-      orderCode: '',
       pipe: '',
       showPipePicker: false,
       pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
-      status: '',
-      showStatusPicker: false,
-      statusColumns: ['已完成','进行中','未完成'],
     }
   },
   methods: {
@@ -155,10 +125,6 @@ export default {
     onConfirmPipe(pipe) {
       this.pipe = pipe;
       this.showPipePicker = false;
-    },
-    onConfirmStatus(status) {
-      this.status = status;
-      this.showStatusPicker = false;
     },
     // onChangeStartDate(e) {
     //   let dateSelVal = e.getValues();
@@ -183,7 +149,7 @@ export default {
     onSubmit() {
       //console.log(this.$route); //通过 this.$route 访问当前路由
       //通过 this.$router 访问路由器
-      this.$router.push('taskQueryList');
+      this.$router.push('pipeQueryList');
 
     }
   }

@@ -4,9 +4,9 @@
 
     <div class="page-wrapper">
       <van-grid clickable :column-num="3">
-        <van-grid-item icon="peer-pay" text="巡检任务" url="/" />
-        <van-grid-item icon="debit-pay" text="维修任务" url="/" />
-        <van-grid-item icon="other-pay" text="更多" url="/" />
+        <van-grid-item icon="peer-pay" text="巡检任务" to="/taskSub/inspectionList" />
+        <van-grid-item icon="debit-pay" text="维修任务" to="/taskSub/repairList" />
+        <van-grid-item icon="other-pay" text="更多" to="/" />
       </van-grid>
     </div>
 

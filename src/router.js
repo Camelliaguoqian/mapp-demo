@@ -17,9 +17,19 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/login'
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('./views/login'),
+    meta: {
+      title: 'login',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/home',
     name: 'home',
     component: () => import('./views/home/index'),
     meta: {
@@ -28,34 +38,275 @@ const routes = [
     }
   },
   {
+    path: '/scan',
+    name: 'scan',
+    component: () => import('./views/scan/index.vue'),
+    meta: {
+      title: 'scan',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/work',
+    name: 'work',
+    component: () => import('./views/work/index.vue'),
+    meta: {
+      title: 'work',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/task',
     name: 'task',
     component: () => import('./views/task/index.vue'),
     meta: {
-      title: 'home',
+      title: 'task',
       isShowFooter: true
     }
   },
   {
-    name: 'message',
-    component: () => import('./views/message/index.vue'),
+    path: '/taskSub',
+    name: 'taskSub',
+    component: () => import('./views/task/subpage.vue'),
+    children: [
+      {
+        path: 'inspectionList',
+        name: 'inspectionList',
+        component: () => import('./views/task/inspection/list.vue'),
+        meta: {
+          title: 'inspectionList',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'inspectionDetail',
+        name: 'inspectionDetail',
+        component: () => import('./views/task/inspection/detail.vue'),
+        meta: {
+          title: 'inspectionDetail',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'inspectionTodo',
+        name: 'inspectionTodo',
+        component: () => import('./views/task/inspection/todo.vue'),
+        meta: {
+          title: 'inspectionTodo',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'inspectionTodoDetail',
+        name: 'inspectionTodoDetail',
+        component: () => import('./views/task/inspection/tododetail.vue'),
+        meta: {
+          title: 'inspectionTodoDetail',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'inspectionFeedback',
+        name: 'inspectionFeedback',
+        component: () => import('./views/task/inspection/feedback.vue'),
+        meta: {
+          title: 'inspectionFeedback',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'repairList',
+        name: 'repairList',
+        component: () => import('./views/task/repair/list.vue'),
+        meta: {
+          title: 'repairList',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'repairDetail',
+        name: 'repairDetail',
+        component: () => import('./views/task/repair/detail.vue'),
+        meta: {
+          title: 'repairDetail',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'repairFeedback',
+        name: 'repairFeedback',
+        component: () => import('./views/task/repair/feedback.vue'),
+        meta: {
+          title: 'repairFeedback',
+          isShowFooter: false
+        }
+      },
+    ],
     meta: {
-      title: 'home',
+      title: 'taskSub',
       isShowFooter: true
     }
   },
   {
+    path: '/message',
+    component: () => import('./views/message/index.vue'),
+    children: [
+      {
+        path: '',
+        name: 'messageHome',
+        component: () => import('./views/message/home/index.vue'),
+        meta: {
+          title: 'messageHome',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'messageAlarm',
+        name: 'messageAlarm',
+        component: () => import('./views/message/alarm/index.vue'),
+        meta: {
+          title: 'messageAlarm',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'messageNotice',
+        name: 'messageNotice',
+        component: () => import('./views/message/notice/index.vue'),
+        meta: {
+          title: 'messageNotice',
+          isShowFooter: false
+        }
+      }
+    ],
+    meta: {
+      title: 'message',
+      isShowFooter: true
+    }
+  },
+  {
+    path: '/user',
     name: 'user',
     component: () => import('./views/user/index.vue'),
     meta: {
-      title: 'home',
+      title: 'user',
       isShowFooter: true
     }
   },
   {
+    path: '/taskQuery',
     name: 'taskQuery',
     component: () => import('./views/taskQuery/index.vue'),
     meta: {
-      title: 'home',
+      title: 'taskQuery',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/taskQueryList',
+    name: 'taskQueryList',
+    component: () => import('./views/taskQuery/list.vue'),
+    meta: {
+      title: 'taskQueryList',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/alarmQuery',
+    name: 'alarmQuery',
+    component: () => import('./views/alarmQuery/index.vue'),
+    meta: {
+      title: 'alarmQuery',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/alarmQueryList',
+    name: 'alarmQueryList',
+    component: () => import('./views/alarmQuery/list.vue'),
+    meta: {
+      title: 'alarmQueryList',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/pipeQuery',
+    name: 'pipeQuery',
+    component: () => import('./views/pipeQuery/index.vue'),
+    meta: {
+      title: 'pipeQuery',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/pipeQueryList',
+    name: 'pipeQueryList',
+    component: () => import('./views/pipeQuery/list.vue'),
+    meta: {
+      title: 'pipeQueryList',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/pipelineQuery',
+    name: 'pipelineQuery',
+    component: () => import('./views/pipelineQuery/index.vue'),
+    meta: {
+      title: 'pipelineQuery',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/pipelineQueryList',
+    name: 'pipelineQueryList',
+    component: () => import('./views/pipelineQuery/list.vue'),
+    meta: {
+      title: 'pipelineQueryList',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/deviceQuery',
+    name: 'deviceQuery',
+    component: () => import('./views/deviceQuery/index.vue'),
+    meta: {
+      title: 'deviceQuery',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/deviceQueryList',
+    name: 'deviceQueryList',
+    component: () => import('./views/deviceQuery/list.vue'),
+    meta: {
+      title: 'deviceQueryList',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/environmentalMonitoring',
+    name: 'environmentalMonitoring',
+    component: () => import('./views/environmentalMonitoring/index.vue'),
+    meta: {
+      title: 'environmentalMonitoring',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/environmentalMonitoringList',
+    name: 'environmentalMonitoringList',
+    component: () => import('./views/environmentalMonitoring/list.vue'),
+    meta: {
+      title: 'environmentalMonitoringList',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/statistic',
+    name: 'statistic',
+    component: () => import('./views/statistic/index.vue'),
+    meta: {
+      title: 'statistic',
       isShowFooter: false
     }
   },
@@ -66,7 +317,16 @@ routes.forEach(route => {
 });
 
 const router = new VueRouter({ 
-  routes 
+  // mode: 'history',
+  routes: routes,
+  //滚动行为。这个功能只在支持 history.pushState 的浏览器中可用
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+  }
 });
 
 router.beforeEach((to, from, next) => {

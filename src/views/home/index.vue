@@ -6,8 +6,8 @@
 
     <section class="page-wrapper">
       <van-grid clickable :column-num="2">
-        <van-grid-item icon="scan" text="扫一扫" url="/" />
-        <van-grid-item icon="friends-o" text="工作" url="/" />
+        <van-grid-item icon="scan" text="扫一扫" @click="scanTest" />
+        <van-grid-item icon="friends-o" text="工作" to="/work" />
       </van-grid>
     </section>
 
@@ -61,6 +61,8 @@
 
 <script>
 import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import { NavBar, 
 Panel, 
 Icon, 
@@ -69,8 +71,11 @@ GridItem,
 NoticeBar, 
 Step, 
 Steps, 
-Divider } from 'vant'
+Divider,
+Toast } from 'vant'
+import Mplat from '@/utils/Mplat'
 
+Vue.use(VueAxios, axios)
 Vue.use(NavBar)
 .use(Panel)
 .use(Icon)
@@ -80,6 +85,7 @@ Vue.use(NavBar)
 .use(Step)
 .use(Steps)
 .use(Divider)
+.use(Toast)
 
 export default {
   props: {
@@ -106,32 +112,32 @@ export default {
         id: 2,
         name: '报警查询',
         icon: 'bulb-o',
-        url: '/',
+        url: '/alarmQuery',
       },{
         id: 3,
         name: '管廊查询',
         icon: 'shop-o',
-        url: '/',
+        url: '/pipeQuery',
       },{
         id: 4,
         name: '管线查询',
         icon: 'description',
-        url: '/',
+        url: '/pipelineQuery',
       },{
         id: 5,
         name: '设备查询',
         icon: 'aim',
-        url: '/',
+        url: '/deviceQuery',
       },{
         id: 6,
         name: '环境监测',
         icon: 'tv-o',
-        url: '/',
+        url: '/environmentalMonitoring',
       },{
         id: 7,
         name: '统计分析',
         icon: 'chart-trending-o',
-        url: '/',
+        url: '/statistic',
       },{
         id: 8,
         name: '更多',
@@ -185,6 +191,27 @@ export default {
   methods: {
     onClickNavLink: function () {
       
+    },
+    //测试Mplat调用原生api的scan功能
+    scanTest: function () {
+      Toast('二维码扫描成功');
+      this.$router.push('scan');
+
+      //调用移动框架接口
+      Mplat.init(function(){
+        Toast('初始化');
+        //Mplat.getUserInfos();
+        Mplat.scanGetCode({
+        params: {
+          "width":"",
+          "height":""
+          },
+          callback: function(data) {
+            var result=eval("(" + data + ")");
+            Toast(result);
+          }
+    })
+      });
     }
   }
 }

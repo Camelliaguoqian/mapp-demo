@@ -1,5 +1,5 @@
 <template>
-  <div class="task-query-page page">
+  <div class="page">
     <van-nav-bar title="任务查询" 
     fixed 
     :zIndex="100" 
@@ -25,66 +25,52 @@
           />
         </van-popup>
 
-        <van-field 
+       <van-field 
           readonly
           clickable
-          label="起始时间"
-          :value="startDateVal"
-          placeholder="请选择起始时间"
-          @click="showStartDatePicker = true"
+          label="舱室类别"
+          :value="cabinType"
+          placeholder="请选择舱室类别"
+          @click="showCabinTypePicker = true"
         />
-        <van-popup v-model="showStartDatePicker" position="bottom">
-          <van-datetime-picker 
-            v-model="startDate"
-            type="date"
-            :min-date="minDate"
-            @cancel="showStartDatePicker = false"
-            @confirm="onConfirmStartDate"
+        <van-popup v-model="showCabinTypePicker" position="bottom">
+          <van-picker 
+            show-toolbar
+            :columns="cabinTypeColumns"
+            @cancel="showCabinTypePicker = false"
+            @confirm="onConfirmCabinType"
           />
         </van-popup>
 
         <van-field 
           readonly
           clickable
-          label="终止时间"
-          :value="endDateVal"
-          placeholder="请选择终止时间"
-          @click="showEndDatePicker = true"
+          label="管线类别"
+          :value="pipelineType"
+          placeholder="请选择管线类别"
+          @click="showPipelineTypePicker = true"
         />
-        <van-popup v-model="showEndDatePicker" position="bottom">
-          <van-datetime-picker 
-            v-model="endDate"
-            type="date"
-            :min-date="minDate"
-            @cancel="showEndDatePicker = false"
-            @confirm="onConfirmEndDate"
-          />
-        </van-popup>        
-
-        <van-field 
-          readonly
-          clickable
-          label="工单状态"
-          :value="status"
-          placeholder="请选择工单状态"
-          @click="showStatusPicker = true"
-        />
-        <van-popup v-model="showStatusPicker" position="bottom">
+        <van-popup v-model="showPipelineTypePicker" position="bottom">
           <van-picker 
             show-toolbar
-            :columns="statusColumns"
-            @cancel="showStatusPicker = false"
-            @confirm="onConfirmStatus"
+            :columns="pipelineTypeColumns"
+            @cancel="showPipelineTypePicker = false"
+            @confirm="onConfirmPipelineType"
           />
         </van-popup>
 
         <van-field
-          v-model="orderCode"
+          v-model="unit"
           clearable
-          label="工单编码"
-          right-icon="question-o"
-          placeholder="请输入工单编码"
-          @click-right-icon="$toast('包含巡检任务和维修任务的工单编码')"
+          label="权属单位"
+          placeholder="请输入权属单位"
+        />
+
+        <van-field
+          v-model="pipelineCode"
+          clearable
+          label="管线编码"
+          placeholder="请输入管线编码"
         />
       </van-cell-group>
     </div>
@@ -101,7 +87,6 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from '@/utils/DateUtil'
 import { NavBar,
  Cell, 
  CellGroup,  
@@ -139,13 +124,17 @@ export default {
       endDate: new Date(),
       showStartDatePicker: false,
       showEndDatePicker: false,
-      orderCode: '',
       pipe: '',
       showPipePicker: false,
       pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
-      status: '',
-      showStatusPicker: false,
-      statusColumns: ['已完成','进行中','未完成'],
+      cabinType: '',
+      showCabinTypePicker: false,
+      cabinTypeColumns: ['1舱','2舱','4舱'],
+      pipelineType: '',
+      showPipelineTypePicker: false,
+      pipelineTypeColumns: ['污水管','给水管'],
+      unit: '',
+      pipelineCode: ''
     }
   },
   methods: {
@@ -156,34 +145,18 @@ export default {
       this.pipe = pipe;
       this.showPipePicker = false;
     },
-    onConfirmStatus(status) {
-      this.status = status;
-      this.showStatusPicker = false;
+    onConfirmCabinType(cabinType) {
+      this.cabinType = cabinType;
+      this.showCabinTypePicker = false;
     },
-    // onChangeStartDate(e) {
-    //   let dateSelVal = e.getValues();
-    //   this.startDateVal = dateSelVal[0] + '-' + dateSelVal[1] + '-' + dateSelVal[2];
-    // },
-    // onChangeEndDate(e) {
-    //   let dateSelVal = e.getValues();
-    //   this.endDateVal = dateSelVal[0] + '-' + dateSelVal[1] + '-' + dateSelVal[2];
-    // },
-    onConfirmStartDate(val) {
-      console.log(val);
-      let currentVal = DateUtil.format(val,'YYYY-MM-DD');
-      this.startDateVal = currentVal;
-      this.showStartDatePicker = false;
-    },
-    onConfirmEndDate(val) {
-      console.log(val);
-      let currentVal = DateUtil.format(val,'YYYY-MM-DD');
-      this.endDateVal = currentVal;
-      this.showEndDatePicker = false;
+    onConfirmPipelineType(pipelineType) {
+      this.pipelineType = pipelineType;
+      this.showPipelineTypePicker = false;
     },
     onSubmit() {
       //console.log(this.$route); //通过 this.$route 访问当前路由
       //通过 this.$router 访问路由器
-      this.$router.push('taskQueryList');
+      this.$router.push('pipelineQueryList');
 
     }
   }

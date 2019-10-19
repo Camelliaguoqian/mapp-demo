@@ -14,8 +14,8 @@
 
 <script>
 // @ is an alias to /src
-// import TheHeader from '@/components/common/TheHeader.vue'
-import TheFooter from '@/components/common/TheFooter.vue'
+// import TheHeader from '@/components/common/TheHeader'
+import TheFooter from '@/components/common/TheFooter'
 
 export default {
   components: {

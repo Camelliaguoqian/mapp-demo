@@ -1,6 +1,6 @@
 <template>
-  <div class="task-query-page page">
-    <van-nav-bar title="任务查询" 
+  <div class="page">
+    <van-nav-bar title="报警查询" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -22,6 +22,74 @@
             :columns="pipeColumns"
             @cancel="showPipePicker = false"
             @confirm="onConfirmPipe"
+          />
+        </van-popup>
+
+        <van-field 
+          readonly
+          clickable
+          label="分区"
+          :value="zone"
+          placeholder="请选择分区"
+          @click="showZonePicker = true"
+        />
+        <van-popup v-model="showZonePicker" position="bottom">
+          <van-picker 
+            show-toolbar
+            :columns="zoneColumns"
+            @cancel="showZonePicker = false"
+            @confirm="onConfirmZone"
+          />
+        </van-popup>
+
+        <van-field 
+          readonly
+          clickable
+          label="舱室"
+          :value="cabin"
+          placeholder="请选择舱室"
+          @click="showCabinPicker = true"
+        />
+        <van-popup v-model="showCabinPicker" position="bottom">
+          <van-picker 
+            show-toolbar
+            :columns="cabinColumns"
+            @cancel="showCabinPicker = false"
+            @confirm="onConfirmCabin"
+          />
+        </van-popup>
+
+        <van-field 
+          readonly
+          clickable
+          label="系统名称"
+          :value="system"
+          placeholder="请选择系统名称"
+          @click="showSystemPicker = true"
+        />
+        <van-popup v-model="showSystemPicker" position="bottom">
+          <van-picker 
+            show-toolbar
+            :columns="systemColumns"
+            @cancel="showSystemPicker = false"
+            @confirm="onConfirmSystem"
+          />
+        </van-popup>
+
+        <van-field 
+          readonly
+          clickable
+          label="告警级别"
+          :value="level"
+          placeholder="请选择告警级别"
+          @click="showLevelPicker = true"
+        />
+        <van-popup v-model="showLevelPicker" position="bottom">
+          <van-picker 
+            show-toolbar
+            :columns="levelColumns"
+            @cancel="showLevelPicker = false"
+            @confirm="onConfirmLevel"
           />
         </van-popup>
 
@@ -61,31 +129,7 @@
           />
         </van-popup>        
 
-        <van-field 
-          readonly
-          clickable
-          label="工单状态"
-          :value="status"
-          placeholder="请选择工单状态"
-          @click="showStatusPicker = true"
-        />
-        <van-popup v-model="showStatusPicker" position="bottom">
-          <van-picker 
-            show-toolbar
-            :columns="statusColumns"
-            @cancel="showStatusPicker = false"
-            @confirm="onConfirmStatus"
-          />
-        </van-popup>
-
-        <van-field
-          v-model="orderCode"
-          clearable
-          label="工单编码"
-          right-icon="question-o"
-          placeholder="请输入工单编码"
-          @click-right-icon="$toast('包含巡检任务和维修任务的工单编码')"
-        />
+    
       </van-cell-group>
     </div>
 
@@ -143,9 +187,18 @@ export default {
       pipe: '',
       showPipePicker: false,
       pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
-      status: '',
-      showStatusPicker: false,
-      statusColumns: ['已完成','进行中','未完成'],
+      zone: '',
+      showZonePicker: false,
+      zoneColumns: ['分区01','分区02','分区03'],
+      cabin: '',
+      showCabinPicker: false,
+      cabinColumns: ['综合舱','燃气舱','电力舱','热力舱'],
+      system: '',
+      showSystemPicker: false,
+      systemColumns: ['监测与环控系统','排水系统'],
+      level: '',
+      showLevelPicker: false,
+      levelColumns: ['一级','二级','三级','四级'],
     }
   },
   methods: {
@@ -156,9 +209,21 @@ export default {
       this.pipe = pipe;
       this.showPipePicker = false;
     },
-    onConfirmStatus(status) {
-      this.status = status;
-      this.showStatusPicker = false;
+    onConfirmZone(zone) {
+      this.zone = zone;
+      this.showZonePicker = false;
+    },
+    onConfirmCabin(cabin) {
+      this.cabin = cabin;
+      this.showCabinPicker = false;
+    },
+    onConfirmSystem(system) {
+      this.system = system;
+      this.showSystemPicker = false;
+    },
+    onConfirmLevel(level) {
+      this.level = level;
+      this.showLevelPicker = false;
     },
     // onChangeStartDate(e) {
     //   let dateSelVal = e.getValues();
@@ -183,7 +248,7 @@ export default {
     onSubmit() {
       //console.log(this.$route); //通过 this.$route 访问当前路由
       //通过 this.$router 访问路由器
-      this.$router.push('taskQueryList');
+      this.$router.push('alarmQueryList');
 
     }
   }
