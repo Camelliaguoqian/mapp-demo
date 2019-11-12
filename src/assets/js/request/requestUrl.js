@@ -3,7 +3,12 @@
  */
  
 let url = {
-  userLogin: '/user/login' // 接口地址（乱写的）
+  //登录
+  userLogin: '/user/login',
+
+  //退出登录
+  userLoginOut: '/logout',
+
 }
  
 export default {
