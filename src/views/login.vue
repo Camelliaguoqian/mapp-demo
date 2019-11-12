@@ -1,80 +1,96 @@
 <template>
-  <form class="login-form" @submit="doSubmit">
+  <div class="login-form">
     <h1>
       <span>黑龙江路综合管控平台</span>
     </h1>
     
+    <!-- 登录页 用户表单 -->
     <van-cell-group>
       <van-field
-        placeholder="请输入用户名"
-        v-model="username"
+        v-model="userCode"
         clearable
         label="用户名"
-        class="login-input"
-        :error-message="errorUserMsg"
+        right-icon="question-o"
+        placeholder="请输入用户名"
+        left-icon="contact"
+        @click-right-icon="$toast('用户名必须是手机号')"
       />
-
+      
       <van-field
-        placeholder="请输入密码"
-        v-model="password"
+        v-model="userPwd"
+        clearable
         type="password"
         label="密码"
-        class="login-input"
-        :error-message="errorPsdMsg"
+        right-icon="question-o"
+        placeholder="请输入密码"
+        left-icon="closed-eye"
+        @click-right-icon="$toast('密码必须是数字、字母、下划线')"
       />
+      <!--登录按钮-->
+      <div class="login-btn"><van-button type="info" size="large" @click="onClickButtonSubmit">登录</van-button></div>
     </van-cell-group>
 
-    <van-button type="info" size="large" class="login-btn">登录</van-button>
-  </form>
+  </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Field, Cell, CellGroup, Button} from 'vant'
+import { Field, Cell, CellGroup, Button, Toast} from 'vant'
+
 
 Vue.use(Field)
 .use(Cell)
 .use(CellGroup)
 .use(Button)
+.use(Toast)
+
 
 export default {
-  metaInfo: {
-    title: 'Login Page'
-  },
+  name: 'login',
   data () {
     return {
-      username: '',
-      password: '',
-      errorUserMsg: '',
-      errorPsdMsg: ''
+      errors: [],
+      userCode: '',
+      userPwd: ''
     }
   },
   methods: {
-    doSubmit (e) {
-      e.preventDefault();
-      if (this.validate()) {
-        // 调用接口
-        this.login({
-          username: this.username,
-          password: this.password
-        })
-        .then(() => {
-          this.$router.replace('/home');
+    // 表单提交
+    onClickButtonSubmit: function (e,userCode,userPwd) {
+      if(this.userCode == ''){
+        this.$toast("用户名不能为空");
+        return false;
+      }
+      if(this.userPwd == ''){
+        this.$toast("密码不能为空");
+        return false;
+      }
+      else{
+        let that=this; // 放置指针，便于then操作的获取
+        let md5UserPwd = this.$md5(this.userPwd);
+
+        this.request.httpPost(this.requestUrl.userLogin, {
+          userCode: this.userCode,
+          userPwd: md5UserPwd}
+        ).then(data => {
+          console.log(data);
+          let reslutData = data;  
+          console.log(reslutData.retCode)
+          if(reslutData.retCode === "SUCCESS"){
+            this.$toast(reslutData.retMsg);
+            //登录成功到首页
+            this.$router.replace('/home');
+          }
+          if(reslutData.retCode === "FAIL"){
+            this.$toast(reslutData.retMsg);
+          }  
+
+        }).catch((error) => {
+          this.$toast("请求失败"+error);
         });
+        
+        e.preventDefault();
       }
-    },
-    validate () {
-      if (!this.username.trim()) {
-        this.errorUserMsg = '姓名不能为空';
-        return false;
-      }
-      else if (!this.password.trim()) {
-        this.errorPsdMsg = '密码不能为空';
-        return false;
-      }
-      this.errorUserMsg = '';
-      this.errorPsdMsg = '';
-      return true;
     }
   }
 }

@@ -163,18 +163,36 @@ const routes = [
       {
         path: 'messageAlarm',
         name: 'messageAlarm',
-        component: () => import('./views/message/alarm/index.vue'),
+        component: () => import('./views/message/alarm/list.vue'),
         meta: {
           title: 'messageAlarm',
           isShowFooter: false
         }
       },
       {
+        path: 'messageAlarmDetail',
+        name: 'messageAlarmDetail',
+        component: () => import('./views/message/alarm/detail.vue'),
+        meta: {
+          title: 'messageAlarmDetail',
+          isShowFooter: false
+        }
+      },
+      {
         path: 'messageNotice',
         name: 'messageNotice',
-        component: () => import('./views/message/notice/index.vue'),
+        component: () => import('./views/message/notice/list.vue'),
         meta: {
           title: 'messageNotice',
+          isShowFooter: false
+        }
+      },
+      {
+        path: 'messageNoticeDetail',
+        name: 'messageNoticeDetail',
+        component: () => import('./views/message/notice/detail.vue'),
+        meta: {
+          title: 'messageNoticeDetail',
           isShowFooter: false
         }
       }
@@ -191,6 +209,24 @@ const routes = [
     meta: {
       title: 'user',
       isShowFooter: true
+    }
+  },
+  {
+    path: '/basicUser',
+    name: 'basicUser',
+    component: () => import('./views/user/basicUser.vue'),
+    meta: {
+      title: 'basicUser',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/passwordModify',
+    name: 'passwordModify',
+    component: () => import('./views/user/passwordModify.vue'),
+    meta: {
+      title: 'passwordModify',
+      isShowFooter: false
     }
   },
   {

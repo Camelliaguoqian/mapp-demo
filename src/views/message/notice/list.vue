@@ -1,0 +1,80 @@
+<template>
+  <div class="page-inner">
+    <van-nav-bar title="通知消息" 
+    fixed 
+    :zIndex="100" 
+    left-arrow 
+    @click-left="goBack"></van-nav-bar>
+
+    <section class="page-wrapper">
+      <!-- list子组件调用 -->
+      <message-list v-bind:listdata="noticelist"></message-list>
+    </section>
+
+  </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import DateUtil from '@/utils/DateUtil'
+import { NavBar,
+ Panel,  
+ Icon,
+} from 'vant'
+import MessageList from '@/components/list/MessageList'
+
+Vue.use(NavBar)
+.use(Panel)
+.use(Icon)
+
+
+export default {
+  props: {
+    zIndex: Number,
+  },
+  components: {
+    'message-list': MessageList
+  },
+  data() {
+    return {
+      noticelist: [
+        {
+          id: '1',
+          title: '应急通知',
+          time: '2019-10-08 09：00：00',
+          status: '已读',
+          type: 'read',
+          url: '/message/messageNoticeDetail',
+        },
+        {
+          id: '2',
+          title: '应急通知',
+          time: '2019-10-09 09：00：00',
+          status: '未读',
+          type: 'unread',
+          url: '/message/messageNoticeDetail',
+        },
+        {
+          id: '2',
+          title: '应急通知',
+          time: '2019-10-11 09：00：00',
+          status: '未读',
+          type: 'unread',
+          url: '/message/messageNoticeDetail',
+        },
+      ],
+    };
+  },
+  methods: {
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+  }
+}
+</script>
+
+<style lang="less" scoped>
+
+</style>
+
+

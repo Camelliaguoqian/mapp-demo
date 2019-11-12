@@ -56,13 +56,13 @@
       </van-divider>
     </section>
 
+    <!-- 底部tab栏组件 -->
+    <v-footer></v-footer>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 import { NavBar, 
 Panel, 
 Icon, 
@@ -74,8 +74,8 @@ Steps,
 Divider,
 Toast } from 'vant'
 import Mplat from '@/utils/Mplat'
+import TheFooter from '@/components/common/TheFooter'
 
-Vue.use(VueAxios, axios)
 Vue.use(NavBar)
 .use(Panel)
 .use(Icon)
@@ -92,6 +92,7 @@ export default {
     zIndex: Number,
   },
   components: {
+    'v-footer': TheFooter
     // [NavBar.name]: NavBar,
     // [Icon.name]: Icon,
     // [Grid.name]: Grid,
@@ -219,6 +220,7 @@ export default {
 
 <style lang="less">
 .page {
+  padding: 46px 0 50px 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

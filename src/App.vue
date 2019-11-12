@@ -8,25 +8,25 @@
     <router-view/>
 
     <!-- 底部tab栏组件 -->
-    <v-footer></v-footer>
+    <!-- <v-footer></v-footer> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import TheHeader from '@/components/common/TheHeader'
-import TheFooter from '@/components/common/TheFooter'
+// import TheFooter from '@/components/common/TheFooter'
 
 export default {
   components: {
     // 'v-header': TheHeader,
-    'v-footer': TheFooter
+    // 'v-footer': TheFooter
   }
 }
 </script>
 
 <style lang="less">
-  #app {
-    padding: 46px 0 50px 0;
-  }
+  // #app {
+  //   padding: 46px 0 50px 0;
+  // }
 </style>

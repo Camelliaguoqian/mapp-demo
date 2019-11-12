@@ -11,6 +11,7 @@
     </section>
 
     <section class="page-wrapper">
+      <control-card v-bind:listdata="deviceControl"></control-card>
       <info-card v-bind:listdata="devicelist"></info-card>
     </section>
 
@@ -25,6 +26,7 @@ import { NavBar,
  Tab,
  Tabs,
 } from 'vant'
+import ControlCard from '@/components/list/ControlCard'
 import InfoCard from '@/components/list/InfoCard'
 
 Vue.use(NavBar)
@@ -38,14 +40,32 @@ export default {
     zIndex: Number,
   },
   components: {
+    "control-card": ControlCard,
     "info-card": InfoCard
   },
   data() {
     return {
+      deviceControl: {
+        isControled: "已开启",
+        valueData: [
+          {
+            label: "当前状态",
+            value: "打开",
+          },
+          {
+            label: "当前转速",
+            value: "1200RPM",
+          },
+          {
+            label: "当前风量",
+            value: "20M³/S",
+          },
+        ],
+      },
       devicelist: [
         {
           label: "设备名称",
-          value: "摄像头",
+          value: "管廊摄像头",
         },
         {
           label: "设备类型",

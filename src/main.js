@@ -2,8 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import { router } from './router'
 import Fastclick from 'fastclick'
+import md5 from 'js-md5' 
+import request from '@/assets/js/request/api.js'
+import requestUrl from '@/assets/js/request/requestUrl.js'
+ 
 
 Vue.config.productionTip = false
+Vue.prototype.$md5 = md5
+Vue.prototype.request = request
+Vue.prototype.requestUrl = requestUrl.url
+
 
 new Vue({
   router,

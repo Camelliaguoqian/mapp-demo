@@ -1,5 +1,5 @@
 <template>
-  <div class="message-page page">
+  <div class="page-inner">
     <van-nav-bar title="消息中心" fixed :zIndex="100"></van-nav-bar>
 
     <van-panel class="page-panel page-icon-panel">
@@ -165,7 +165,9 @@
 
       </div>
     </van-panel>
-    
+
+    <!-- 底部tab栏组件 -->
+    <v-footer></v-footer>
   </div>
 </template>
 
@@ -186,6 +188,7 @@ import { NavBar,
  Steps, 
  Circle,
  Button } from 'vant'
+ import TheFooter from '@/components/common/TheFooter'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -208,7 +211,7 @@ export default {
     zIndex: Number,
   },
   components: {
-    
+    'v-footer': TheFooter
   },
   data () {
     return {
@@ -229,6 +232,7 @@ export default {
 
 <style lang="less">
 .page {
+  padding: 46px 0 50px 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

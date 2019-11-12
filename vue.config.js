@@ -6,7 +6,10 @@ function resolve(dir) {
 }
 
 module.exports = {
-  publicPath: './',
+  // 部署应用包时的基本 URL。
+  publicPath: process.env.NODE_ENV === 'production'
+  ? './'
+  : '/',
 
   // 输出文件目录
   outputDir: 'dist',
@@ -64,17 +67,12 @@ module.exports = {
   // webpack-dev-server 相关配置
   // 开发环境代理
   devServer: {
-    port:5000,
-    //果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。
+    host: '0.0.0.0', // 地址
+    port: 8080, // 端口
+    //如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。
     //这个问题可以通过 vue.config.js 中的 devServer.proxy 选项来配置。
     //devServer.proxy 可以是一个指向开发环境 API 服务器的字符串：
-    proxy: {
-      '/api': {
-        target: 'http://localhost:4000',
-        ws: true,
-        changeOrigin: true
-      },
-    }
+    proxy: 'http://192.168.50.215:8080'
   },
 
   //这是一个不进行任何 schema 验证的对象，因此它可以用来传递任何第三方插件选项。

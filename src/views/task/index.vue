@@ -188,6 +188,8 @@
       </van-divider>
     </section>
 
+    <!-- 底部tab栏组件 -->
+    <v-footer></v-footer>
   </div>
 </template>
 
@@ -208,6 +210,7 @@ import { NavBar,
  Steps, 
  Circle,
  Divider } from 'vant'
+ import TheFooter from '@/components/common/TheFooter'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -230,7 +233,7 @@ export default {
     zIndex: Number,
   },
   components: {
-    
+    'v-footer': TheFooter
   },
   data () {
     return {
@@ -272,6 +275,7 @@ export default {
 
 <style lang="less">
 .page {
+  padding: 46px 0 50px 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

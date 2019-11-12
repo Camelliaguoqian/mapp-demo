@@ -37,17 +37,22 @@ export default {
   .card {
     margin: 0 auto;
     padding: 10px;
-    width: 70%;
+    width: 90%;
     border-radius: 3%;
     background-color: #fff;
+    box-shadow: #ddd 0 0 10px 5px;
     &-item {
+      margin-bottom: 20px;
       line-height: 24px;
       &-label {
+        line-height: 30px;
+        font-size: 18px;
+        font-weight: bolder;
         color: #333;
       }
 
       &-value {
-        color: #666;
+        color: #999;
       }
 
     }
