@@ -71,9 +71,10 @@ export default {
   methods: {
     //退出登录
     loginOut: function() {
-      this.request.httpPost(this.requestUrl.userLoginOut).then(data => {  
+      this.request.httpPost(this.requestUrl.userLoginOut)
+      .then(data => {
         //退出登录
-        this.$router.push('/login');
+        this.$router.replace('/login');
       });
       
     }

@@ -7,7 +7,7 @@ let url = {
   userLogin: '/user/login',
 
   //退出登录
-  userLoginOut: '/logout',
+  userLoginOut: '/user/logout',
 
 }
  
