@@ -9,6 +9,9 @@ let url = {
   //退出登录
   userLoginOut: '/user/logout',
 
+  //工作任务
+  workTaskList: '/homePage/taskSearch',
+
 }
  
 export default {

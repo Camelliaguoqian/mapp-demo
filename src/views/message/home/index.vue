@@ -6,115 +6,102 @@
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
         告警分析
-        <van-button class="panel-title-link" 
-        icon="arrow" 
-        type="primary" 
-        size="small"
-        to="/message/messageAlarm">告警消息</van-button>
       </div>
       <div class="page-panel-content page-icon-panel-content">
-        <van-tag mark type="primary">今日告警</van-tag>
-        <van-row class="infomation-list">
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
-            <div class="item-label">总数</div>
-            <div class="item-value">48</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
-            <div class="item-label">已解除</div>
-            <div class="item-value">32</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
-            <div class="item-label">未解除</div>
-            <div class="item-value">16</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
-            <div class="item-label">解除率</div>
-            <div class="item-value">
-              <van-circle
-                v-model="currentRate"
-                size="50px"
-                :color="gradientColor"
-                layer-color="#f8f8f8"
-                :rate="66.7"
-                :speed="100"         
-                :text="text"
-              />
+        <van-tabs v-model="activeName">
+          <van-tab name="todayAlarm">
+            <div slot="title">
+              <van-icon name="bulb-o" />今日告警
             </div>
-          </van-col>
-        </van-row>
+            <!-- 内容 -->
+            <div class="pd-top-10">
+              <!-- <van-tag mark type="primary">今日告警</van-tag> -->
+              <van-grid class="infomation-list" :column-num="4">
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">总数</div>
+                  <div class="item-value">48</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">已解除</div>
+                  <div class="item-value">32</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">未解除</div>
+                  <div class="item-value">16</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">解除率</div>
+                  <div class="item-value">
+                    <van-circle
+                      v-model="currentRate"
+                      size="50px"
+                      :color="gradientColor"
+                      layer-color="#f8f8f8"
+                      :rate="66.7"
+                      :speed="100"         
+                      :text="text"
+                    />
+                  </div>
+                </van-grid-item>
+              </van-grid>
 
-        <!-- 系统列表 -->
-        <van-row class="infomation-list">
-          <van-col class="infomation-list-item van-hairline--surround" span="12">
-            <div class="item-label">监控与报警系统</div>
-            <div class="item-value">38</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="12">
-            <div class="item-label">消防系统</div>
-            <div class="item-value">0</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">通风系统</div>
-            <div class="item-value">2</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">排水系统</div>
-            <div class="item-value">8</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">照明系统</div>
-            <div class="item-value">0</div>
-          </van-col>
-        </van-row>
+              <!-- 系统列表 -->
+              <van-grid class="infomation-list" :column-num="2">
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">监控与报警系统</div>
+                  <div class="item-value">38</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">消防系统</div>
+                  <div class="item-value">0</div>
+                </van-grid-item>
+              </van-grid>
+            </div>
+          </van-tab>
+          <van-tab name="historyAlarm">
+            <div slot="title">
+              <van-icon name="bulb-o" />历史告警
+            </div>
+            <!-- 内容 -->
+            <div class="pd-top-10">
+              <!-- <van-tag mark type="warning">历史告警</van-tag> -->
+              <van-grid class="infomation-list" :column-num="5">
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">总数</div>
+                  <div class="item-value">1208</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">一级</div>
+                  <div class="item-value">108</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">二级</div>
+                  <div class="item-value">350</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">三级</div>
+                  <div class="item-value">350</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">四级</div>
+                  <div class="item-value">400</div>
+                </van-grid-item>
+              </van-grid>
 
-        <van-tag mark type="warning">历史告警</van-tag>
-        <van-row class="infomation-list">
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">总数</div>
-            <div class="item-value">1208</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="4">
-            <div class="item-label">一级</div>
-            <div class="item-value">108</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="4">
-            <div class="item-label">二级</div>
-            <div class="item-value">350</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="4">
-            <div class="item-label">三级</div>
-            <div class="item-value">350</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="4">
-            <div class="item-label">四级</div>
-            <div class="item-value">400</div>
-          </van-col>
-        </van-row>
-
-        <!-- 系统列表 -->
-        <van-row class="infomation-list">
-          <van-col class="infomation-list-item van-hairline--surround" span="12">
-            <div class="item-label">监控与报警系统</div>
-            <div class="item-value">604</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="12">
-            <div class="item-label">消防系统</div>
-            <div class="item-value">151</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">通风系统</div>
-            <div class="item-value">302</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">排水系统</div>
-            <div class="item-value">151</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">照明系统</div>
-            <div class="item-value">151</div>
-          </van-col>
-        </van-row>
-
+              <!-- 系统列表 -->
+              <van-grid class="infomation-list" :column-num="2">
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">监控与报警系统</div>
+                  <div class="item-value">604</div>
+                </van-grid-item>
+                <van-grid-item class="infomation-list-item" to="/message/messageAlarm">
+                  <div class="item-label">消防系统</div>
+                  <div class="item-value">151</div>
+                </van-grid-item>
+              </van-grid>   
+            </div>        
+          </van-tab>
+        </van-tabs>
       </div>
     </van-panel>
 
@@ -122,46 +109,41 @@
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
         通知统计
-        <van-button class="panel-title-link" 
-        icon="arrow" 
-        type="primary" 
-        size="small"
-        to="/message/messageNotice">通知消息</van-button>
       </div>
       <div class="page-panel-content page-icon-panel-content">
-        <van-tag mark type="primary">今日通知</van-tag>
-        <van-row class="infomation-list">
-          <van-col class="infomation-list-item van-hairline--surround" span="12">
+        <van-tag mark type="primary">未读</van-tag>
+        <van-grid class="infomation-list" :column-num="3">
+          <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">总数</div>
             <div class="item-value">8</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
+          </van-grid-item>
+          <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">一般</div>
             <div class="item-value">6</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
+          </van-grid-item>
+          <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">紧急</div>
             <div class="item-value">2</div>
-          </van-col>
-        </van-row>
+          </van-grid-item>
+        </van-grid>
 
         
 
-        <van-tag mark type="warning">历史通知</van-tag>
-        <van-row class="infomation-list">
-          <van-col class="infomation-list-item van-hairline--surround" span="12">
+        <van-tag mark type="warning">已读</van-tag>
+        <van-grid class="infomation-list" :column-num="3">
+          <van-grid-item class="infomation-list-item">
             <div class="item-label">总数</div>
             <div class="item-value">18</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
+          </van-grid-item>
+          <van-grid-item class="infomation-list-item">
             <div class="item-label">一般</div>
             <div class="item-value">16</div>
-          </van-col>
-          <van-col class="infomation-list-item van-hairline--surround" span="6">
+          </van-grid-item>
+          <van-grid-item class="infomation-list-item">
             <div class="item-label">紧急</div>
             <div class="item-value">2</div>
-          </van-col>
-        </van-row>
+          </van-grid-item>
+        </van-grid>
 
       </div>
     </van-panel>
@@ -187,7 +169,9 @@ import { NavBar,
  Step, 
  Steps, 
  Circle,
- Button } from 'vant'
+ Button,
+ Tab,
+ Tabs } from 'vant'
  import TheFooter from '@/components/common/TheFooter'
 
 Vue.use(NavBar)
@@ -205,6 +189,8 @@ Vue.use(NavBar)
 .use(Steps)
 .use(Circle)
 .use(Button)
+.use(Tab)
+.use(Tabs)
 
 export default {
   props: {
@@ -215,6 +201,7 @@ export default {
   },
   data () {
     return {
+      activeName: 'todayAlarm',
       currentRate: 0,
       gradientColor: {
         '0%': '#3fecff',
@@ -232,7 +219,7 @@ export default {
 
 <style lang="less">
 .page {
-  padding: 46px 0 50px 0;
+  padding: 46px 0 50px 0 !important;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;
@@ -291,9 +278,11 @@ export default {
         font-size: 16px;
         font-weight: bolder;
       }
-
-
     }
+  }
+
+  .pd-top-10 {
+    padding-top: 10px;
   }
 
 }

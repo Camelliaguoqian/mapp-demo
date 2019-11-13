@@ -11,8 +11,24 @@
     </section>
 
     <section class="page-wrapper">
+      <!-- 运行控制 -->
       <control-card v-bind:listdata="deviceControl"></control-card>
+
+      <!-- 设备信息 -->
       <info-card v-bind:listdata="devicelist"></info-card>
+
+      <!-- 设备台账 -->
+      <van-panel class="page-panel-card" title="设备台账">
+        <div class="page-panel-card-content">
+          <van-steps direction="vertical" :active="0">
+            <van-step v-for="item in deviceAccount" :key="item.id">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.time }}</p>
+            </van-step>
+          </van-steps>
+        </div>
+      </van-panel>
+
     </section>
 
   </div>
@@ -25,6 +41,8 @@ import { NavBar,
  Icon,
  Tab,
  Tabs,
+ Step, 
+ Steps, 
 } from 'vant'
 import ControlCard from '@/components/list/ControlCard'
 import InfoCard from '@/components/list/InfoCard'
@@ -34,6 +52,8 @@ Vue.use(NavBar)
 .use(Icon)
 .use(Tab)
 .use(Tabs)
+.use(Step)
+.use(Steps)
 
 export default {
    props: {
@@ -80,6 +100,19 @@ export default {
           value: "彩虹西路综合管廊 电力舱 08分区",
         },
       ],
+      deviceAccount: [{
+        id: 1,
+        title:  '摄像头检修11.11',
+        time: '2019-07-12 12:40'
+      },{
+        id: 2,
+        title:  '摄像头检修10.10',
+        time: '2019-06-12 12:40'
+      },{
+        id: 3,
+        title:  '摄像头安装',
+        time: '2019-05-12 12:40'
+      }],
     }
   },
   methods: {
@@ -101,35 +134,13 @@ export default {
     margin-bottom: 0;
   }
 
-  &-panel {
+  &-panel-card {
     margin: 10px auto;
-  }
-
-  &-panel:last-child {
-    margin-bottom: 0;
-  }
-
-  &-icon-panel {
-    &-content {
-      padding: 10px 16px;
-    }
-
-    .panel-title {
-      position: relative;
-      display: flex;
-      box-sizing: border-box;
-      width: 100%;
-      padding: 10px 16px;
-      overflow: hidden;
-      color: #323233;
-      font-size: 14px;
-      line-height: 24px;
-      background-color: #fff;
-      &-icon {
-        margin-right: 2px;
-        margin-top: 4px;
-      }
-    }
+    padding: 10px;
+    width: 90%;
+    border-radius: 3%;
+    background-color: #fff;
+    box-shadow: #ddd 0 0 10px 5px;
   }
 
   &-cover {

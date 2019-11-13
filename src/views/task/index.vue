@@ -6,7 +6,7 @@
       <van-grid clickable :column-num="3">
         <van-grid-item icon="peer-pay" text="巡检任务" to="/taskSub/inspectionList" />
         <van-grid-item icon="debit-pay" text="维修任务" to="/taskSub/repairList" />
-        <van-grid-item icon="other-pay" text="更多" to="/" />
+        <van-grid-item icon="other-pay" text="更多" @click="onClickNavLink($event)" />
       </van-grid>
     </div>
 
@@ -171,23 +171,6 @@
       </div>
     </van-panel>
 
-    <van-panel class="page-panel" title="最近任务动态">
-      <div class="page-panel-content">
-        <van-steps direction="vertical" :active="0">
-          <van-step v-for="item in tasks" :key="item.id">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.time }}</p>
-          </van-step>
-        </van-steps>
-      </div>
-    </van-panel>
-
-    <section class="page-wrapper">
-      <van-divider :style="{ color: '#969799', borderColor: '#969799', padding: '0 16px' }">
-        我是有底线的
-      </van-divider>
-    </section>
-
     <!-- 底部tab栏组件 -->
     <v-footer></v-footer>
   </div>
@@ -201,7 +184,8 @@ import { NavBar,
  GridItem, 
  Row, 
  Col, 
- Icon, 
+ Icon,
+ Toast, 
  Cell, 
  CellGroup, 
  Image, 
@@ -219,6 +203,7 @@ Vue.use(NavBar)
 .use(Row)
 .use(Col)
 .use(Icon)
+.use(Toast)
 .use(Cell)
 .use(CellGroup)
 .use(Image)
@@ -269,6 +254,14 @@ export default {
     text() {
       return this.currentRate.toFixed(0) + '%';
     }
+  },
+  methods: {
+    onClickNavLink: function (event) {
+      //获取点击对象      
+      //var el = event.currentTarget;
+      // console.log("当前对象的内容："+el.innerHTML);
+      this.$toast("更多功能暂未开放，敬请期待");
+    },
   }
 };
 </script>

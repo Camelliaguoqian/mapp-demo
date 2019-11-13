@@ -1,6 +1,6 @@
 <template>
   <div class="task-query-page page">
-    <van-nav-bar title="巡检任务" 
+    <van-nav-bar title="维修任务" 
     fixed 
     :zIndex="100" 
     left-arrow 

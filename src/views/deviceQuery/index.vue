@@ -10,6 +10,7 @@
       <van-cell-group>
         <van-field 
           readonly
+          required
           clickable
           label="管廊"
           :value="pipe"
@@ -27,6 +28,7 @@
 
         <van-field 
           readonly
+          required
           clickable
           label="分区"
           :value="zone"
@@ -44,6 +46,7 @@
 
         <van-field 
           readonly
+          required
           clickable
           label="舱室"
           :value="cabin"
@@ -61,6 +64,7 @@
 
         <van-field 
           readonly
+          required
           clickable
           label="系统名称"
           :value="system"
@@ -78,6 +82,7 @@
 
         <van-field 
           readonly
+          required
           clickable
           label="设备类型"
           :value="deviceType"
@@ -92,13 +97,6 @@
             @confirm="onConfirmDeviceType"
           />
         </van-popup>
-
-        <van-field
-          v-model="deviceName"
-          clearable
-          label="设备名称"
-          placeholder="请输入设备名称"
-        />
 
         <van-field
           v-model="deviceCode"
@@ -168,7 +166,6 @@ export default {
       deviceType: '',
       showDeviceTypePicker: false,
       deviceTypeColumns: ['传感器','摄像头'],
-      deviceName: '',
       deviceCode: '',
     }
   },

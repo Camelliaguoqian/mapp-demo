@@ -62,8 +62,8 @@ export default {
       position: relative;
       &-title {
         line-height: 30px;
-        font-size: 18px;
-        font-weight: bolder;
+        font-size: 16px;
+        font-weight: bold;
         color: #333;
       }
 

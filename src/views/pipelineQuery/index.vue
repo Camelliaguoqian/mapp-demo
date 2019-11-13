@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="任务查询" 
+    <van-nav-bar title="管线查询" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -8,40 +8,6 @@
 
     <div class="page-wrapper">
       <van-cell-group>
-        <van-field 
-          readonly
-          clickable
-          label="管廊"
-          :value="pipe"
-          placeholder="请选择管廊"
-          @click="showPipePicker = true"
-        />
-        <van-popup v-model="showPipePicker" position="bottom">
-          <van-picker 
-            show-toolbar
-            :columns="pipeColumns"
-            @cancel="showPipePicker = false"
-            @confirm="onConfirmPipe"
-          />
-        </van-popup>
-
-       <van-field 
-          readonly
-          clickable
-          label="舱室类别"
-          :value="cabinType"
-          placeholder="请选择舱室类别"
-          @click="showCabinTypePicker = true"
-        />
-        <van-popup v-model="showCabinTypePicker" position="bottom">
-          <van-picker 
-            show-toolbar
-            :columns="cabinTypeColumns"
-            @cancel="showCabinTypePicker = false"
-            @confirm="onConfirmCabinType"
-          />
-        </van-popup>
-
         <van-field 
           readonly
           clickable
@@ -59,19 +25,6 @@
           />
         </van-popup>
 
-        <van-field
-          v-model="unit"
-          clearable
-          label="权属单位"
-          placeholder="请输入权属单位"
-        />
-
-        <van-field
-          v-model="pipelineCode"
-          clearable
-          label="管线编码"
-          placeholder="请输入管线编码"
-        />
       </van-cell-group>
     </div>
 
@@ -117,37 +70,14 @@ export default {
   },
   data() {
     return {
-      minDate: DateUtil.format(DateUtil.date(),'YYYY-MM-DD'),
-      startDateVal: '',
-      endDateVal: '',
-      startDate: new Date(),
-      endDate: new Date(),
-      showStartDatePicker: false,
-      showEndDatePicker: false,
-      pipe: '',
-      showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
-      cabinType: '',
-      showCabinTypePicker: false,
-      cabinTypeColumns: ['1舱','2舱','4舱'],
       pipelineType: '',
       showPipelineTypePicker: false,
       pipelineTypeColumns: ['污水管','给水管'],
-      unit: '',
-      pipelineCode: ''
     }
   },
   methods: {
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-    },
-    onConfirmPipe(pipe) {
-      this.pipe = pipe;
-      this.showPipePicker = false;
-    },
-    onConfirmCabinType(cabinType) {
-      this.cabinType = cabinType;
-      this.showCabinTypePicker = false;
     },
     onConfirmPipelineType(pipelineType) {
       this.pipelineType = pipelineType;

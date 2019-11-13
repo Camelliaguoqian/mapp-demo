@@ -35,19 +35,17 @@ export default {
 
 <style lang="less" scoped>
   .card {
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 10px;
     width: 90%;
     border-radius: 3%;
     background-color: #fff;
     box-shadow: #ddd 0 0 10px 5px;
     &-item {
-      margin-bottom: 20px;
       line-height: 24px;
       &-label {
-        line-height: 30px;
-        font-size: 18px;
-        font-weight: bolder;
+        font-size: 16px;
+        font-weight: bold;
         color: #333;
       }
 

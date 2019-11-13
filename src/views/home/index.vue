@@ -1,13 +1,13 @@
 <template>
   <div class="home-page page">
     <van-nav-bar title="首页" fixed :zIndex="100">
-      <van-icon name="search" slot="right" />
+      <!-- <van-icon name="search" slot="right" /> -->
     </van-nav-bar>
 
     <section class="page-wrapper">
       <van-grid clickable :column-num="2">
         <van-grid-item icon="scan" text="扫一扫" @click="scanTest" />
-        <van-grid-item icon="friends-o" text="工作" to="/work" />
+        <van-grid-item icon="friends-o" dot text="工作" to="/work" />
       </van-grid>
     </section>
 
@@ -19,7 +19,11 @@
           :icon="item.icon"
           :text="item.name"
           :to="item.url"
-          @click="onClickNavLink"
+        />
+        <van-grid-item
+          icon="more-o"
+          text="更多"
+          @click="onClickNavLink($event)"
         />
       </van-grid>
     </section>
@@ -139,11 +143,6 @@ export default {
         name: '统计分析',
         icon: 'chart-trending-o',
         url: '/statistic',
-      },{
-        id: 8,
-        name: '更多',
-        icon: 'more-o',
-        url: '/',
       }],
       alarms: [{
         id: 1,
@@ -190,8 +189,11 @@ export default {
     }
   },
   methods: {
-    onClickNavLink: function () {
-      
+    onClickNavLink: function (event) {
+      //获取点击对象      
+      //var el = event.currentTarget;
+      // console.log("当前对象的内容："+el.innerHTML);
+      this.$toast("更多功能暂未开放，敬请期待");
     },
     //测试Mplat调用原生api的scan功能
     scanTest: function () {
@@ -211,7 +213,7 @@ export default {
             var result=eval("(" + data + ")");
             Toast(result);
           }
-    })
+       })
       });
     }
   }
