@@ -73,16 +73,22 @@ export default {
           userCode: this.userCode,
           userPwd: md5UserPwd}
         ).then(data => {
-          console.log(data);
-          let reslutData = data;  
-          console.log(reslutData.retCode)
-          if(reslutData.retCode === "SUCCESS"){
-            this.$toast(reslutData.retMsg);
+          let result = data; 
+          let resultRetCode = result.retCode; 
+          let resultRetMsg = result.retMsg; 
+          let resultRetData = result.retData; 
+          // console.log(result);
+          // console.log(resultRetCode);
+          // console.log(resultRetMsg);
+          // console.log(resultRetData);
+
+          if(resultRetCode === "SUCCESS"){
+            this.$toast(resultRetMsg);
             //登录成功到首页
             this.$router.replace('/home');
           }
-          if(reslutData.retCode === "FAIL"){
-            this.$toast(reslutData.retMsg);
+          if(resultRetCode === "FAIL"){
+            this.$toast(resultRetMsg);
           }  
 
         }).catch((error) => {

@@ -71,14 +71,13 @@ export default {
   methods: {
     //退出登录
     loginOut: function() {
-      this.request.httpPost(this.requestUrl.userLoginOut)
-      .then(data => {
-        console.log(data);
-          let reslutData = data;  
-          console.log(reslutData.retCode)
-          if(reslutData.retCode === "SUCCESS"){
-            this.$router.replace('/login');
-          }
+      this.request.httpPost(this.requestUrl.userLoginOut).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; 
+      
+        if(resultRetCode === "SUCCESS"){
+          this.$router.replace('/login');
+        }
       });
       
     }

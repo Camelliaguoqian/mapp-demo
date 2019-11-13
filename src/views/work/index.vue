@@ -48,61 +48,53 @@ export default {
   data() {
     return {
       activeTab: 'dayTab',
-      daylist: [
-        {
-          id: '1',
-          title: '黑龙江路综合舱巡检任务',
-          time: '2019-10-08 09：00：00',
-          status: '已完成',
-          type: 0,
-          content: '综合舱风机水泵开关检查',
-        },
-        {
-          id: '2',
-          title: '黑龙江路电力舱巡检任务',
-          time: '2019-10-09 09：00：00',
-          status: '待处理',
-          type: 1,
-          content: '电力舱电缆常规检查',
-        },
-        {
-          id: '2',
-          title: '黑龙江路燃气舱巡检任务',
-          time: '2019-10-11 09：00：00',
-          status: '处理中',
-          type: 2,
-          content: '燃气舱燃气浓度检查',
-        },
-      ],
-      weeklist: [
-        {
-          id: '1',
-          title: '黑龙江路综合舱巡检任务',
-          time: '2019-07-08 09：00：00',
-          status: '已完成',
-          type: 0,
-          content: '综合舱风机水泵开关检查',
-        },
-        {
-          id: '2',
-          title: '黑龙江路电力舱巡检任务',
-          time: '2019-08-09 09：00：00',
-          status: '待处理',
-          type: 1,
-          content: '电力舱电缆常规检查',
-        },
-        {
-          id: '2',
-          title: '黑龙江路燃气舱巡检任务',
-          time: '2019-09-11 09：00：00',
-          status: '处理中',
-          type: 2,
-          content: '燃气舱燃气浓度检查',
-        },
-      ],
+      daylist: [],
+      weeklist: [],
     }
   },
+  mounted: function() {
+    this.initData();
+  },
   methods: {
+    initData() {
+      //工作任务- 今日任务 、 本周任务
+      this.request.httpPost(this.requestUrl.workTaskList).then(data => {
+          let result = data; 
+          let resultRetCode = result.retCode; 
+          let resultRetMsg = result.retMsg; 
+          let resultRetData = result.retData; 
+          let todayTaskData = resultRetData.todayTask;
+          let weekTaskData = resultRetData.sevenDaysTask;
+          console.log(result);
+          console.log(resultRetCode);
+          console.log(resultRetMsg);
+          console.log(resultRetData);
+
+          //实体
+          let taskStatusType = [{'150':'待处理'},{'151':'处理中'},{'152':'已完成'}];
+
+          if(resultRetCode === "SUCCESS"){
+            //今日任务 、 本周任务
+            for(let i=0; i<todayTaskData.length; i++) {
+              let node = {};
+              node.id = todayTaskData[i].resId;
+              node.title = todayTaskData[i].name;
+              node.time = '开始时间：' + todayTaskData[i].planStartTime;
+              node.content = '结束时间：' + todayTaskData[i].planEndTime;
+              node.status = taskStatusType[0];
+
+              this.daylist.push(node);
+            }
+
+          }
+          if(resultRetCode === "FAIL"){
+            this.$toast(resultRetMsg);
+          }  
+
+        }).catch((error) => {
+          this.$toast("请求失败"+error);
+        });
+    },
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },

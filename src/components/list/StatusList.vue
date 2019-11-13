@@ -13,8 +13,8 @@
         <div class="van-ellipsis">{{ item.title }}</div>
       </template>
       <template slot="label">
-        <div class="van-ellipsis">工作时间:{{ item.time }}</div>
-        <div class="van-ellipsis">工作地点:{{ item.content }}</div>
+        <div class="van-ellipsis">{{ item.time }}</div>
+        <div class="van-ellipsis">{{ item.content }}</div>
       </template>
     </van-cell>
 

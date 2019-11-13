@@ -10,7 +10,7 @@ let url = {
   userLoginOut: '/user/logout',
 
   //工作任务
-  workTaskList: '/homePage/taskSearch',
+  workTaskList: '/homePage/workTask',
 
 }
  
