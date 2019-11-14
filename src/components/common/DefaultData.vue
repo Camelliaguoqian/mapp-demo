@@ -1,12 +1,30 @@
 <template>
-  <div class="default-data" :class="ishide">暂无数据</div>
+  <div class="default-data" :class="ishide">
+    <van-image
+      class="default-data-img"
+      width="76"
+      height="48"
+      :src="imgUrl"
+    />
+    <p class="default-data-text">暂无数据</p>
+  </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import { Image } from 'vant'
+
+Vue.use(Image)
+
 export default {
   name: 'DefaultData',
   props: {
     ishide: String
+  },
+  data() {
+    return {
+      imgUrl: require('assets/image/default_data.png')
+    }
   }
 }
 </script>
@@ -14,12 +32,17 @@ export default {
 <style lang="less" scoped>
 .default-data {
   margin: 0 auto;
-  padding: 10px;
+  padding: 50px 0 0;
   height: 100px;
-  line-height: 100px;
   font-size: 14px;
-  color: #666;
+  color: #8a8a8a;
   text-align: center;
+  &-img {
+    margin: 10px auto;
+  }
+  &-text {
+    line-height: 20px;
+  }
 }
 .hide {
   display: none;

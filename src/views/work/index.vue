@@ -35,9 +35,9 @@ import { NavBar,
  Tabs,
  Image
 } from 'vant'
-import StatusList from '@/components/list/StatusList'
-import DataDictionaryUtil from '@/utils/DataDictionaryUtil.js'
-import DefaultData from '@/components/common/DefaultData'
+import StatusList from 'components/list/StatusList'
+import DataDictionaryUtil from 'utils/DataDictionaryUtil.js'
+import DefaultData from 'components/common/DefaultData'
 
 Vue.use(NavBar)
 .use(Panel)
