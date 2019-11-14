@@ -11,10 +11,14 @@
           <van-tab title="今日任务" name="dayTab">
             <!-- 任务list子组件调用 -->
             <status-list v-bind:listdata="daylist"></status-list>
+            <!-- 暂无数据组件 -->
+            <default-data v-bind:ishide="isdaylisthide"></default-data>
           </van-tab>
           <van-tab title="本周任务" name="weekTab">
             <!-- 任务list子组件调用 -->
             <status-list v-bind:listdata="weeklist"></status-list>
+            <!-- 暂无数据组件 -->
+            <default-data v-bind:ishide="isweeklisthide"></default-data>
           </van-tab>
         </van-tabs>
     </section>
@@ -29,20 +33,26 @@ import { NavBar,
  Icon,
  Tab,
  Tabs,
+ Image
 } from 'vant'
 import StatusList from '@/components/list/StatusList'
+import DataDictionaryUtil from '@/utils/DataDictionaryUtil.js'
+import DefaultData from '@/components/common/DefaultData'
 
 Vue.use(NavBar)
 .use(Panel)
 .use(Icon)
 .use(Tab)
 .use(Tabs)
+.use(Image)
 
 export default {
+  name: 'workTaskPage',
   props: {
     zIndex: Number,
   },
   components: {
+    'default-data': DefaultData,
     'status-list': StatusList
   },
   data() {
@@ -50,6 +60,8 @@ export default {
       activeTab: 'dayTab',
       daylist: [],
       weeklist: [],
+      isdaylisthide: 'hide',
+      isweeklisthide: 'hide'
     }
   },
   mounted: function() {
@@ -70,22 +82,46 @@ export default {
           console.log(resultRetMsg);
           console.log(resultRetData);
 
-          //实体
-          let taskStatusType = [{'150':'待处理'},{'151':'处理中'},{'152':'已完成'}];
-
           if(resultRetCode === "SUCCESS"){
-            //今日任务 、 本周任务
-            for(let i=0; i<todayTaskData.length; i++) {
-              let node = {};
-              node.id = todayTaskData[i].resId;
-              node.title = todayTaskData[i].name;
-              node.time = '开始时间：' + todayTaskData[i].planStartTime;
-              node.content = '结束时间：' + todayTaskData[i].planEndTime;
-              node.status = taskStatusType[0];
+            //今日任务
+            if(todayTaskData.length > 0) {
+              for(let i=0; i<todayTaskData.length; i++) {
+                let node = {};
+                node.id = todayTaskData[i].resId;
+                node.title = todayTaskData[i].name;
+                node.time = '开始时间：' + todayTaskData[i].planStartTime;
+                node.content = '结束时间：' + todayTaskData[i].planEndTime;
+                node.status = DataDictionaryUtil.commonJudgeStatusType(todayTaskData[i].status).status;
+                node.type = DataDictionaryUtil.commonJudgeStatusType(todayTaskData[i].status).classNameType;
 
-              this.daylist.push(node);
+                this.daylist.push(node);
+              }
+            }else{
+              //暂无数据
+              this.isdaylisthide='show';
             }
+            
 
+            //本周任务
+            if(weekTaskData.length > 0) {
+              for(let i=0; i<weekTaskData.length; i++) {
+                let node = {};
+                node.id = weekTaskData[i].resId;
+                node.title = weekTaskData[i].name;
+                node.time = '开始时间：' + weekTaskData[i].planStartTime;
+                node.content = '结束时间：' + weekTaskData[i].planEndTime;
+                node.status = DataDictionaryUtil.commonJudgeStatusType(weekTaskData[i].status).status;
+                node.type = DataDictionaryUtil.commonJudgeStatusType(weekTaskData[i].status).classNameType;
+
+                //console.log(DataDictionaryUtil.commonJudgeStatusType(weekTaskData[i].status));
+
+                this.weeklist.push(node); 
+              }
+            }else{
+              //暂无数据
+              this.isweeklisthide='show';
+            }
+          
           }
           if(resultRetCode === "FAIL"){
             this.$toast(resultRetMsg);
@@ -104,6 +140,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

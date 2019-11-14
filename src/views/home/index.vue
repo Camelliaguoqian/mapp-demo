@@ -92,6 +92,7 @@ Vue.use(NavBar)
 .use(Toast)
 
 export default {
+  name: 'homePage',
   props: {
     zIndex: Number,
   },

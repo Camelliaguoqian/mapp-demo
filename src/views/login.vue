@@ -46,7 +46,7 @@ Vue.use(Field)
 
 
 export default {
-  name: 'login',
+  name: 'loginPage',
   data () {
     return {
       errors: [],

@@ -24,9 +24,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-  // #app {
-  //   padding: 46px 0 50px 0;
-  // }
-</style>

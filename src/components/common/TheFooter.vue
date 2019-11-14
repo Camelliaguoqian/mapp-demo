@@ -15,6 +15,7 @@ import { Tabbar, TabbarItem } from 'vant'
 Vue.use(Tabbar).use(TabbarItem)
 
 export default {
+  name: 'TheFooter',
   props: {
     zIndex: Number,
   },
