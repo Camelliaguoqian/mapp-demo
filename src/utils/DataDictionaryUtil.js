@@ -21,6 +21,22 @@ DataDictionaryUtil = {
     }
     return retData;
   },
+  //反查任务状态的id
+  commonJudgeStatusTypeId(val) {
+    let typeId = '';
+    switch(val) {
+      case '待处理':
+        typeId = '150';
+        break;
+      case '处理中':
+        typeId = '151';
+        break;
+      case '已完成':
+        typeId = '152';
+        break;
+    }
+    return typeId;
+  },
 }
 
 

@@ -11,9 +11,9 @@
         <van-field 
           readonly
           clickable
-          label="管廊"
-          :value="pipe"
-          placeholder="请选择管廊"
+          label="所属管廊"
+          :value="pipeName"
+          placeholder="请选择所属管廊"
           @click="showPipePicker = true"
         />
         <van-popup v-model="showPipePicker" position="bottom">
@@ -101,7 +101,8 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from '@/utils/DateUtil'
+import DateUtil from 'utils/DateUtil'
+import DataDictionaryUtil from 'utils/DataDictionaryUtil.js'
 import { NavBar,
  Cell, 
  CellGroup,  
@@ -127,6 +128,7 @@ Vue.use(NavBar)
 
 
 export default {
+  name: 'taskQueryIndex',
   props: {
     zIndex: Number,
   },
@@ -140,58 +142,78 @@ export default {
       showStartDatePicker: false,
       showEndDatePicker: false,
       orderCode: '',
-      pipe: '',
+      pipeName: '',
+      pipeId: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
+      pipeColumns: ['黑龙江路综合管廊'],
       status: '',
+      statusId: '',
       showStatusPicker: false,
-      statusColumns: ['已完成','进行中','未完成'],
+      statusColumns: ['待处理','处理中','已完成'],
     }
   },
   methods: {
-    goBack() {
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    onConfirmPipe(pipe) {
-      this.pipe = pipe;
+    onConfirmPipe: function(pipeName) {
+      this.pipeName = pipeName;
+      switch(pipeName) {
+        case '黑龙江路综合管廊':
+          this.pipeId = '21';
+          break;
+      }
       this.showPipePicker = false;
     },
-    onConfirmStatus(status) {
+    onConfirmStatus: function(status) {
       this.status = status;
+      //根据状态值反查状态id
+      this.statusId = DataDictionaryUtil.commonJudgeStatusTypeId(status);
       this.showStatusPicker = false;
     },
-    // onChangeStartDate(e) {
-    //   let dateSelVal = e.getValues();
-    //   this.startDateVal = dateSelVal[0] + '-' + dateSelVal[1] + '-' + dateSelVal[2];
-    // },
-    // onChangeEndDate(e) {
-    //   let dateSelVal = e.getValues();
-    //   this.endDateVal = dateSelVal[0] + '-' + dateSelVal[1] + '-' + dateSelVal[2];
-    // },
-    onConfirmStartDate(val) {
+    onConfirmStartDate: function(val) {
       console.log(val);
       let currentVal = DateUtil.format(val,'YYYY-MM-DD');
       this.startDateVal = currentVal;
       this.showStartDatePicker = false;
     },
-    onConfirmEndDate(val) {
+    onConfirmEndDate: function(val) {
       console.log(val);
       let currentVal = DateUtil.format(val,'YYYY-MM-DD');
       this.endDateVal = currentVal;
       this.showEndDatePicker = false;
     },
-    onSubmit() {
-      //console.log(this.$route); //通过 this.$route 访问当前路由
-      //通过 this.$router 访问路由器
-      this.$router.push('taskQueryList');
-
+    onSubmit: function (e) {
+      e.preventDefault();
+      //校验
+      if(this.pipeId == '' 
+      && this.startDateVal == '' 
+      && this.endDateVal == '' 
+      && this.statusId == '' 
+      && this.orderCode == ''){
+        this.$toast("请至少选择一项查询条件");
+        return false;
+      }else {
+        //带参数的跳转页面
+        this.$router.push({
+          path:"taskQueryList",
+          query: {
+          pipeId: this.pipeId,
+          startTime: this.startDateVal,
+          endTime: this.endDateVal,
+          status: this.statusId,
+          code: this.orderCode
+          }
+        })
+      }
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

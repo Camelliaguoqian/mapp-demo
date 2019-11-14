@@ -24,9 +24,9 @@
 <script>
 import Vue from 'vue'
 import {
- Cell,
- CellGroup,
- Tag,
+  Cell,
+  CellGroup,
+  Tag,
 } from 'vant'
 
 Vue.use(Cell)
@@ -35,7 +35,7 @@ Vue.use(Cell)
 
 
 export default {
-  name: 'InfoList',
+  name: 'StatusInfoList',
   props: {
     listdata: {
       id: String,
@@ -51,7 +51,7 @@ export default {
       
     }
   },
-  
+
 }
 </script>
 

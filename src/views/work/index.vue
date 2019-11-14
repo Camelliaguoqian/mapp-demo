@@ -12,13 +12,13 @@
             <!-- 任务list子组件调用 -->
             <status-list v-bind:listdata="daylist"></status-list>
             <!-- 暂无数据组件 -->
-            <default-data v-bind:ishide="isdaylisthide"></default-data>
+            <default-data v-bind:nodata="isdaylisthide"></default-data>
           </van-tab>
           <van-tab title="本周任务" name="weekTab">
             <!-- 任务list子组件调用 -->
             <status-list v-bind:listdata="weeklist"></status-list>
             <!-- 暂无数据组件 -->
-            <default-data v-bind:ishide="isweeklisthide"></default-data>
+            <default-data v-bind:nodata="isweeklisthide"></default-data>
           </van-tab>
         </van-tabs>
     </section>
@@ -33,7 +33,8 @@ import { NavBar,
  Icon,
  Tab,
  Tabs,
- Image
+ Image,
+ Toast
 } from 'vant'
 import StatusList from 'components/list/StatusList'
 import DataDictionaryUtil from 'utils/DataDictionaryUtil.js'
@@ -45,15 +46,16 @@ Vue.use(NavBar)
 .use(Tab)
 .use(Tabs)
 .use(Image)
+.use(Toast)
 
 export default {
   name: 'workTaskPage',
-  props: {
-    zIndex: Number,
-  },
   components: {
     'default-data': DefaultData,
     'status-list': StatusList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {
@@ -68,7 +70,7 @@ export default {
     this.initData();
   },
   methods: {
-    initData() {
+    initData: function() {
       //工作任务- 今日任务 、 本周任务
       this.request.httpPost(this.requestUrl.workTaskList).then(data => {
           let result = data; 
@@ -124,14 +126,18 @@ export default {
           
           }
           if(resultRetCode === "FAIL"){
+            //暂无数据
+            this.istaskhide='show';
             this.$toast(resultRetMsg);
           }  
 
         }).catch((error) => {
+          //暂无数据
+          this.istaskhide='show';
           this.$toast("请求失败"+error);
         });
     },
-    goBack() {
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
   }

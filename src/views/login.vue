@@ -27,7 +27,7 @@
         @click-right-icon="$toast('密码必须是数字、字母、下划线')"
       />
       <!--登录按钮-->
-      <div class="login-btn"><van-button type="info" size="large" @click="onClickButtonSubmit">登录</van-button></div>
+      <div class="login-btn"><van-button type="info" size="large" @click="onSubmit">登录</van-button></div>
     </van-cell-group>
 
   </div>
@@ -56,16 +56,14 @@ export default {
   },
   methods: {
     // 表单提交
-    onClickButtonSubmit: function (e,userCode,userPwd) {
+    onSubmit: function (e,userCode,userPwd) {
       if(this.userCode == ''){
         this.$toast("用户名不能为空");
         return false;
-      }
-      if(this.userPwd == ''){
+      }else if(this.userPwd == ''){
         this.$toast("密码不能为空");
         return false;
-      }
-      else{
+      }else{
         let that=this; // 放置指针，便于then操作的获取
         let md5UserPwd = this.$md5(this.userPwd);
 

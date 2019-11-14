@@ -1,5 +1,5 @@
 <template>
-  <div class="default-data" :class="ishide">
+  <div class="default-data" :class="nodata">
     <van-image
       class="default-data-img"
       width="76"
@@ -19,7 +19,7 @@ Vue.use(Image)
 export default {
   name: 'DefaultData',
   props: {
-    ishide: String
+    nodata: String
   },
   data() {
     return {
