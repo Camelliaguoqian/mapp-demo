@@ -49,7 +49,7 @@ Vue.use(NavBar)
 .use(Toast)
 
 export default {
-  name: 'workTaskPage',
+  name: 'WorkTaskPage',
   components: {
     'default-data': DefaultData,
     'status-list': StatusList

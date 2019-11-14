@@ -18,18 +18,19 @@ import { NavBar,
  Panel,  
  Icon,
 } from 'vant'
-import StatusList from '@/components/list/StatusList'
+import StatusList from 'components/list/StatusList'
 
 Vue.use(NavBar)
 .use(Panel)
 .use(Icon)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'DeviceQueryListPage',
   components: {
     'status-list': StatusList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {

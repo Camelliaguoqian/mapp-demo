@@ -172,7 +172,7 @@ import { NavBar,
  Button,
  Tab,
  Tabs } from 'vant'
- import TheFooter from '@/components/common/TheFooter'
+ import TheFooter from 'components/common/TheFooter'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -193,11 +193,12 @@ Vue.use(NavBar)
 .use(Tabs)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'MessageHomeIndexPage',
   components: {
     'v-footer': TheFooter
+  },
+  props: {
+    zIndex: Number,
   },
   data () {
     return {

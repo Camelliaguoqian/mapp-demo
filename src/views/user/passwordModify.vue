@@ -65,11 +65,6 @@ import { NavBar,
  Toast,
  Button
 } from 'vant'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import md5 from 'js-md5' 
-
-Vue.prototype.$md5 = md5;
 
 Vue.use(NavBar)
 .use(Cell)
@@ -84,6 +79,7 @@ Vue.use(NavBar)
 
 
 export default {
+  name: 'PasswordModifyPage',
   props: {
     zIndex: Number,
   },
@@ -106,7 +102,7 @@ export default {
         return false;
       }
       else{
-        this.$router.replace('/user');
+        this.$router.replace('/User');
         e.preventDefault();
       }
     },

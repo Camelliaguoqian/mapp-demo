@@ -29,7 +29,7 @@ import { NavBar,
  Tab,
  Tabs,
 } from 'vant'
-import InfoList from '@/components/list/InfoList'
+import InfoList from 'components/list/InfoList'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -38,11 +38,12 @@ Vue.use(NavBar)
 .use(Tabs)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'TaskInspectionTodoPage',
   components: {
     'info-list': InfoList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {
@@ -53,14 +54,14 @@ export default {
           code: '执行中',
           time: '2019-01-02 12:00:00',
           title: '氧气传感器',
-          url: '/taskSub/inspectionTodoDetail',
+          url: '/TaskSub/InspectionTodoDetail',
         },
         {
           id: '2',
           code: '已完成',
           time: '2019-01-03 16:00:00',
           title: '温湿度传感器',
-          url: '/taskSub/inspectionTodoDetail',
+          url: '/TaskSub/InspectionTodoDetail',
         },
       ],
     

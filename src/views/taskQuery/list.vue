@@ -39,7 +39,7 @@ Vue.use(NavBar)
 .use(Toast)
 
 export default {
-  name: 'taskQueryList',
+  name: 'TaskQueryListPage',
   components: {
     'default-data': DefaultData,
     'status-list': StatusList

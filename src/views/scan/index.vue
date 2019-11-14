@@ -44,8 +44,8 @@ import { NavBar,
  Step, 
  Steps, 
 } from 'vant'
-import ControlCard from '@/components/list/ControlCard'
-import InfoCard from '@/components/list/InfoCard'
+import ControlCard from 'components/list/ControlCard'
+import InfoCard from 'components/list/InfoCard'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -56,12 +56,13 @@ Vue.use(NavBar)
 .use(Steps)
 
 export default {
-   props: {
-    zIndex: Number,
-  },
+  name: 'ScanIndexPage',
   components: {
     "control-card": ControlCard,
     "info-card": InfoCard
+  },
+   props: {
+    zIndex: Number,
   },
   data() {
     return {

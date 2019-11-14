@@ -46,7 +46,7 @@ Vue.use(Field)
 
 
 export default {
-  name: 'loginPage',
+  name: 'LoginPage',
   data () {
     return {
       errors: [],
@@ -83,7 +83,7 @@ export default {
           if(resultRetCode === "SUCCESS"){
             this.$toast(resultRetMsg);
             //登录成功到首页
-            this.$router.replace('/home');
+            this.$router.replace('/Home');
           }
           if(resultRetCode === "FAIL"){
             this.$toast(resultRetMsg);

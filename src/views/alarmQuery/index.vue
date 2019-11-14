@@ -145,7 +145,7 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from '@/utils/DateUtil'
+import DateUtil from 'utils/DateUtil'
 import { NavBar,
  Cell, 
  CellGroup,  
@@ -171,6 +171,7 @@ Vue.use(NavBar)
 
 
 export default {
+  name: 'AlarmQueryIndexPage',
   props: {
     zIndex: Number,
   },
@@ -248,7 +249,7 @@ export default {
     onSubmit() {
       //console.log(this.$route); //通过 this.$route 访问当前路由
       //通过 this.$router 访问路由器
-      this.$router.push('alarmQueryList');
+      this.$router.push('AlarmQueryList');
 
     }
   }

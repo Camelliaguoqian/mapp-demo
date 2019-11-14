@@ -194,7 +194,7 @@ import { NavBar,
  Steps, 
  Circle,
  Divider } from 'vant'
- import TheFooter from '@/components/common/TheFooter'
+ import TheFooter from 'components/common/TheFooter'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -214,11 +214,12 @@ Vue.use(NavBar)
 .use(Divider)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'TaskIndexPage',
   components: {
     'v-footer': TheFooter
+  },
+  props: {
+    zIndex: Number,
   },
   data () {
     return {

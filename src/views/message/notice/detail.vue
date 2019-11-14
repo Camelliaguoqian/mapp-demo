@@ -22,12 +22,12 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from '@/utils/DateUtil'
+import DateUtil from 'utils/DateUtil'
 import { NavBar,
  Panel,  
  Icon,
 } from 'vant'
-import SimpleList from '@/components/list/SimpleList'
+import SimpleList from 'components/list/SimpleList'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -35,11 +35,12 @@ Vue.use(NavBar)
 
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'MessageNoticeDetailPage',
   components: {
     'simple-list': SimpleList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {

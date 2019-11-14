@@ -128,7 +128,7 @@ Vue.use(NavBar)
 
 
 export default {
-  name: 'taskQueryIndex',
+  name: 'TaskQueryIndexPage',
   props: {
     zIndex: Number,
   },
@@ -196,7 +196,7 @@ export default {
       }else {
         //带参数的跳转页面
         this.$router.push({
-          path:"taskQueryList",
+          path:"TaskQueryList",
           query: {
           pipeId: this.pipeId,
           startTime: this.startDateVal,

@@ -15,16 +15,9 @@ import { NavBar } from 'vant'
 Vue.use(NavBar)
 
 export default {
+  name: 'MessageIndexPage',
   props: {
     zIndex: Number,
-  },
-  components: {
-    
-  },
-  data () {
-    return {
-      
-    }
   },
 };
 </script>

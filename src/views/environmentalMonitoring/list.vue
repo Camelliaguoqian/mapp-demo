@@ -24,11 +24,9 @@ Vue.use(NavBar)
 .use(Icon)
 
 export default {
+  name: 'EnvironmentalMonitoringListPage',
   props: {
     zIndex: Number,
-  },
-  components: {
-    
   },
   data() {
     return {

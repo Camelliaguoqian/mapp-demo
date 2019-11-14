@@ -42,7 +42,7 @@ import { NavBar,
  Tab,
  Tabs,
 } from 'vant'
-import InfoList from '@/components/list/InfoList'
+import InfoList from 'components/list/InfoList'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -51,11 +51,12 @@ Vue.use(NavBar)
 .use(Tabs)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'TaskInspectionListPage',
   components: {
     'info-list': InfoList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {
@@ -66,14 +67,14 @@ export default {
           code: 'GD111111',
           time: '2019-01-02 12:00:00',
           title: '热力舱任务',
-          url: '/taskSub/inspectionDetail',
+          url: '/TaskSub/InspectionDetail',
         },
         {
           id: '2',
           code: 'GD222222',
           time: '2019-01-03 16:00:00',
           title: '综合舱任务',
-          url: '/taskSub/inspectionDetail',
+          url: '/TaskSub/InspectionDetail',
         },
       ],
       handlinglistdata: [
@@ -82,14 +83,14 @@ export default {
           code: 'GD333333',
           time: '2019-01-02 12:00:00',
           title: '热力舱任务',
-          url: '/taskSub/inspectionDetail',
+          url: '/TaskSub/InspectionDetail',
         },
         {
           id: '4',
           code: 'GD444444',
           time: '2019-01-03 16:00:00',
           title: '综合舱任务',
-          url: '/taskSub/inspectionDetail',
+          url: '/TaskSub/InspectionDetail',
         },
       ],
       handledlistdata: [
@@ -98,14 +99,14 @@ export default {
           code: 'GD555555',
           time: '2019-01-02 12:00:00',
           title: '热力舱任务',
-          url: '/taskSub/inspectionDetail',
+          url: '/TaskSub/InspectionDetail',
         },
         {
           id: '6',
           code: 'GD666666',
           time: '2019-01-03 16:00:00',
           title: '综合舱任务',
-          url: '/taskSub/inspectionDetail',
+          url: '/TaskSub/InspectionDetail',
         },
       ],
       

@@ -46,14 +46,12 @@
 <script>
 import Vue from 'vue'
 import { NavBar, Grid, GridItem, Row, Col, Icon, Cell, CellGroup, Image, Tag, Button } from 'vant'
-import TheFooter from '@/components/common/TheFooter'
+import TheFooter from 'components/common/TheFooter'
 
 Vue.use(NavBar).use(Grid).use(GridItem).use(Row).use(Col).use(Icon).use(Cell).use(CellGroup).use(Image).use(Tag).use(Button)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'UserIndexPage',
   components: {
     'v-footer': TheFooter
     // [NavBar.name]: NavBar,
@@ -62,6 +60,9 @@ export default {
     // [Icon.name]: Icon,
     // [Cell.name]: Cell,
     // [CellGroup.name]: CellGroup
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {
@@ -76,7 +77,7 @@ export default {
         let resultRetCode = result.retCode; 
       
         if(resultRetCode === "SUCCESS"){
-          this.$router.replace('/login');
+          this.$router.replace('/Login');
         }
       });
       

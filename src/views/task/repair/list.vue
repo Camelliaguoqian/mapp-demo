@@ -42,7 +42,7 @@ import { NavBar,
  Tab,
  Tabs,
 } from 'vant'
-import InfoList from '@/components/list/InfoList'
+import InfoList from 'components/list/InfoList'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -51,11 +51,12 @@ Vue.use(NavBar)
 .use(Tabs)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'TaskRepairListPage',
   components: {
     'info-list': InfoList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {
@@ -66,14 +67,14 @@ export default {
           code: 'GD111111',
           time: '2019-01-02 12:00:00',
           title: '无线AP',
-          url: '/taskSub/repairDetail',
+          url: '/TaskSub/RepairDetail',
         },
         {
           id: '2',
           code: 'GD222222',
           time: '2019-01-03 16:00:00',
           title: '声光报警器08',
-          url: '/taskSub/repairDetail',
+          url: '/TaskSub/RepairDetail',
         },
       ],
       handlinglistdata: [
@@ -82,14 +83,14 @@ export default {
           code: 'GD333333',
           time: '2019-01-02 12:00:00',
           title: '门禁控制器20',
-          url: '/taskSub/repairDetail',
+          url: '/TaskSub/RepairDetail',
         },
         {
           id: '4',
           code: 'GD444444',
           time: '2019-01-03 16:00:00',
           title: '声光报警器08',
-          url: '/taskSub/repairDetail',
+          url: '/TaskSub/RepairDetail',
         },
       ],
       handledlistdata: [
@@ -98,14 +99,14 @@ export default {
           code: 'GD555555',
           time: '2019-01-02 12:00:00',
           title: '门禁控制器66',
-          url: '/taskSub/repairDetail',
+          url: '/TaskSub/RepairDetail',
         },
         {
           id: '6',
           code: 'GD666666',
           time: '2019-01-03 16:00:00',
           title: '门禁控制器11',
-          url: '/taskSub/repairDetail',
+          url: '/TaskSub/RepairDetail',
         },
       ],
       

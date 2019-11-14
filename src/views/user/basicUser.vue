@@ -45,6 +45,7 @@ Vue.use(NavBar)
 
 
 export default {
+  name: 'BasicUserPage',
   props: {
     zIndex: Number,
   },

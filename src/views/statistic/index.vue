@@ -67,11 +67,12 @@ Vue.use(NavBar)
 .use(Tag)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'StatisticIndexPage',
   components: {
     'v-chart': ECharts
+  },
+  props: {
+    zIndex: Number,
   },
   data () {
     // let data = []

@@ -117,6 +117,7 @@ Vue.use(NavBar)
 
 
 export default {
+  name: 'TaskRepairFeedbackage',
   props: {
     zIndex: Number,
   },

@@ -41,7 +41,7 @@ import { NavBar,
  Button,
  Toast
 } from 'vant'
-import SimpleList from '@/components/list/SimpleList'
+import SimpleList from 'components/list/SimpleList'
 
 
 Vue.use(NavBar)
@@ -53,11 +53,12 @@ Vue.use(NavBar)
 .use(Toast)
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'TaskInspectionDetailPage',
   components: {
     'simple-list': SimpleList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {

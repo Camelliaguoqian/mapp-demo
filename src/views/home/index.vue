@@ -77,8 +77,8 @@ Step,
 Steps, 
 Divider,
 Toast } from 'vant'
-import Mplat from '@/utils/Mplat'
-import TheFooter from '@/components/common/TheFooter'
+import Mplat from 'utils/Mplat'
+import TheFooter from 'components/common/TheFooter'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -92,10 +92,7 @@ Vue.use(NavBar)
 .use(Toast)
 
 export default {
-  name: 'homePage',
-  props: {
-    zIndex: Number,
-  },
+  name: 'HomeIndexPage',
   components: {
     'v-footer': TheFooter
     // [NavBar.name]: NavBar,
@@ -106,6 +103,9 @@ export default {
     // [Step.name]: Step,
     // [Steps.name]: Steps,
   },
+  props: {
+    zIndex: Number,
+  },
   data () {
     return {
       noticeMsg: '2019年10月10日 黑龙江路综合管廊燃气舱温度过高发出告警，请相关人员及时进行处理',
@@ -113,37 +113,37 @@ export default {
         id: 1,
         name: '任务查询',
         icon: 'notes-o',
-        url: '/taskQuery',
+        url: '/TaskQuery',
       },{
         id: 2,
         name: '报警查询',
         icon: 'bulb-o',
-        url: '/alarmQuery',
+        url: '/AlarmQuery',
       },{
         id: 3,
         name: '管廊查询',
         icon: 'shop-o',
-        url: '/pipeQuery',
+        url: '/PipeQuery',
       },{
         id: 4,
         name: '管线查询',
         icon: 'description',
-        url: '/pipelineQuery',
+        url: '/PipelineQuery',
       },{
         id: 5,
         name: '设备查询',
         icon: 'aim',
-        url: '/deviceQuery',
+        url: '/DeviceQuery',
       },{
         id: 6,
         name: '环境监测',
         icon: 'tv-o',
-        url: '/environmentalMonitoring',
+        url: '/EnvironmentalMonitoring',
       },{
         id: 7,
         name: '统计分析',
         icon: 'chart-trending-o',
-        url: '/statistic',
+        url: '/Statistic',
       }],
       alarms: [{
         id: 1,
@@ -199,7 +199,7 @@ export default {
     //测试Mplat调用原生api的scan功能
     scanTest: function () {
       Toast('二维码扫描成功');
-      this.$router.push('scan');
+      this.$router.push('Scan');
 
       //调用移动框架接口
       Mplat.init(function(){

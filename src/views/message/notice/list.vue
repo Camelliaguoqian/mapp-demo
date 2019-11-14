@@ -16,12 +16,12 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from '@/utils/DateUtil'
+import DateUtil from 'utils/DateUtil'
 import { NavBar,
  Panel,  
  Icon,
 } from 'vant'
-import MessageList from '@/components/list/MessageList'
+import MessageList from 'components/list/MessageList'
 
 Vue.use(NavBar)
 .use(Panel)
@@ -29,11 +29,12 @@ Vue.use(NavBar)
 
 
 export default {
-  props: {
-    zIndex: Number,
-  },
+  name: 'MessageNoticeListPage',
   components: {
     'message-list': MessageList
+  },
+  props: {
+    zIndex: Number,
   },
   data() {
     return {
@@ -44,7 +45,7 @@ export default {
           time: '2019-10-08 09：00：00',
           status: '已读',
           type: 'read',
-          url: '/message/messageNoticeDetail',
+          url: '/Message/MessageNoticeDetail',
         },
         {
           id: '2',
@@ -52,7 +53,7 @@ export default {
           time: '2019-10-09 09：00：00',
           status: '未读',
           type: 'unread',
-          url: '/message/messageNoticeDetail',
+          url: '/Message/MessageNoticeDetail',
         },
         {
           id: '2',
@@ -60,7 +61,7 @@ export default {
           time: '2019-10-11 09：00：00',
           status: '未读',
           type: 'unread',
-          url: '/message/messageNoticeDetail',
+          url: '/Message/MessageNoticeDetail',
         },
       ],
     };
