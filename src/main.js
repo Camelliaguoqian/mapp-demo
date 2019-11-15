@@ -3,9 +3,15 @@ import App from './App.vue'
 import { router } from './router'
 import Fastclick from 'fastclick'
 import md5 from 'js-md5' 
-import request from '@/assets/js/request/api.js'
-import requestUrl from '@/assets/js/request/requestUrl.js'
- 
+import request from 'assets/js/request/api.js'
+import requestUrl from 'assets/js/request/requestUrl.js'
+
+//自定义字体库
+import 'assets/font/font_1511230_kparicrh2tq/iconfont.css'
+
+//引入vant
+import { Icon, Toast } from 'vant'
+Vue.use(Icon, Toast)
 
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5
@@ -18,6 +24,8 @@ new Vue({
   el: '#app',
   render: h => h(App)
 });
+
+
 
 //way-2
 /* new Vue({

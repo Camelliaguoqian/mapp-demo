@@ -22,7 +22,6 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from 'utils/DateUtil'
 import { NavBar,
  Panel,  
  Icon,

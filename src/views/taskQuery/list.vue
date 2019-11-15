@@ -82,7 +82,6 @@ export default {
         let resultRetMsg = result.retMsg; 
         let resultRetData = result.retData; 
         let taskQueryData = resultRetData;
-        let listLength = taskQueryData.length;
         
         if(resultRetCode === "SUCCESS"){
           //今日任务

@@ -17,332 +17,332 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: '/Login'
+    redirect: '/login'
   },
   {
-    path: '/Login',
-    name: 'Login',
+    path: '/login',
+    name: 'login',
     component: () => import('./views/Login'),
     meta: {
-      title: 'Login',
+      title: 'login',
       isShowFooter: false
     }
   },
   {
-    path: '/Home',
-    name: 'Home',
+    path: '/home',
+    name: 'home',
     component: () => import('./views/Home/Index'),
     meta: {
-      title: 'Home',
+      title: 'home',
       isShowFooter: true
     }
   },
   {
-    path: '/Scan',
-    name: 'Scan',
+    path: '/scan',
+    name: 'scan',
     component: () => import('./views/Scan/Index.vue'),
     meta: {
-      title: 'Scan',
+      title: 'scan',
       isShowFooter: false
     }
   },
   {
-    path: '/Work',
-    name: 'Work',
+    path: '/work',
+    name: 'work',
     component: () => import('./views/Work/Index.vue'),
     meta: {
-      title: 'Work',
+      title: 'work',
       isShowFooter: false
     }
   },
   {
-    path: '/Task',
-    name: 'Task',
+    path: '/task',
+    name: 'task',
     component: () => import('./views/Task/Index.vue'),
     meta: {
-      title: 'Task',
+      title: 'task',
       isShowFooter: true
     }
   },
   {
-    path: '/TaskSub',
-    name: 'TaskSub',
+    path: '/taskSub',
+    name: 'taskSub',
     component: () => import('./views/Task/Subpage.vue'),
     children: [
       {
-        path: 'InspectionList',
-        name: 'InspectionList',
+        path: 'inspectionList',
+        name: 'inspectionList',
         component: () => import('./views/Task/Inspection/List.vue'),
         meta: {
-          title: 'IinspectionList',
+          title: 'inspectionList',
           isShowFooter: false
         }
       },
       {
-        path: 'InspectionDetail',
-        name: 'InspectionDetail',
+        path: 'inspectionDetail',
+        name: 'inspectionDetail',
         component: () => import('./views/Task/Inspection/Detail.vue'),
         meta: {
-          title: 'InspectionDetail',
+          title: 'inspectionDetail',
           isShowFooter: false
         }
       },
       {
-        path: 'InspectionTodo',
-        name: 'InspectionTodo',
+        path: 'inspectionTodo',
+        name: 'inspectionTodo',
         component: () => import('./views/Task/Inspection/Todo.vue'),
         meta: {
-          title: 'InspectionTodo',
+          title: 'inspectionTodo',
           isShowFooter: false
         }
       },
       {
-        path: 'InspectionTodoDetail',
-        name: 'InspectionTodoDetail',
+        path: 'inspectionTodoDetail',
+        name: 'inspectionTodoDetail',
         component: () => import('./views/Task/Inspection/TodoDetail.vue'),
         meta: {
-          title: 'InspectionTodoDetail',
+          title: 'inspectionTodoDetail',
           isShowFooter: false
         }
       },
       {
-        path: 'InspectionFeedback',
-        name: 'InspectionFeedback',
+        path: 'inspectionFeedback',
+        name: 'inspectionFeedback',
         component: () => import('./views/Task/Inspection/Feedback.vue'),
         meta: {
-          title: 'InspectionFeedback',
+          title: 'inspectionFeedback',
           isShowFooter: false
         }
       },
       {
-        path: 'RepairList',
-        name: 'RepairList',
+        path: 'repairList',
+        name: 'repairList',
         component: () => import('./views/Task/Repair/List.vue'),
         meta: {
-          title: 'RepairList',
+          title: 'repairList',
           isShowFooter: false
         }
       },
       {
-        path: 'RepairDetail',
-        name: 'RepairDetail',
+        path: 'repairDetail',
+        name: 'repairDetail',
         component: () => import('./views/Task/Repair/Detail.vue'),
         meta: {
-          title: 'RepairDetail',
+          title: 'repairDetail',
           isShowFooter: false
         }
       },
       {
-        path: 'RepairFeedback',
-        name: 'RepairFeedback',
+        path: 'repairFeedback',
+        name: 'repairFeedback',
         component: () => import('./views/Task/Repair/Feedback.vue'),
         meta: {
-          title: 'RepairFeedback',
+          title: 'repairFeedback',
           isShowFooter: false
         }
       },
     ],
     meta: {
-      title: 'TaskSub',
+      title: 'taskSub',
       isShowFooter: true
     }
   },
   {
-    path: '/Message',
+    path: '/message',
     component: () => import('./views/Message/Index.vue'),
     children: [
       {
         path: '',
-        name: 'MessageHome',
+        name: 'messageHome',
         component: () => import('./views/Message/Home/Index.vue'),
         meta: {
-          title: 'MessageHome',
+          title: 'messageHome',
           isShowFooter: false
         }
       },
       {
-        path: 'MessageAlarm',
-        name: 'MessageAlarm',
+        path: 'messageAlarm',
+        name: 'messageAlarm',
         component: () => import('./views/Message/Alarm/List.vue'),
         meta: {
-          title: 'MessageAlarm',
+          title: 'messageAlarm',
           isShowFooter: false
         }
       },
       {
-        path: 'MessageAlarmDetail',
-        name: 'MessageAlarmDetail',
+        path: 'messageAlarmDetail',
+        name: 'messageAlarmDetail',
         component: () => import('./views/Message/Alarm/Detail.vue'),
         meta: {
-          title: 'MessageAlarmDetail',
+          title: 'messageAlarmDetail',
           isShowFooter: false
         }
       },
       {
-        path: 'MessageNotice',
-        name: 'MessageNotice',
+        path: 'messageNotice',
+        name: 'messageNotice',
         component: () => import('./views/Message/Notice/List.vue'),
         meta: {
-          title: 'MessageNotice',
+          title: 'messageNotice',
           isShowFooter: false
         }
       },
       {
-        path: 'MessageNoticeDetail',
-        name: 'MessageNoticeDetail',
+        path: 'messageNoticeDetail',
+        name: 'messageNoticeDetail',
         component: () => import('./views/Message/Notice/Detail.vue'),
         meta: {
-          title: 'MessageNoticeDetail',
+          title: 'messageNoticeDetail',
           isShowFooter: false
         }
       }
     ],
     meta: {
-      title: 'Message',
+      title: 'message',
       isShowFooter: true
     }
   },
   {
-    path: '/User',
-    name: 'User',
+    path: '/user',
+    name: 'user',
     component: () => import('./views/User/Index.vue'),
     meta: {
-      title: 'User',
+      title: 'user',
       isShowFooter: true
     }
   },
   {
-    path: '/BasicUser',
-    name: 'BasicUser',
+    path: '/basicUser',
+    name: 'basicUser',
     component: () => import('./views/User/BasicUser.vue'),
     meta: {
-      title: 'BasicUser',
+      title: 'basicUser',
       isShowFooter: false
     }
   },
   {
-    path: '/PasswordModify',
-    name: 'PsswordModify',
+    path: '/passwordModify',
+    name: 'passwordModify',
     component: () => import('./views/User/PasswordModify.vue'),
     meta: {
-      title: 'PasswordModify',
+      title: 'passwordModify',
       isShowFooter: false
     }
   },
   {
-    path: '/TaskQuery',
-    name: 'TaskQuery',
+    path: '/taskQuery',
+    name: 'taskQuery',
     component: () => import('./views/TaskQuery/Index.vue'),
     meta: {
-      title: 'TaskQuery',
+      title: 'taskQuery',
       isShowFooter: false
     }
   },
   {
-    path: '/TaskQueryList',
-    name: 'TaskQueryList',
+    path: '/taskQueryList',
+    name: 'taskQueryList',
     component: () => import('./views/TaskQuery/List.vue'),
     meta: {
-      title: 'TaskQueryList',
+      title: 'taskQueryList',
       isShowFooter: false
     }
   },
   {
-    path: '/AlarmQuery',
-    name: 'AlarmQuery',
+    path: '/alarmQuery',
+    name: 'alarmQuery',
     component: () => import('./views/AlarmQuery/Index.vue'),
     meta: {
-      title: 'AlarmQuery',
+      title: 'alarmQuery',
       isShowFooter: false
     }
   },
   {
-    path: '/AlarmQueryList',
-    name: 'AlarmQueryList',
+    path: '/alarmQueryList',
+    name: 'alarmQueryList',
     component: () => import('./views/AlarmQuery/List.vue'),
     meta: {
-      title: 'AlarmQueryList',
+      title: 'alarmQueryList',
       isShowFooter: false
     }
   },
   {
-    path: '/PipeQuery',
-    name: 'PipeQuery',
+    path: '/pipeQuery',
+    name: 'pipeQuery',
     component: () => import('./views/PipeQuery/Index.vue'),
     meta: {
-      title: 'PipeQuery',
+      title: 'pipeQuery',
       isShowFooter: false
     }
   },
   {
-    path: '/PipeQueryList',
-    name: 'PipeQueryList',
+    path: '/pipeQueryList',
+    name: 'pipeQueryList',
     component: () => import('./views/PipeQuery/List.vue'),
     meta: {
-      title: 'PipeQueryList',
+      title: 'pipeQueryList',
       isShowFooter: false
     }
   },
   {
-    path: '/PipeLineQuery',
-    name: 'PipeLineQuery',
+    path: '/pipeLineQuery',
+    name: 'pipeLineQuery',
     component: () => import('./views/PipeLineQuery/Index.vue'),
     meta: {
-      title: 'PipeLineQuery',
+      title: 'pipeLineQuery',
       isShowFooter: false
     }
   },
   {
-    path: '/PipeLineQueryList',
-    name: 'PipeLineQueryList',
+    path: '/pipeLineQueryList',
+    name: 'pipeLineQueryList',
     component: () => import('./views/PipeLineQuery/List.vue'),
     meta: {
-      title: 'PipeLineQueryList',
+      title: 'pipeLineQueryList',
       isShowFooter: false
     }
   },
   {
-    path: '/DeviceQuery',
-    name: 'DeviceQuery',
+    path: '/deviceQuery',
+    name: 'deviceQuery',
     component: () => import('./views/DeviceQuery/Index.vue'),
     meta: {
-      title: 'DeviceQuery',
+      title: 'deviceQuery',
       isShowFooter: false
     }
   },
   {
-    path: '/DeviceQueryList',
-    name: 'DeviceQueryList',
+    path: '/deviceQueryList',
+    name: 'deviceQueryList',
     component: () => import('./views/DeviceQuery/List.vue'),
     meta: {
-      title: 'DeviceQueryList',
+      title: 'deviceQueryList',
       isShowFooter: false
     }
   },
   {
-    path: '/EnvironmentalMonitoring',
-    name: 'EnvironmentalMonitoring',
+    path: '/environmentalMonitoring',
+    name: 'environmentalMonitoring',
     component: () => import('./views/EnvironmentalMonitoring/Index.vue'),
     meta: {
-      title: 'EnvironmentalMonitoring',
+      title: 'environmentalMonitoring',
       isShowFooter: false
     }
   },
   {
-    path: '/EnvironmentalMonitoringList',
-    name: 'EnvironmentalMonitoringList',
+    path: '/environmentalMonitoringList',
+    name: 'environmentalMonitoringList',
     component: () => import('./views/EnvironmentalMonitoring/List.vue'),
     meta: {
-      title: 'EnvironmentalMonitoringList',
+      title: 'environmentalMonitoringList',
       isShowFooter: false
     }
   },
   {
-    path: '/Statistic',
-    name: 'Statistic',
+    path: '/statistic',
+    name: 'statistic',
     component: () => import('./views/Statistic/Index.vue'),
     meta: {
-      title: 'Statistic',
+      title: 'statistic',
       isShowFooter: false
     }
   },
@@ -355,8 +355,8 @@ routes.forEach(route => {
 const router = new VueRouter({ 
   // mode: 'history',
   routes: routes,
-  //滚动行为。这个功能只在支持 history.pushState 的浏览器中可用
-  scrollBehavior (to, from, savedPosition) {
+  //滚动行为。这个功能只在支持 history.pushState 的浏览器中可用 (to, from, savedPosition)
+  scrollBehavior (to) {
     if (to.hash) {
       return {
         selector: to.hash

@@ -16,7 +16,6 @@
 
 <script>
 import Vue from 'vue'
-import DateUtil from 'utils/DateUtil'
 import { NavBar,
  Panel,  
  Icon,
@@ -44,21 +43,21 @@ export default {
           title: '黑龙江路 04# 综合舱 入侵告警',
           time: '2019-10-08 09：00：00',
           system: '监控与报警系统',
-          url: '/Message/MessageAlarmDetail',
+          url: '/message/messageAlarmDetail',
         },
         {
           id: '2',
           title: '黑龙江路 01# 综合舱 湿度告警',
           time: '2019-10-09 09：00：00',
           system: '监控与报警系统',
-          url: '/Message/MessageAlarmDetail',
+          url: '/message/messageAlarmDetail',
         },
         {
           id: '2',
           title: '黑龙江路 09#-10# 公共设备夹层 风机故障',
           time: '2019-10-11 09：00：00',
           system: '监控与报警系统',
-          url: '/Message/MessageAlarmDetail',
+          url: '/message/messageAlarmDetail',
         },
       ],
     };

@@ -77,7 +77,7 @@ export default {
         let resultRetCode = result.retCode; 
       
         if(resultRetCode === "SUCCESS"){
-          this.$router.replace('/Login');
+          this.$router.replace('/login');
         }
       });
       

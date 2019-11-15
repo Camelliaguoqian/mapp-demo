@@ -54,14 +54,14 @@ export default {
           code: '执行中',
           time: '2019-01-02 12:00:00',
           title: '氧气传感器',
-          url: '/TaskSub/InspectionTodoDetail',
+          url: '/taskSub/inspectionTodoDetail',
         },
         {
           id: '2',
           code: '已完成',
           time: '2019-01-03 16:00:00',
           title: '温湿度传感器',
-          url: '/TaskSub/InspectionTodoDetail',
+          url: '/taskSub/inspectionTodoDetail',
         },
       ],
     

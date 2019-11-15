@@ -23,7 +23,7 @@
         <van-grid-item
           icon="more-o"
           text="更多"
-          @click="onClickNavLink($event)"
+          @click="onClickNavLink"
         />
       </van-grid>
     </section>
@@ -113,37 +113,37 @@ export default {
         id: 1,
         name: '任务查询',
         icon: 'notes-o',
-        url: '/TaskQuery',
+        url: '/taskQuery',
       },{
         id: 2,
         name: '报警查询',
         icon: 'bulb-o',
-        url: '/AlarmQuery',
+        url: '/alarmQuery',
       },{
         id: 3,
         name: '管廊查询',
         icon: 'shop-o',
-        url: '/PipeQuery',
+        url: '/pipeQuery',
       },{
         id: 4,
         name: '管线查询',
         icon: 'description',
-        url: '/PipelineQuery',
+        url: '/pipelineQuery',
       },{
         id: 5,
         name: '设备查询',
         icon: 'aim',
-        url: '/DeviceQuery',
+        url: '/deviceQuery',
       },{
         id: 6,
         name: '环境监测',
         icon: 'tv-o',
-        url: '/EnvironmentalMonitoring',
+        url: '/environmentalMonitoring',
       },{
         id: 7,
         name: '统计分析',
         icon: 'chart-trending-o',
-        url: '/Statistic',
+        url: '/statistic',
       }],
       alarms: [{
         id: 1,
@@ -190,16 +190,13 @@ export default {
     }
   },
   methods: {
-    onClickNavLink: function (event) {
-      //获取点击对象      
-      //var el = event.currentTarget;
-      // console.log("当前对象的内容："+el.innerHTML);
+    onClickNavLink: function () {
       this.$toast("更多功能暂未开放，敬请期待");
     },
     //测试Mplat调用原生api的scan功能
     scanTest: function () {
       Toast('二维码扫描成功');
-      this.$router.push('Scan');
+      this.$router.push('scan');
 
       //调用移动框架接口
       Mplat.init(function(){

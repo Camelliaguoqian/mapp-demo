@@ -7,7 +7,7 @@
     @click-left="goBack"></van-nav-bar>
 
     <section class="page-cover">
-      <img class="device-img" src="@/assets/image/camera.jpg" alt="" />
+      <img class="device-img" :src="devImgUrl" alt="" />
     </section>
 
     <section class="page-wrapper">
@@ -66,6 +66,7 @@ export default {
   },
   data() {
     return {
+      devImgUrl: require('assets/image/camera.jpg'),
       deviceControl: {
         isControled: "已开启",
         valueData: [

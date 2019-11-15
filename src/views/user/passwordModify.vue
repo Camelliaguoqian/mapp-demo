@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     // 表单提交
-    onClickButtonSubmit: function (e,oldPassword,newPassword,confirmPassword) {
+    onClickButtonSubmit: function (e) {
       if(this.oldPassword == '' || this.newPassword == '' || this.confirmPassword == ''){
         this.$toast("密码不能为空");
         return false;

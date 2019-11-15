@@ -6,7 +6,7 @@
       <van-grid clickable :column-num="3">
         <van-grid-item icon="peer-pay" text="巡检任务" to="/taskSub/inspectionList" />
         <van-grid-item icon="debit-pay" text="维修任务" to="/taskSub/repairList" />
-        <van-grid-item icon="other-pay" text="更多" @click="onClickNavLink($event)" />
+        <van-grid-item icon="other-pay" text="更多" @click="onClickNavLink" />
       </van-grid>
     </div>
 
@@ -257,10 +257,7 @@ export default {
     }
   },
   methods: {
-    onClickNavLink: function (event) {
-      //获取点击对象      
-      //var el = event.currentTarget;
-      // console.log("当前对象的内容："+el.innerHTML);
+    onClickNavLink: function () {
       this.$toast("更多功能暂未开放，敬请期待");
     },
   }
