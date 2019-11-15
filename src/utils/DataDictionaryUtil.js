@@ -37,6 +37,31 @@ DataDictionaryUtil = {
     }
     return typeId;
   },
+  //字典值-报警级别
+  commonJudgeAlarmType(val) {
+    let retData = {status: '',classNameType: ''};
+    switch(val) {
+      case '1':
+        retData.status = '一级';
+        retData.classNameType = 'danger';
+        break;
+      case '2':
+        retData.status = '二级';
+        retData.classNameType = 'warning';
+        break;
+      case '3':
+        retData.status = '三级';
+        retData.classNameType = 'primary';
+        break;
+      case '4':
+        retData.status = '四级';
+        retData.classNameType = 'success';
+        break;
+    }
+    return retData;
+  },
+
+
 }
 
 

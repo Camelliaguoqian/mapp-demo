@@ -2,8 +2,8 @@
   <div class="page">
     <van-nav-bar title="报警查询" 
     fixed 
-    :zIndex="100" 
     left-arrow 
+    :zIndex="100" 
     @click-left="goBack"></van-nav-bar>
 
     <div class="page-wrapper">
@@ -11,9 +11,9 @@
         <van-field 
           readonly
           clickable
-          label="管廊"
-          :value="pipe"
-          placeholder="请选择管廊"
+          label="所属管廊"
+          :value="pipeName"
+          placeholder="请选择所属管廊"
           @click="showPipePicker = true"
         />
         <van-popup v-model="showPipePicker" position="bottom">
@@ -28,9 +28,9 @@
         <van-field 
           readonly
           clickable
-          label="分区"
-          :value="zone"
-          placeholder="请选择分区"
+          label="所属分区"
+          :value="zoneName"
+          placeholder="请选择所属分区"
           @click="showZonePicker = true"
         />
         <van-popup v-model="showZonePicker" position="bottom">
@@ -45,9 +45,9 @@
         <van-field 
           readonly
           clickable
-          label="舱室"
-          :value="cabin"
-          placeholder="请选择舱室"
+          label="所属舱室"
+          :value="cabinName"
+          placeholder="请选择所属舱室"
           @click="showCabinPicker = true"
         />
         <van-popup v-model="showCabinPicker" position="bottom">
@@ -144,34 +144,30 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import DateUtil from 'utils/DateUtil'
 import { NavBar,
  Cell, 
  CellGroup,  
- Icon, 
  Field,
  DatetimePicker,
  Picker,
  Popup,
- Toast,
  Button
 } from 'vant'
-
-Vue.use(NavBar)
-.use(Cell)
-.use(CellGroup)
-.use(Icon)
-.use(Field)
-.use(DatetimePicker)
-.use(Picker)
-.use(Popup)
-.use(Toast)
-.use(Button)
-
+import DateUtil from 'utils/DateUtil'
+import DataDictionaryUtil from 'utils/DataDictionaryUtil'
 
 export default {
   name: 'AlarmQueryIndexPage',
+  components: {
+    [NavBar.name]: NavBar,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Field.name]: Field,
+    [DatetimePicker.name]: DatetimePicker,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+    [Button.name]: Button,
+  },
   props: {
     zIndex: Number,
   },
@@ -185,16 +181,20 @@ export default {
       showStartDatePicker: false,
       showEndDatePicker: false,
       orderCode: '',
-      pipe: '',
+      pipeName: '',
+      pipeId: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
-      zone: '',
+      pipeColumns: ['黑龙江路综合管廊'],
+      zoneName: '',
+      zoneId: '',
       showZonePicker: false,
       zoneColumns: ['分区01','分区02','分区03'],
-      cabin: '',
+      cabinName: '',
+      cabinId: '',
       showCabinPicker: false,
       cabinColumns: ['综合舱','燃气舱','电力舱','热力舱'],
       system: '',
+      systemId: '',
       showSystemPicker: false,
       systemColumns: ['监测与环控系统','排水系统'],
       level: '',
@@ -203,61 +203,84 @@ export default {
     }
   },
   methods: {
-    goBack() {
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    onConfirmPipe(pipe) {
-      this.pipe = pipe;
+    onConfirmPipe: function(pipeName) {
+      this.pipeName = pipeName;
+      switch(pipeName) {
+        case '黑龙江路综合管廊':
+          this.pipeId = '26';
+          break;
+      }
       this.showPipePicker = false;
     },
-    onConfirmZone(zone) {
-      this.zone = zone;
+    onConfirmZone: function(zoneName) {
+      this.zoneName = zoneName;
+      this.zoneId = '';
       this.showZonePicker = false;
     },
-    onConfirmCabin(cabin) {
-      this.cabin = cabin;
+    onConfirmCabin: function(cabinName) {
+      this.cabinName = cabinName;
+      this.cabinId = '';
       this.showCabinPicker = false;
     },
-    onConfirmSystem(system) {
+    onConfirmSystem: function(system) {
       this.system = system;
+      this.systemId = '';
       this.showSystemPicker = false;
     },
-    onConfirmLevel(level) {
+    onConfirmLevel: function(level) {
       this.level = level;
       this.showLevelPicker = false;
     },
-    // onChangeStartDate(e) {
-    //   let dateSelVal = e.getValues();
-    //   this.startDateVal = dateSelVal[0] + '-' + dateSelVal[1] + '-' + dateSelVal[2];
-    // },
-    // onChangeEndDate(e) {
-    //   let dateSelVal = e.getValues();
-    //   this.endDateVal = dateSelVal[0] + '-' + dateSelVal[1] + '-' + dateSelVal[2];
-    // },
-    onConfirmStartDate(val) {
+    onConfirmStartDate: function(val) {
       console.log(val);
       let currentVal = DateUtil.format(val,'YYYY-MM-DD');
       this.startDateVal = currentVal;
       this.showStartDatePicker = false;
     },
-    onConfirmEndDate(val) {
+    onConfirmEndDate: function(val) {
       console.log(val);
       let currentVal = DateUtil.format(val,'YYYY-MM-DD');
       this.endDateVal = currentVal;
       this.showEndDatePicker = false;
     },
-    onSubmit() {
-      //console.log(this.$route); //通过 this.$route 访问当前路由
-      //通过 this.$router 访问路由器
-      this.$router.push('alarmQueryList');
-
+    onSubmit: function (e) {
+      e.preventDefault();
+      //校验
+      if(this.pipeId == '' 
+      && this.zoneId == '' 
+      && this.cabinId == '' 
+      && this.startDateVal == '' 
+      && this.endDateVal == '' 
+      && this.systemId == '' 
+      && this.level == ''){
+        this.$toast("请至少选择一项查询条件");
+        return false;
+      }else {
+        //带参数的跳转页面
+        this.$router.push({
+          path:"alarmQueryList",
+          query: {
+          pipeId: this.pipeId,
+          zoneId: this.zoneId,
+          cabinId: this.cabinId,
+          startTime: this.startDateVal,
+          endTime: this.endDateVal,
+          systemId: this.systemId,
+          alarmLevel: this.level
+          }
+        })
+      }
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

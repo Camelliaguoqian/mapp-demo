@@ -2,31 +2,40 @@
   <div class="page">
     <van-nav-bar title="报警查询" 
     fixed 
-    :zIndex="100" 
     left-arrow 
+    :zIndex="100" 
     @click-left="goBack"></van-nav-bar>
 
-    <!-- 任务list子组件调用 -->
-    <status-list v-bind:listdata="querylistdata"></status-list>
-    
+    <section class="page-wrapper">
+      <!-- 任务list子组件调用 -->
+      <status-list v-bind:listdata="alarmquerylist"></status-list>
+      <!-- 暂无数据组件 -->
+      <default-data v-bind:nodata="isdatahide"></default-data> 
+    </section>
+
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
- Panel,  
- Icon,
+  Panel, 
+  Tab,
+  Tabs,
+  Image,
 } from 'vant'
+import DefaultData from 'components/common/DefaultData'
 import StatusList from 'components/list/StatusList'
-
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
+import DataDictionaryUtil from 'utils/DataDictionaryUtil'
 
 export default {
   name: 'AlarmQueryListPage',
   components: {
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
+    [Image.name]: Image,
+    'default-data': DefaultData,
     'status-list': StatusList
   },
   props: {
@@ -34,43 +43,145 @@ export default {
   },
   data() {
     return {
-      querylistdata: [
-        {
-          id: '1',
-          title: '黑龙江路综合舱巡检任务',
-          time: '2019-10-08 09：00：00',
-          status: '已完成',
-          type: 0,
-          content: '综合舱风机水泵开关检查',
-        },
-        {
-          id: '2',
-          title: '黑龙江路电力舱巡检任务',
-          time: '2019-10-09 09：00：00',
-          status: '待处理',
-          type: 1,
-          content: '电力舱电缆常规检查',
-        },
-        {
-          id: '2',
-          title: '黑龙江路燃气舱巡检任务',
-          time: '2019-10-11 09：00：00',
-          status: '处理中',
-          type: 2,
-          content: '燃气舱燃气浓度检查',
-        },
-      ],
+      alarmquerylist: [],
+      isdatahide: 'hide'
     }
   },
+  mounted: function() {
+    this.initData();
+    this.getDicCode();
+  },
   methods: {
-    goBack() {
+    initData: function() {
+      /**
+       * 获取父组件路由传过来的参数值
+       * 方法1：this.$router.currentRoute.query.pipeId
+       * 方法2：this.$route.query.pipeId
+       */
+      let pipeId = this.$route.query.pipeId;
+      let zoneId = this.$route.query.zoneId;
+      let cabinId = this.$route.query.cabinId;
+      let startTime = this.$route.query.startTime;
+      let endTime = this.$route.query.endTime;
+      let systemId = this.$route.query.systemId;
+      let alarmLevel = this.$route.query.alarmLevel;
+     
+      //数据查询-瀑布流滚动加载长列表
+      this.request.httpPost(this.requestUrl.alarmSearch, {
+        pipeId: pipeId,
+        zoneId: zoneId,
+        cabinId: cabinId,
+        startTime: startTime,
+        endTime: endTime,
+        systemId: systemId,
+        alarmLevel: alarmLevel}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; 
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        let queryListData = resultRetData;
+        
+        if(resultRetCode === "SUCCESS"){
+          if(queryListData.length > 0) {
+            for(let i=0; i<queryListData.length; i++) {
+              let node = {};
+              node.id = queryListData[i].resId;
+              node.title = queryListData[i].devname + ' ' + queryListData[i].almstr;
+              node.time = '报警时间：' + queryListData[i].eventTime;
+              node.content = '报警位置：' + queryListData[i].spacename;
+              node.status = DataDictionaryUtil.commonJudgeAlarmType(queryListData[i].alarmStatus).status;
+              node.type = DataDictionaryUtil.commonJudgeAlarmType(queryListData[i].alarmStatus).classNameType;
+              this.alarmquerylist.push(node);
+            }
+
+          }else{
+            //暂无数据
+            this.isdatahide = 'show';
+          }
+
+        }
+        if(resultRetCode === "FAIL"){
+          //暂无数据
+          this.isdatahide = 'show';
+          this.$toast(resultRetMsg);
+        }  
+
+      }).catch((error) => {
+        //暂无数据
+        this.isdatahide = 'show';
+        this.$toast("请求失败"+error);
+      });
+    },
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
+    getDicCode: function() {
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: ''}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          this.$toast(resultRetMsg);
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.page {
+  padding: 46px 0 0 0;
+  &-wrapper {
+    padding: 0 10px;
+    margin: 10px auto;
+  }
 
+  &-wrapper:last-child {
+    margin-bottom: 0;
+  }
+
+  &-panel {
+    margin: 10px auto;
+  }
+
+  &-panel:last-child {
+    margin-bottom: 0;
+  }
+
+  &-icon-panel {
+    &-content {
+      padding: 10px 16px;
+    }
+
+    .panel-title {
+      position: relative;
+      display: flex;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px 16px;
+      overflow: hidden;
+      color: #323233;
+      font-size: 14px;
+      line-height: 24px;
+      background-color: #fff;
+      &-icon {
+        margin-right: 2px;
+        margin-top: 4px;
+      }
+    }
+  }
+
+}
 </style>
 

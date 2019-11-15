@@ -2,8 +2,8 @@
   <div class="page">
     <van-nav-bar title="工作任务" 
     fixed 
-    :zIndex="100" 
     left-arrow 
+    :zIndex="100" 
     @click-left="goBack"></van-nav-bar>
 
     <section class="page-wrapper">
@@ -27,30 +27,24 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Panel, 
- Icon,
  Tab,
  Tabs,
  Image,
- Toast
 } from 'vant'
+import DefaultData from 'components/common/DefaultData'
 import StatusList from 'components/list/StatusList'
 import DataDictionaryUtil from 'utils/DataDictionaryUtil.js'
-import DefaultData from 'components/common/DefaultData'
-
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
-.use(Tab)
-.use(Tabs)
-.use(Image)
-.use(Toast)
 
 export default {
   name: 'WorkTaskPage',
   components: {
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
+    [Image.name]: Image,
     'default-data': DefaultData,
     'status-list': StatusList
   },
@@ -127,13 +121,15 @@ export default {
           }
           if(resultRetCode === "FAIL"){
             //暂无数据
-            this.istaskhide='show';
+            this.isdaylisthide='show';
+            this.isweeklisthide='show';
             this.$toast(resultRetMsg);
           }  
 
         }).catch((error) => {
           //暂无数据
-          this.istaskhide='show';
+          this.isdaylisthide='show';
+          this.isweeklisthide='show';
           this.$toast("请求失败"+error);
         });
     },

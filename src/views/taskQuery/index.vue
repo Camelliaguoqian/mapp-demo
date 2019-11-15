@@ -2,17 +2,17 @@
   <div class="task-query-page page">
     <van-nav-bar title="任务查询" 
     fixed 
-    :zIndex="100" 
     left-arrow 
+    :zIndex="100" 
     @click-left="goBack"></van-nav-bar>
 
     <div class="page-wrapper">
       <van-cell-group>
         <van-field 
+          :value="pipeName"
           readonly
           clickable
           label="所属管廊"
-          :value="pipeName"
           placeholder="请选择所属管廊"
           @click="showPipePicker = true"
         />
@@ -91,44 +91,39 @@
 
     <div class="page-wrapper">
       <van-button 
-      type="info" 
-      size="large"
-      @click="onSubmit"
-      >提交查询</van-button>
+        type="info" 
+        size="large"
+        @click="onSubmit"
+        >提交查询</van-button>
     </div>
   </div>  
 </template>
 
 <script>
-import Vue from 'vue'
-import DateUtil from 'utils/DateUtil'
-import DataDictionaryUtil from 'utils/DataDictionaryUtil.js'
 import { NavBar,
  Cell, 
  CellGroup,  
- Icon, 
  Field,
  DatetimePicker,
  Picker,
  Popup,
- Toast,
  Button
 } from 'vant'
-
-Vue.use(NavBar)
-.use(Cell)
-.use(CellGroup)
-.use(Icon)
-.use(Field)
-.use(DatetimePicker)
-.use(Picker)
-.use(Popup)
-.use(Toast)
-.use(Button)
-
+import DateUtil from 'utils/DateUtil'
+import DataDictionaryUtil from 'utils/DataDictionaryUtil'
 
 export default {
   name: 'TaskQueryIndexPage',
+  components: {
+    [NavBar.name]: NavBar,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Field.name]: Field,
+    [DatetimePicker.name]: DatetimePicker,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+    [Button.name]: Button,
+  },
   props: {
     zIndex: Number,
   },
@@ -160,7 +155,7 @@ export default {
       this.pipeName = pipeName;
       switch(pipeName) {
         case '黑龙江路综合管廊':
-          this.pipeId = '21';
+          this.pipeId = '26';
           break;
       }
       this.showPipePicker = false;
