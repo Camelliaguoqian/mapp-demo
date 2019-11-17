@@ -6,8 +6,8 @@
 
     <section class="page-wrapper">
       <van-grid clickable :column-num="2">
-        <van-grid-item icon="scan" text="扫一扫" @click="scanTest" />
-        <van-grid-item icon="friends-o" dot text="工作" to="/work" />
+        <van-grid-item :icon="navIconUrlScan" text="扫一扫" @click="scanTest" />
+        <van-grid-item :icon="navIconUrlWork" dot text="工作" to="/work" />
       </van-grid>
     </section>
 
@@ -21,8 +21,8 @@
           :to="item.url"
         />
         <van-grid-item
-          icon="more-o"
           text="更多"
+          :icon="navIconUrlMore"
           @click="onClickNavLink"
         />
       </van-grid>
@@ -66,83 +66,73 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar, 
 Panel, 
-Icon, 
 Grid, 
 GridItem, 
 NoticeBar, 
 Step, 
 Steps, 
-Divider,
-Toast } from 'vant'
-import Mplat from 'utils/Mplat'
+Divider} from 'vant'
 import TheFooter from 'components/common/TheFooter'
-
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
-.use(Grid)
-.use(GridItem)
-.use(NoticeBar)
-.use(Step)
-.use(Steps)
-.use(Divider)
-.use(Toast)
+import Mplat from 'utils/Mplat'
 
 export default {
   name: 'HomeIndexPage',
   components: {
-    'v-footer': TheFooter
-    // [NavBar.name]: NavBar,
-    // [Icon.name]: Icon,
-    // [Grid.name]: Grid,
-    // [GridItem.name]: GridItem,
-    // [NoticeBar.name]: NoticeBar,
-    // [Step.name]: Step,
-    // [Steps.name]: Steps,
+    'v-footer': TheFooter,
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Grid.name]: Grid,
+    [GridItem.name]: GridItem,
+    [NoticeBar.name]: NoticeBar,
+    [Step.name]: Step,
+    [Steps.name]: Steps,
+    [Divider.name]: Divider
   },
   props: {
     zIndex: Number,
   },
   data () {
     return {
+      navIconUrlScan: require('assets/image/nav/scan.png'),
+      navIconUrlWork: require('assets/image/nav/work.png'),
+      navIconUrlMore: require('assets/image/nav/more-query.png'),
       noticeMsg: '2019年10月10日 黑龙江路综合管廊燃气舱温度过高发出告警，请相关人员及时进行处理',
       navs: [{
         id: 1,
         name: '任务查询',
-        icon: 'notes-o',
+        icon: require('assets/image/nav/task-query.png'),
         url: '/taskQuery',
       },{
         id: 2,
         name: '报警查询',
-        icon: 'bulb-o',
+        icon: require('assets/image/nav/alarm-query.png'),
         url: '/alarmQuery',
       },{
         id: 3,
         name: '管廊查询',
-        icon: 'shop-o',
+        icon: require('assets/image/nav/pipe-query.png'),
         url: '/pipeQuery',
       },{
         id: 4,
         name: '管线查询',
-        icon: 'description',
+        icon: require('assets/image/nav/pipeline-query.png'),
         url: '/pipelineQuery',
       },{
         id: 5,
         name: '设备查询',
-        icon: 'aim',
+        icon: require('assets/image/nav/device-query.png'),
         url: '/deviceQuery',
       },{
         id: 6,
         name: '环境监测',
-        icon: 'tv-o',
+        icon: require('assets/image/nav/env-query.png'),
         url: '/environmentalMonitoring',
       },{
         id: 7,
         name: '统计分析',
-        icon: 'chart-trending-o',
+        icon: require('assets/image/nav/statistic.png'),
         url: '/statistic',
       }],
       alarms: [{
@@ -218,7 +208,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
   padding: 46px 0 50px 0;
   &-wrapper {

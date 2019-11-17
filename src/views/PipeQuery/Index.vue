@@ -73,7 +73,7 @@ export default {
     return {
       pipe: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
+      pipeColumns: ['黑龙江路综合管廊'],
     }
   },
   methods: {
