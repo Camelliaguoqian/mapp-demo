@@ -128,6 +128,7 @@ import { NavBar,
  Popup,
  Button
 } from 'vant'
+import DataDictionaryUtil from 'utils/DataDictionaryUtil'
 
 export default {
   name: 'DeviceQueryIndexPage',
@@ -162,7 +163,7 @@ export default {
       showSystemPicker: false,
       systemColumns: [],
       deviceType: '',
-      deviceTypeId: '',
+      devTypeId: '',
       showDeviceTypePicker: false,
       deviceTypeColumns: [],
       deviceCode: '',
@@ -341,6 +342,8 @@ export default {
     },
     onConfirmSystem: function(system) {
       this.system = system;
+      //根据系统名称反查id
+      this.systemId = DataDictionaryUtil.commonJudgeSystemId(system);
       this.showSystemPicker = false;
     },
     onConfirmDeviceType: function(deviceType) {
@@ -350,7 +353,11 @@ export default {
     onSubmit: function (e) {
       e.preventDefault();
       //校验
-      if(this.pipeId == ''){
+      if(this.pipeId == ''
+      && this.zoneId == ''
+      && this.cabinId == ''
+      && this.systemId == ''
+      && this.devTypeId == ''){
         this.$toast("请至少选择一项查询条件");
         return false;
       }else {
@@ -362,7 +369,7 @@ export default {
             zoneId: this.zoneId,
             cabinId: this.cabinId,
             systemId: this.systemId,
-            devTypeId: this.deviceTypeId,
+            devTypeId: this.devTypeId,
           }
         })
       }

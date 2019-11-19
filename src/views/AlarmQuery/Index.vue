@@ -31,7 +31,7 @@
           label="所属分区"
           :value="zoneName"
           placeholder="请选择所属分区"
-          @click="showZonePicker = true"
+          @click="onClickZonePicker"
         />
         <van-popup v-model="showZonePicker" position="bottom">
           <van-picker 
@@ -48,7 +48,7 @@
           label="所属舱室"
           :value="cabinName"
           placeholder="请选择所属舱室"
-          @click="showCabinPicker = true"
+          @click="onClickCabinPicker"
         />
         <van-popup v-model="showCabinPicker" position="bottom">
           <van-picker 
@@ -79,9 +79,9 @@
         <van-field 
           readonly
           clickable
-          label="告警级别"
+          label="报警级别"
           :value="level"
-          placeholder="请选择告警级别"
+          placeholder="请选择报警级别"
           @click="showLevelPicker = true"
         />
         <van-popup v-model="showLevelPicker" position="bottom">
@@ -117,7 +117,7 @@
           label="终止时间"
           :value="endDateVal"
           placeholder="请选择终止时间"
-          @click="showEndDatePicker = true"
+          @click="onClickEndDatePicker"
         />
         <van-popup v-model="showEndDatePicker" position="bottom">
           <van-datetime-picker 
@@ -184,32 +184,56 @@ export default {
       pipeName: '',
       pipeId: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊'],
+      pipeColumns: [],
       zoneName: '',
       zoneId: '',
       showZonePicker: false,
-      zoneColumns: ['分区01','分区02','分区03'],
+      zoneColumns: [],
       cabinName: '',
       cabinId: '',
       showCabinPicker: false,
-      cabinColumns: ['综合舱','燃气舱','电力舱','热力舱'],
+      cabinColumns: [],
       system: '',
       systemId: '',
       showSystemPicker: false,
-      systemColumns: ['监测与环控系统','排水系统'],
+      systemColumns: [],
       level: '',
+      alamLevelId: '',
       showLevelPicker: false,
       levelColumns: [],
     }
   },
   mounted: function() {
     this.getDicCode();
+    this.getPipeName();
   },
   methods: {
     goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     getDicCode: function() {
+      //字典值-系统名称
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: 'IOT_DEVICE.SYSTEMID'}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.systemColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+
       //字典值-告警级别
       this.request.httpPost(this.requestUrl.getDicListByCode, {
         dicCode: 'POW_DEF_ALARM.ALARM_LEVEL'}
@@ -232,6 +256,77 @@ export default {
         this.$toast("请求失败"+error);
       });
     },
+    getPipeName: function() {
+      //管廊名称
+      this.request.httpPost(this.requestUrl.getPipe).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.pipeColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
+    initZonePicker(pid) {
+      //根据管廊ID查询分区接口
+      this.request.httpPost(this.requestUrl.getZoneByPipe, {
+        pipeId: pid}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.zoneColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+    initCabinPicker(pid,zid) {
+      //根据管廊ID、分区ID查询舱室接口
+      this.request.httpPost(this.requestUrl.getCabinByPipeZone, {
+        pipeId: pid,
+        zoneId: zid}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.cabinColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
+
     onConfirmPipe: function(pipeName) {
       this.pipeName = pipeName;
       switch(pipeName) {
@@ -240,31 +335,71 @@ export default {
           break;
       }
       this.showPipePicker = false;
+
+      //根据管廊ID查询分区接口
+      this.initZonePicker(this.pipeId);
+    },
+    onClickZonePicker: function() {
+      //分区选择前先选择管廊
+      if(this.pipeName =='') {
+        this.$toast("请先选择所属管廊");
+      }else {
+        this.showZonePicker = true;
+      }
     },
     onConfirmZone: function(zoneName) {
       this.zoneName = zoneName;
-      this.zoneId = '';
+      switch(zoneName) {
+        case '01#':
+          this.zoneId = '205';
+          break;
+      }
       this.showZonePicker = false;
+
+      //根据管廊ID查询分区接口
+      this.initCabinPicker(this.pipeId,this.zoneId);
+    },
+    onClickCabinPicker: function() {
+      //舱室选择前先选择管廊和分区
+      if(this.pipeName =='') {
+        this.$toast("请先选择所属管廊");
+      }else if(this.zoneName =='') {
+        this.$toast("请先选择所属分区");
+      }else {
+        this.showCabinPicker = true;
+      }
     },
     onConfirmCabin: function(cabinName) {
       this.cabinName = cabinName;
-      this.cabinId = '';
       this.showCabinPicker = false;
     },
+
     onConfirmSystem: function(system) {
       this.system = system;
-      this.systemId = '';
+      //根据系统名称反查id
+      this.systemId = DataDictionaryUtil.commonJudgeSystemId(system);
       this.showSystemPicker = false;
     },
     onConfirmLevel: function(level) {
       this.level = level;
+      //根据报警级别名称反查id
+      this.alamLevelId = DataDictionaryUtil.commonJudgeAlarmLevelId(level);
       this.showLevelPicker = false;
     },
+
     onConfirmStartDate: function(val) {
       console.log(val);
       let currentVal = DateUtil.format(val,'YYYY-MM-DD');
       this.startDateVal = currentVal;
       this.showStartDatePicker = false;
+    },
+    onClickEndDatePicker: function() {
+      //终止时间选择前，先选择起始时间
+      if(this.startDateVal =='') {
+        this.$toast("请先选择起始时间");
+      }else {
+        this.showEndDatePicker = true;
+      }
     },
     onConfirmEndDate: function(val) {
       console.log(val);
@@ -295,7 +430,7 @@ export default {
           startTime: this.startDateVal,
           endTime: this.endDateVal,
           systemId: this.systemId,
-          alarmLevel: this.level
+          alarmLevel: this.alamLevelId
           }
         })
       }

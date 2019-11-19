@@ -49,7 +49,7 @@
           label="终止时间"
           :value="endDateVal"
           placeholder="请选择终止时间"
-          @click="showEndDatePicker = true"
+          @click="onClickEndDatePicker"
         />
         <van-popup v-model="showEndDatePicker" position="bottom">
           <van-datetime-picker 
@@ -140,16 +140,65 @@ export default {
       pipeName: '',
       pipeId: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊'],
+      pipeColumns: [],
       status: '',
       statusId: '',
       showStatusPicker: false,
-      statusColumns: ['待处理','处理中','已完成'],
+      statusColumns: [],
     }
+  },
+  mounted: function() {
+    this.getDicCode();
+    this.getPipeName();
   },
   methods: {
     goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+    getDicCode: function() {
+      //字典值-工单状态
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: 'GL_WORK_ORDER.STATUS'}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.statusColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+
+    },
+    getPipeName: function() {
+      //管廊名称
+      this.request.httpPost(this.requestUrl.getPipe).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.pipeColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
     },
     onConfirmPipe: function(pipeName) {
       this.pipeName = pipeName;
@@ -160,17 +209,27 @@ export default {
       }
       this.showPipePicker = false;
     },
+
     onConfirmStatus: function(status) {
       this.status = status;
       //根据状态值反查状态id
       this.statusId = DataDictionaryUtil.commonJudgeStatusTypeId(status);
       this.showStatusPicker = false;
     },
+
     onConfirmStartDate: function(val) {
       console.log(val);
       let currentVal = DateUtil.format(val,'YYYY-MM-DD');
       this.startDateVal = currentVal;
       this.showStartDatePicker = false;
+    },
+    onClickEndDatePicker: function() {
+      //终止时间选择前，先选择起始时间
+      if(this.startDateVal =='') {
+        this.$toast("请先选择起始时间");
+      }else {
+        this.showEndDatePicker = true;
+      }
     },
     onConfirmEndDate: function(val) {
       console.log(val);
@@ -193,11 +252,11 @@ export default {
         this.$router.push({
           path:"taskQueryList",
           query: {
-          pipeId: this.pipeId,
-          startTime: this.startDateVal,
-          endTime: this.endDateVal,
-          status: this.statusId,
-          code: this.orderCode
+            pipeId: this.pipeId,
+            startTime: this.startDateVal,
+            endTime: this.endDateVal,
+            status: this.statusId,
+            code: this.orderCode
           }
         })
       }

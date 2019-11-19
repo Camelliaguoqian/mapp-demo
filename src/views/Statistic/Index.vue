@@ -1,9 +1,9 @@
 <template>
   <div class="statistic-page page">
-    <van-nav-bar title="统计分析" 
-    fixed 
+    <van-nav-bar title="统计分析"  
     :zIndex="100" 
     left-arrow 
+    fixed
     @click-left="goBack"></van-nav-bar>
 
     <!-- 设备统计 -->
@@ -31,21 +31,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import { NavBar, 
-Panel, 
-Icon, 
-Grid, 
-GridItem, 
-NoticeBar, 
-Step, 
-Steps, 
-Divider,
-Toast,
-Tag } from 'vant'
-
+import { NavBar, Panel, Tag} from 'vant'
 import ECharts from 'vue-echarts'
 // 手动引入 ECharts 各模块来减小打包体积
 import 'echarts/lib/chart/pie'
@@ -53,22 +39,12 @@ import 'echarts/lib/chart/bar'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/legend'
 
-Vue.use(VueAxios, axios)
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
-.use(Grid)
-.use(GridItem)
-.use(NoticeBar)
-.use(Step)
-.use(Steps)
-.use(Divider)
-.use(Toast)
-.use(Tag)
-
 export default {
   name: 'StatisticIndexPage',
   components: {
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Tag.name]: Tag,
     'v-chart': ECharts
   },
   props: {
@@ -205,7 +181,7 @@ export default {
   
   },
   methods: {
-    goBack() {
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
   }
@@ -214,6 +190,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

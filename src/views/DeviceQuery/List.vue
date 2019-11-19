@@ -66,7 +66,7 @@ export default {
         zoneId: zoneId,
         cabinId: cabinId,
         systemId: systemId,
-        devTypeId: deviceTypeId,}
+        devTypeId: devTypeId,}
       ).then(data => {
         let result = data; 
         let resultRetCode = result.retCode; 
