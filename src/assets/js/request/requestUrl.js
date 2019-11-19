@@ -62,6 +62,12 @@ let url = {
   userLoginOut: '/user/logout',
 
   /**
+   * 查询用户信息接口
+   * 参数：无
+   */
+  getUser: '/user/getUser',
+
+  /**
    * 工作任务
    * 参数：无
    */

@@ -154,14 +154,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Panel, 
  Grid, 
  GridItem, 
  Row, 
  Col, 
- Icon, 
  Cell, 
  CellGroup, 
  Image, 
@@ -174,28 +172,26 @@ import { NavBar,
  Tabs } from 'vant'
  import TheFooter from 'components/common/TheFooter'
 
-Vue.use(NavBar)
-.use(Panel)
-.use(Grid)
-.use(GridItem)
-.use(Row)
-.use(Col)
-.use(Icon)
-.use(Cell)
-.use(CellGroup)
-.use(Image)
-.use(Tag)
-.use(Step)
-.use(Steps)
-.use(Circle)
-.use(Button)
-.use(Tab)
-.use(Tabs)
-
 export default {
   name: 'MessageHomeIndexPage',
   components: {
-    'v-footer': TheFooter
+    'v-footer': TheFooter,
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Grid.name]: Grid,
+    [GridItem.name]: GridItem,
+    [Row.name]: Row,
+    [Col.name]: Col,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Image.name]: Image,
+    [Tag.name]: Tag,
+    [Step.name]: Step,
+    [Steps.name]: Steps,
+    [Circle.name]: Circle,
+    [Button.name]: Button,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
   },
   props: {
     zIndex: Number,
@@ -214,11 +210,37 @@ export default {
     text() {
       return this.currentRate.toFixed(0) + '%';
     }
+  },
+  mounted: function() {
+    this.getNoticeData();
+  },
+  methods: {
+    //通知消息- 查询所有消息时，isRead='';查询未读消息时，isRead='0'
+    getNoticeData: function() {
+      this.request.httpPost(this.requestUrl.noticeSearch,{isRead:''}).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
+
   }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
   padding: 46px 0 50px 0 !important;
   &-wrapper {

@@ -10,11 +10,11 @@
         <van-col class="user-poster-info" span=16>
           <ul>
             <li class="account-item">
-              <span class="account-item-name">王丽丽</span>
+              <span class="account-item-name">{{ userName }}</span>
             </li>
             <li class="account-item">
               <van-icon class="account-item-icon" name="contact" />
-              <span class="account-item-phone">15523231111</span>
+              <span class="account-item-phone">{{ telCode }}</span>
               <van-tag class="account-item-status" type="warning">审核中</van-tag>
             </li>
           </ul>
@@ -44,32 +44,67 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { NavBar, Grid, GridItem, Row, Col, Icon, Cell, CellGroup, Image, Tag, Button } from 'vant'
+import { NavBar,
+ Grid, 
+ GridItem, 
+ Row, 
+ Col, 
+ Cell, 
+ CellGroup, 
+ Image, 
+ Tag, 
+ Button } from 'vant'
 import TheFooter from 'components/common/TheFooter'
-
-Vue.use(NavBar).use(Grid).use(GridItem).use(Row).use(Col).use(Icon).use(Cell).use(CellGroup).use(Image).use(Tag).use(Button)
 
 export default {
   name: 'UserIndexPage',
   components: {
-    'v-footer': TheFooter
-    // [NavBar.name]: NavBar,
-    // [Row.name]: Row,
-    // [Col.name]: Col,
-    // [Icon.name]: Icon,
-    // [Cell.name]: Cell,
-    // [CellGroup.name]: CellGroup
+    'v-footer': TheFooter,
+    [NavBar.name]: NavBar,
+    [Grid.name]: Grid,
+    [GridItem.name]: GridItem,
+    [Row.name]: Row,
+    [Col.name]: Col,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Image.name]: Image,
+    [Tag.name]: Tag,
+    [Button.name]: Button,
   },
   props: {
     zIndex: Number,
   },
   data() {
     return {
-
+      userName: '王丽丽',
+      telCode: '15223231111'
     }
   },
+  mounted: function() {
+    this.getUserName();
+  },
   methods: {
+    //用户信息
+    getUserName: function() {
+      this.request.httpPost(this.requestUrl.getUser).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          //this.userName = resultRetData.user_name;
+          //this.telCode = resultRetData.user_code;
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
     //退出登录
     loginOut: function() {
       this.request.httpPost(this.requestUrl.userLoginOut).then(data => {
@@ -86,7 +121,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
   padding: 46px 0 50px 0;
   .user {

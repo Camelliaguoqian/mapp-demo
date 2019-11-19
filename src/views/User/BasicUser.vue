@@ -9,7 +9,6 @@
     <van-cell-group class="cell-group-list">
       <van-cell title="用户名" is-link value="王丽丽" />
       <van-cell title="手机号" is-link value="15523231111" />
-      <van-cell title="邮箱" is-link value="178896554@qq.com" />
       <van-cell title="职务" is-link value="巡检人员" />
     </van-cell-group>
 
@@ -19,33 +18,28 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Cell, 
  CellGroup,  
- Icon, 
  Field,
  DatetimePicker,
  Picker,
  Popup,
- Toast,
  Button
 } from 'vant'
 
-Vue.use(NavBar)
-.use(Cell)
-.use(CellGroup)
-.use(Icon)
-.use(Field)
-.use(DatetimePicker)
-.use(Picker)
-.use(Popup)
-.use(Toast)
-.use(Button)
-
-
 export default {
   name: 'BasicUserPage',
+  components: {
+    [NavBar.name]: NavBar,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Field.name]: Field,
+    [DatetimePicker.name]: DatetimePicker,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+    [Button.name]: Button,
+  },
   props: {
     zIndex: Number,
   },
@@ -63,7 +57,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
   padding: 46px 0 0 0;
   &-wrapper {
