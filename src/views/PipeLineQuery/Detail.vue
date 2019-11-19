@@ -1,6 +1,6 @@
 <template>
-  <div class="page-inner">
-    <van-nav-bar title="告警详情" 
+  <div class="page">
+    <van-nav-bar title="管线详情" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -9,11 +9,11 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        告警详情
+        管线基本信息
       </div>
       <div class="page-panel-content">
         <!-- 简单信息列表组件 -->
-        <simple-list :listdata="alarmlistdata"></simple-list>
+        <simple-list :listdata="pipelinelistdata"></simple-list>
       </div>
     </van-panel>
 
@@ -21,21 +21,16 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
- Panel,  
- Icon,
+ Panel,
 } from 'vant'
 import SimpleList from 'components/list/SimpleList'
 
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
-
-
 export default {
-  name: 'MessageAlarmDetailPage',
+  name: 'PipeLineDetailPage',
   components: {
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
     'simple-list': SimpleList
   },
   props: {
@@ -43,31 +38,28 @@ export default {
   },
   data() {
     return {
-      alarmlistdata: [
+      pipelinelistdata: [
         {
           label: '所属管廊',
           value: '黑龙江路综合管廊',
         },
         {
-          label: '所属分区',
-          value: '03分区',
+          label: '管线名称',
+          value: '给水管',
         },
         {
-          label: '所属舱室',
-          value: '燃气舱',
+          label: '管线编码',
+          value: 'GX-GS180730-000007',
         },
         {
-          label: '发生时间',
-          value: '2019-10-08 09：00：00',
+          label: '管线类别',
+          value: 'DN300给水管',
         },
         {
-          label: '监测来源',
-          value: '监控与报警系统',
+          label: '安装位置',
+          value: '公共设备夹层',
         },
-        {
-          label: '告警内容',
-          value: '黑龙江路综合管廊燃气舱03分区浓度异常，运维人员暂停入廊',
-        },
+        
       ]
     };
   },

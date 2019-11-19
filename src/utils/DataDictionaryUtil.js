@@ -60,6 +60,31 @@ DataDictionaryUtil = {
     }
     return retData;
   },
+  //根据管线类别名称反查id
+  commonJudgePineLineTypeId(val) {
+    let retData = '';
+    switch(val) {
+      case '供水管线':
+        retData = '106102';
+        break;
+      case '燃气管线':
+        retData = '106103';
+        break;
+      case '污水管线':
+        retData = '106104';
+        break;
+      case '电力线缆':
+        retData = '106105';
+        break;
+      case '热力管线':
+        retData = '106106';
+        break;
+      case '通信线缆':
+        retData = '106107';
+        break;
+    }
+    return retData;
+  },
 
 
 }

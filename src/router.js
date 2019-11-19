@@ -302,6 +302,15 @@ const routes = [
     }
   },
   {
+    path: '/pipeLineQueryDetail',
+    name: 'pipeLineQueryDetail',
+    component: () => import('./views/PipeLineQuery/Detail.vue'),
+    meta: {
+      title: 'pipeLineQueryDetail',
+      isShowFooter: false
+    }
+  },
+  {
     path: '/deviceQuery',
     name: 'deviceQuery',
     component: () => import('./views/DeviceQuery/Index.vue'),

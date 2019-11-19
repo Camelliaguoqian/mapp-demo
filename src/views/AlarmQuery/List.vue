@@ -49,7 +49,6 @@ export default {
   },
   mounted: function() {
     this.initData();
-    this.getDicCode();
   },
   methods: {
     initData: function() {
@@ -116,25 +115,6 @@ export default {
     goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    getDicCode: function() {
-      this.request.httpPost(this.requestUrl.getDicListByCode, {
-        dicCode: ''}
-      ).then(data => {
-        let result = data; 
-        let resultRetCode = result.retCode; console.log(data);
-        let resultRetMsg = result.retMsg; 
-        let resultRetData = result.retData; 
-        
-        if(resultRetCode === "SUCCESS"){
-          this.$toast(resultRetMsg);
-        }
-        if(resultRetCode === "FAIL"){
-          this.$toast(resultRetMsg);
-        } 
-      }).catch((error) => {
-        this.$toast("请求失败"+error);
-      });
-    }
   }
 }
 </script>

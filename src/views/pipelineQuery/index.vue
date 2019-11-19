@@ -39,63 +39,97 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Cell, 
  CellGroup,  
- Icon, 
  Field,
- DatetimePicker,
  Picker,
  Popup,
- Toast,
  Button
 } from 'vant'
-
-Vue.use(NavBar)
-.use(Cell)
-.use(CellGroup)
-.use(Icon)
-.use(Field)
-.use(DatetimePicker)
-.use(Picker)
-.use(Popup)
-.use(Toast)
-.use(Button)
-
+import DataDictionaryUtil from 'utils/DataDictionaryUtil'
 
 export default {
   name: 'PipeLineQueryIndexPage',
+  components: {
+    [NavBar.name]: NavBar,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Field.name]: Field,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+    [Button.name]: Button
+  },
   props: {
     zIndex: Number,
   },
   data() {
     return {
       pipelineType: '',
+      pipelineTypeId: '',
       showPipelineTypePicker: false,
-      pipelineTypeColumns: ['污水管','给水管'],
+      pipelineTypeColumns: [],
     }
+  },
+  mounted: function() {
+    this.getDicCode();
   },
   methods: {
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
+    getDicCode: function() {
+      //字典值-管线类型
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: 'GL_PIPELINE.ENTITY_TYPE_ID'}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.pipelineTypeColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
     onConfirmPipelineType(pipelineType) {
       this.pipelineType = pipelineType;
+      //根据管线类别名称反查id
+      this.pipelineTypeId = DataDictionaryUtil.commonJudgePineLineTypeId(pipelineType);
       this.showPipelineTypePicker = false;
     },
-    onSubmit() {
-      //console.log(this.$route); //通过 this.$route 访问当前路由
-      //通过 this.$router 访问路由器
-      this.$router.push('pipelineQueryList');
-
+    onSubmit: function (e) {
+      e.preventDefault();
+      //校验
+      if(this.pipelineType == ''){
+        this.$toast("请选择管线类别");
+        return false;
+      }else {
+        //带参数的跳转页面
+        this.$router.push({
+          path:"pipeLineQueryList",
+          query: {
+            entityTypeId: this.pipelineTypeId,
+          }
+        })
+      }
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

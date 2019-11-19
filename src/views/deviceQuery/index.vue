@@ -12,9 +12,9 @@
           readonly
           required
           clickable
-          label="管廊"
-          :value="pipe"
-          placeholder="请选择管廊"
+          label="所属管廊"
+          :value="pipeName"
+          placeholder="请选择所属管廊"
           @click="showPipePicker = true"
         />
         <van-popup v-model="showPipePicker" position="bottom">
@@ -30,10 +30,10 @@
           readonly
           required
           clickable
-          label="分区"
-          :value="zone"
-          placeholder="请选择分区"
-          @click="showZonePicker = true"
+          label="所属分区"
+          :value="zoneName"
+          placeholder="请选择所属分区"
+          @click="onClickZonePicker"
         />
         <van-popup v-model="showZonePicker" position="bottom">
           <van-picker 
@@ -48,10 +48,10 @@
           readonly
           required
           clickable
-          label="舱室"
-          :value="cabin"
-          placeholder="请选择舱室"
-          @click="showCabinPicker = true"
+          label="所属舱室"
+          :value="cabinName"
+          placeholder="请选择所属舱室"
+          @click="onClickCabinPicker"
         />
         <van-popup v-model="showCabinPicker" position="bottom">
           <van-picker 
@@ -98,12 +98,12 @@
           />
         </van-popup>
 
-        <van-field
+        <!-- <van-field
           v-model="deviceCode"
           clearable
           label="设备编码"
           placeholder="请输入设备编码"
-        />
+        /> -->
 
     
       </van-cell-group>
@@ -120,92 +120,260 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Cell, 
  CellGroup,  
- Icon, 
  Field,
- DatetimePicker,
  Picker,
  Popup,
- Toast,
  Button
 } from 'vant'
 
-Vue.use(NavBar)
-.use(Cell)
-.use(CellGroup)
-.use(Icon)
-.use(Field)
-.use(DatetimePicker)
-.use(Picker)
-.use(Popup)
-.use(Toast)
-.use(Button)
-
-
 export default {
   name: 'DeviceQueryIndexPage',
+  components: {
+    [NavBar.name]: NavBar,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Field.name]: Field,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+    [Button.name]: Button
+  },
   props: {
     zIndex: Number,
   },
   data() {
     return {
-      pipe: '',
+      pipeName: '',
+      pipeId: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊','习友路综合管廊','彩虹西路综合管廊','鸡鸣山路综合管廊'],
-      zone: '',
+      pipeColumns: [],
+      zoneName: '',
+      zoneId: '',
       showZonePicker: false,
-      zoneColumns: ['分区01','分区02','分区03'],
-      cabin: '',
+      zoneColumns: [],
+      cabinName: '',
+      cabinId: '',
       showCabinPicker: false,
-      cabinColumns: ['综合舱','燃气舱','电力舱','热力舱'],
+      cabinColumns: [],
       system: '',
+      systemId: '',
       showSystemPicker: false,
-      systemColumns: ['监测与环控系统','排水系统'],
+      systemColumns: [],
       deviceType: '',
+      deviceTypeId: '',
       showDeviceTypePicker: false,
-      deviceTypeColumns: ['传感器','摄像头'],
+      deviceTypeColumns: [],
       deviceCode: '',
     }
   },
+  mounted: function() {
+    this.getDicCode();
+    this.getPipeName();
+  },
   methods: {
-    goBack() {
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    onConfirmPipe(pipe) {
-      this.pipe = pipe;
+    getDicCode: function() {
+      //字典值-系统名称
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: 'IOT_DEVICE.SYSTEMID'}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.systemColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+
+      //字典值-设备类型
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: 'IOT_DEVICE.DEVTYPEID'}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.deviceTypeColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+
+    },
+    getPipeName: function() {
+      //管廊名称
+      this.request.httpPost(this.requestUrl.getPipe).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.pipeColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
+    initZonePicker(pid) {
+      //根据管廊ID查询分区接口
+      this.request.httpPost(this.requestUrl.getZoneByPipe, {
+        pipeId: pid}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.zoneColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+    initCabinPicker(pid,zid) {
+      //根据管廊ID、分区ID查询舱室接口
+      this.request.httpPost(this.requestUrl.getCabinByPipeZone, {
+        pipeId: pid,
+        zoneId: zid}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.cabinColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
+
+    onConfirmPipe: function(pipeName) {
+      this.pipeName = pipeName;
+      switch(pipeName) {
+        case '黑龙江路综合管廊':
+          this.pipeId = '26';
+          break;
+      }
       this.showPipePicker = false;
+
+      //根据管廊ID查询分区接口
+      this.initZonePicker(this.pipeId);
     },
-    onConfirmZone(zone) {
-      this.zone = zone;
+    onClickZonePicker: function() {
+      //分区选择前先选择管廊
+      if(this.pipeName =='') {
+        this.$toast("请先选择所属管廊");
+      }else {
+        this.showZonePicker = true;
+      }
+    },
+    onConfirmZone: function(zoneName) {
+      this.zoneName = zoneName;
+      switch(zoneName) {
+        case '01#':
+          this.zoneId = '205';
+          break;
+      }
       this.showZonePicker = false;
+
+      //根据管廊ID查询分区接口
+      this.initCabinPicker(this.pipeId,this.zoneId);
     },
-    onConfirmCabin(cabin) {
-      this.cabin = cabin;
+    onClickCabinPicker: function() {
+      //舱室选择前先选择管廊和分区
+      if(this.pipeName =='') {
+        this.$toast("请先选择所属管廊");
+      }else if(this.zoneName =='') {
+        this.$toast("请先选择所属分区");
+      }else {
+        this.showCabinPicker = true;
+      }
+    },
+    onConfirmCabin: function(cabinName) {
+      this.cabinName = cabinName;
       this.showCabinPicker = false;
     },
-    onConfirmSystem(system) {
+    onConfirmSystem: function(system) {
       this.system = system;
       this.showSystemPicker = false;
     },
-    onConfirmDeviceType(deviceType) {
+    onConfirmDeviceType: function(deviceType) {
       this.deviceType = deviceType;
       this.showDeviceTypePicker = false;
     },
-    onSubmit() {
-      //console.log(this.$route); //通过 this.$route 访问当前路由
-      //通过 this.$router 访问路由器
-      this.$router.push('deviceQueryList');
-
+    onSubmit: function (e) {
+      e.preventDefault();
+      //校验
+      if(this.pipeId == ''){
+        this.$toast("请至少选择一项查询条件");
+        return false;
+      }else {
+        //带参数的跳转页面
+        this.$router.push({
+          path:"deviceQueryList",
+          query: {
+            pipeId: this.pipeId,
+            zoneId: this.zoneId,
+            cabinId: this.cabinId,
+            systemId: this.systemId,
+            devTypeId: this.deviceTypeId,
+          }
+        })
+      }
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

@@ -199,12 +199,38 @@ export default {
       systemColumns: ['监测与环控系统','排水系统'],
       level: '',
       showLevelPicker: false,
-      levelColumns: ['一级','二级','三级','四级'],
+      levelColumns: [],
     }
+  },
+  mounted: function() {
+    this.getDicCode();
   },
   methods: {
     goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+    getDicCode: function() {
+      //字典值-告警级别
+      this.request.httpPost(this.requestUrl.getDicListByCode, {
+        dicCode: 'POW_DEF_ALARM.ALARM_LEVEL'}
+      ).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.levelColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
     },
     onConfirmPipe: function(pipeName) {
       this.pipeName = pipeName;

@@ -13,6 +13,16 @@ let url = {
    * 字典值查询
    * 任务状态
    * 参数：String dicCode
+   * 备注：
+   * 1）告警级别 'POW_DEF_ALARM.ALARM_LEVEL'
+   * 2）管线类型 'GL_PIPELINE.ENTITY_TYPE_ID' 
+   * 3）管廊 'GL_PIPE_GALLERY.ENTITY_TYPE_ID'
+   * 4）分区 'GL_ZONE.ENTITY_TYPE_ID'
+   * 5）舱室类别 'GL_CABIN.SMALL_TYPE'
+   * 6）舱室类型 'GL_CABIN.ENTITY_TYPE_ID'
+   * 7）工单状态 'GL_WORK_ORDER.STATUS'
+   * 8）系统名称 'IOT_DEVICE.SYSTEMID'
+   * 9）设备类型 'IOT_DEVICE.DEVTYPEID'
    */
   getDicListByCode: '/dic/getDicListByCode',
 
@@ -68,6 +78,25 @@ let url = {
    * 参数：String pipeId,String zoneId,String cabinId,String systemId,String alarmLevel,String startTime,String endTime
    */
   alarmSearch: '/homePage/alarmSearch',
+
+  /**
+   * 管线查询
+   * 参数：String entityTypeId
+   */
+  pipeLineSearch: '/homePage/pipeLineSearch',
+
+  /**
+   * 设备查询
+   * 参数：String devTypeId, String systemId, String pipeId, String zoneId, String cabinId
+   */
+  deviceSearch: '/homePage/deviceSearch',
+
+  /**
+   * 消息查询
+   * 参数：String isRead
+   * 备注：查询所有消息时，isRead='';查询未读消息时，isRead='0'
+   */
+  noticeSearch: '/homePage/noticeSearch',
 
 }
  

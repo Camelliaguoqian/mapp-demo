@@ -5,8 +5,8 @@
     :key="item.label"
     class="list-item"
     >
-      <van-col span="6" class="list-item-label">{{ item.label }} :</van-col>
-      <van-col span="17" class="list-item-value">{{ item.value }}</van-col>
+      <van-col span="7" class="list-item-label">{{ item.label }} :</van-col>
+      <van-col span="16" class="list-item-value">{{ item.value }}</van-col>
     </van-row>
   </div>
 </template>
@@ -35,13 +35,13 @@ export default {
 
 <style lang="less" scoped>
   .list {
-    padding: 10px;
     background-color: #f8f8f8;
     &-item {
       line-height: 24px;
       font-size: 14px;
       &-label {
-        text-align: center;
+        padding-right: 10px;
+        text-align: right;
         color: #666;
       }
 

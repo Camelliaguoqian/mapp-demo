@@ -185,12 +185,12 @@ export default {
     },
     //测试Mplat调用原生api的scan功能
     scanTest: function () {
-      Toast('二维码扫描成功');
+      this.$toast('二维码扫描成功');
       this.$router.push('scan');
 
       //调用移动框架接口
       Mplat.init(function(){
-        Toast('初始化');
+        this.$toast('初始化');
         //Mplat.getUserInfos();
         Mplat.scanGetCode({
         params: {
@@ -199,7 +199,7 @@ export default {
           },
           callback: function(data) {
             var result=eval("(" + data + ")");
-            Toast(result);
+            this.$toast(result);
           }
        })
       });

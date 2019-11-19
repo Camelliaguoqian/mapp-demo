@@ -1,8 +1,8 @@
 <template>
   <div class="page">
-    <van-nav-bar title="管廊查询" 
-    fixed 
+    <van-nav-bar title="管廊查询"  
     :zIndex="100" 
+    fixed
     left-arrow 
     @click-left="goBack"></van-nav-bar>
 
@@ -39,33 +39,26 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Cell, 
  CellGroup,  
- Icon, 
  Field,
- DatetimePicker,
  Picker,
  Popup,
- Toast,
  Button
 } from 'vant'
 
-Vue.use(NavBar)
-.use(Cell)
-.use(CellGroup)
-.use(Icon)
-.use(Field)
-.use(DatetimePicker)
-.use(Picker)
-.use(Popup)
-.use(Toast)
-.use(Button)
-
-
 export default {
   name: 'PipeQueryIndexPage',
+  components: {
+    [NavBar.name]: NavBar,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Field.name]: Field,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+    [Button.name]: Button
+  },
   props: {
     zIndex: Number,
   },
@@ -94,8 +87,9 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

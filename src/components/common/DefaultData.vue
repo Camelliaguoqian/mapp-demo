@@ -32,7 +32,7 @@ export default {
 <style lang="less" scoped>
 .default-data {
   margin: 0 auto;
-  padding: 50px 0 0;
+  padding: 50px 0;
   height: 100px;
   font-size: 14px;
   color: #8a8a8a;

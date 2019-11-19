@@ -81,6 +81,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

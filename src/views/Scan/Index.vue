@@ -38,26 +38,19 @@
 import Vue from 'vue'
 import { NavBar,
  Panel, 
- Icon,
- Tab,
- Tabs,
  Step, 
  Steps, 
 } from 'vant'
 import ControlCard from 'components/list/ControlCard'
 import InfoCard from 'components/list/InfoCard'
 
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
-.use(Tab)
-.use(Tabs)
-.use(Step)
-.use(Steps)
-
 export default {
   name: 'ScanIndexPage',
   components: {
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Step.name]: Step,
+    [Steps.name]: Steps,
     "control-card": ControlCard,
     "info-card": InfoCard
   },
@@ -127,6 +120,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;
