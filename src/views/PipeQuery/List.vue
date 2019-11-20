@@ -68,42 +68,6 @@ export default {
     zIndex: Number,
   },
   data() {
-    // let data = []
-
-    // for (let i = 0; i <= 360; i++) {
-    //     let t = i / 180 * Math.PI
-    //     let r = Math.sin(2 * t) * Math.cos(2 * t)
-    //     data.push([r, i])
-    // }
-
-    const resultData = [{
-      nodeNum: "13", vendor: "驰诚",
-    },{
-      nodeNum: "8", vendor: "宝临",
-    },{
-      nodeNum: "5", vendor: null,
-    },{
-      nodeNum: "9", vendor: null,
-    },{
-      nodeNum: "14", vendor: null,
-    },{
-      nodeNum: "22", vendor: "顺安居",
-    },{
-      nodeNum: "5", vendor: "大华",
-    }];
-    let arrNum = [];
-    let obj = [];
-    let objNum = [];
-    for (var i = 0; i < resultData.length; i++) {
-        if (resultData[i].vendor == "" || resultData[i].vendor == null){
-          obj[i] = "未知厂商";
-        }else {
-          obj[i] = resultData[i].vendor;
-        }
-        objNum[i] = resultData[i].nodeNum;
-    }
-
-
     return {
       pipeinfolist: [
         {
@@ -171,9 +135,68 @@ export default {
           value: "383.11万元",
         },
       ],
+      vendorBar: {},
+      vendorStatusPie: {},
+
+    }
+  },
+  mounted: function() {
+    this.initData();
+    this.initChart();
+  },
+  methods: {
+    goBack: function() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+    initData: function() {
+      /**
+       * 获取父组件路由传过来的参数值
+       * 方法1：this.$router.currentRoute.query.pipeId
+       * 方法2：this.$route.query.pipeId
+       */
+      let pipeId = this.$route.query.pipeId;
+
+    },
+    initChart: function() {
+      // let data = []
+
+      // for (let i = 0; i <= 360; i++) {
+      //     let t = i / 180 * Math.PI
+      //     let r = Math.sin(2 * t) * Math.cos(2 * t)
+      //     data.push([r, i])
+      // }
+
+      const resultData = [{
+        nodeNum: "13", vendor: "驰诚",
+      },{
+        nodeNum: "8", vendor: "宝临",
+      },{
+        nodeNum: "5", vendor: null,
+      },{
+        nodeNum: "9", vendor: null,
+      },{
+        nodeNum: "14", vendor: null,
+      },{
+        nodeNum: "22", vendor: "顺安居",
+      },{
+        nodeNum: "5", vendor: "大华",
+      }];
+      let arrNum = [];
+      let obj = [];
+      let objNum = [];
+      for (var i = 0; i < resultData.length; i++) {
+          if (resultData[i].vendor == "" || resultData[i].vendor == null){
+            obj[i] = "未知厂商";
+          }else {
+            obj[i] = resultData[i].vendor;
+          }
+          objNum[i] = resultData[i].nodeNum;
+      }
+
+      
 
       //设备厂商-柱状图data
-      vendorBar: {
+      this.vendorBar= {
         grid: {
           top: '5%',
         },
@@ -201,8 +224,10 @@ export default {
           }
         ]
       },
+
+
       //设备状态-饼状图data
-      vendorStatusPie: {
+      this.vendorStatusPie= {
         legend: {
           orient: 'vertical',
           itemWidth: 18,             // 图例图形宽度
@@ -262,13 +287,9 @@ export default {
           }
         ],
       }
-
-    }
-  },
-  methods: {
-    goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+      
     },
+
   }
 }
 </script>

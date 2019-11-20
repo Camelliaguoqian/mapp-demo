@@ -5,7 +5,7 @@
     <div class="user-poster">
       <van-row>
         <van-col class="user-poster-image" span=6>
-          <van-image round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image class="user-avatar" round :src="userAvatarUrl" />
         </van-col>
         <van-col class="user-poster-info" span=16>
           <ul>
@@ -76,6 +76,7 @@ export default {
   },
   data() {
     return {
+      userAvatarUrl: require('assets/image/user/avatar.png'),
       userName: '王丽丽',
       telCode: '15223231111'
     }
@@ -130,7 +131,7 @@ export default {
       display: block;
       height: 100px;
       background-color: rgba(91, 193, 211, 0.9);
-      &-image img{
+      .user-avatar {
         margin: 10px auto;
         width: 80px;
         height: 80px;

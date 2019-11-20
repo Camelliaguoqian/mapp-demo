@@ -193,9 +193,9 @@ export default {
         this.$toast('初始化');
         //Mplat.getUserInfos();
         Mplat.scanGetCode({
-        params: {
-          "width":"",
-          "height":""
+          params: {
+            "width":"",
+            "height":""
           },
           callback: function(data) {
             var result=eval("(" + data + ")");

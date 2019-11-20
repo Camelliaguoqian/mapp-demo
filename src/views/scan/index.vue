@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Panel, 
  Step, 

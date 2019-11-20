@@ -331,7 +331,7 @@ const routes = [
   {
     path: '/environmentalMonitoring',
     name: 'environmentalMonitoring',
-    component: () => import('./views/EnvironmentalMonitoring/Index.vue'),
+    component: () => import('./views/EnvironmentalMonitoring/Info.vue'),
     meta: {
       title: 'environmentalMonitoring',
       isShowFooter: false

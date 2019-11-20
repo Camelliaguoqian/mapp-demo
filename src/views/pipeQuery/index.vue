@@ -11,9 +11,9 @@
         <van-field 
           readonly
           clickable
-          label="管廊"
-          :value="pipe"
-          placeholder="请选择管廊"
+          label="所属管廊"
+          :value="pipeName"
+          placeholder="请选择所属管廊"
           @click="showPipePicker = true"
         />
         <van-popup v-model="showPipePicker" position="bottom">
@@ -64,25 +64,67 @@ export default {
   },
   data() {
     return {
-      pipe: '',
+      pipeName: '',
+      pipeId: '',
       showPipePicker: false,
-      pipeColumns: ['黑龙江路综合管廊'],
+      pipeColumns: [],
     }
   },
+  mounted: function() {
+    this.getPipeName();
+  },
   methods: {
-    goBack() {
+    goBack: function() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    onConfirmPipe(pipe) {
-      this.pipe = pipe;
+    getPipeName: function() {
+      //管廊名称
+      this.request.httpPost(this.requestUrl.getPipe).then(data => {
+        let result = data; 
+        let resultRetCode = result.retCode; console.log(data);
+        let resultRetMsg = result.retMsg; 
+        let resultRetData = result.retData; 
+        
+        if(resultRetCode === "SUCCESS"){
+          //this.$toast(resultRetMsg);
+          for(let i=0; i<resultRetData.length; i++) {
+            this.pipeColumns.push(resultRetData[i].name);
+          }
+        }
+        if(resultRetCode === "FAIL"){
+          this.$toast(resultRetMsg);
+        } 
+      }).catch((error) => {
+        this.$toast("请求失败"+error);
+      });
+    },
+
+    onConfirmPipe: function(pipeName) {
+      this.pipeName = pipeName;
+      switch(pipeName) {
+        case '黑龙江路综合管廊':
+          this.pipeId = '26';
+          break;
+      }
       this.showPipePicker = false;
     },
-    onSubmit() {
-      //console.log(this.$route); //通过 this.$route 访问当前路由
-      //通过 this.$router 访问路由器
-      this.$router.push('pipeQueryList');
-
+    onSubmit: function (e) {
+      e.preventDefault();
+      //校验
+      if(this.pipeId == ''){
+        this.$toast("请选择所属管廊");
+        return false;
+      }else {
+        //带参数的跳转页面
+        this.$router.push({
+          path:"pipeQueryList",
+          query: {
+          pipeId: this.pipeId
+          }
+        })
+      }
     }
+
   }
 }
 </script>
