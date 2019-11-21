@@ -264,7 +264,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page {
   padding: 46px 0 50px 0;
   &-wrapper {

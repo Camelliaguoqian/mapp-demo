@@ -8,7 +8,7 @@
       size="large" 
     >
       <template slot="default">
-        <van-tag type="primary">{{ item.status }}</van-tag>
+        <van-tag :type="item.type">{{ item.status }}</van-tag>
       </template>
       <template slot="title">
         <div class="van-ellipsis">{{ item.title }}</div>
@@ -43,7 +43,7 @@ export default {
       title: String,
       time: String,
       status: String,
-      //type: String,
+      type: Array,
       content: String,
       url: String,
     },

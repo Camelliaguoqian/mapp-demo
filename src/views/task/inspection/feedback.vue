@@ -20,27 +20,16 @@
           />
 
           <van-field
+            v-model="zone"
+            readonly
+            label="所属分区"
+          />
+
+          <van-field
             v-model="cabin"
             readonly
             label="所属舱室"
           />
-
-          <van-field 
-            readonly
-            clickable
-            label="所属分区"
-            :value="zone"
-            placeholder="请选择所属分区"
-            @click="showZonePicker = true"
-          />
-          <van-popup v-model="showZonePicker" position="bottom">
-            <van-picker 
-              show-toolbar
-              :columns="zoneColumns"
-              @cancel="showZonePicker = false"
-              @confirm="onConfirmZone"
-            />
-          </van-popup>
 
           <van-field 
             readonly
@@ -124,9 +113,9 @@ export default {
   data() {
     return {
       orderCode: 'ZD091011-0045734',
-      pipe: '彩虹西路综合管廊',
+      pipe: '黑龙江路综合管廊',
       cabin: '综合舱',
-      zone: '',
+      zone: '01#',
       showZonePicker: false,
       zoneColumns: ['分区01','分区02','分区03','分区04'],
       status: '',
@@ -170,7 +159,7 @@ export default {
     },
 
     onSubmit() {
-      Toast("确定按钮点击");
+      Toast("提交成功");
     }
   }
 }
@@ -178,6 +167,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

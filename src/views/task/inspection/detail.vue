@@ -65,11 +65,11 @@ export default {
       tasklistdata: [
         {
           label: '任务编码',
-          value: 'GD18394844-499558',
+          value: 'GD-20191121-000001',
         },
         {
           label: '任务名称',
-          value: '热力舱任务',
+          value: '综合舱传感器巡检',
         },
         {
           label: '巡检频次',
@@ -81,19 +81,19 @@ export default {
         },
         {
           label: '所属管廊',
-          value: '彩虹西路综合管廊',
+          value: '黑龙江路综合管廊',
         },
         {
           label: '所属舱室',
-          value: '热力舱',
+          value: '综合舱',
         },
         {
           label: '起始分区',
-          value: '分区01',
+          value: '01#',
         },
         {
           label: '终止分区',
-          value: '分区06',
+          value: '11#',
         },
         {
           label: '巡检备注',
@@ -108,7 +108,7 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     onSignIn() {
-      Toast("签到按钮点击");
+      Toast("签到成功");
     },
   }
 }
@@ -116,6 +116,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

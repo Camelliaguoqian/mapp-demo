@@ -34,6 +34,7 @@
       v-model="show"
       title="任务详情"
       confirm-button-text="开始巡检"
+      showCancelButton
       @confirm="onConfirmDialog"
     >
       <!-- 简单信息列表组件 -->
@@ -44,31 +45,24 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { NavBar,
  Panel, 
- Icon,
  Tab,
  Tabs,
  Button,
- Dialog,
- Toast
+ Dialog
 } from 'vant'
 import SimpleList from 'components/list/SimpleList'
-
-
-Vue.use(NavBar)
-.use(Panel)
-.use(Icon)
-.use(Tab)
-.use(Tabs)
-.use(Button)
-.use(Dialog)
-.use(Toast)
 
 export default {
   name: 'TaskInspectionTodoDetailPage',
   components: {
+    [NavBar.name]: NavBar,
+    [Panel.name]: Panel,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
+    [Button.name]: Button,
+    [Dialog.Component.name]: Dialog.Component,
     'simple-list': SimpleList
   },
   props: {
@@ -102,7 +96,7 @@ export default {
       detaildata: [
         {
           label: '任务',
-          value: '管廊消防设备维护保养',
+          value: '管廊氧气传感器设备维护保养',
         },
         {
           label: '类型',
@@ -110,7 +104,7 @@ export default {
         },
         {
           label: '详情',
-          value: '1.检查消防设备的生产日期，如有必要需进行更换。2.保证消防设备周五环境卫生干净。3.确保逃生通道附近无杂物堆放，必要是进行清理。4.检查防火门的开关状态。5.查看火灾警报探测器、手动报警按钮、火灾警报装置的外观和运行状态。',
+          value: '1.检查设备的生产日期，如有必要需进行更换。2.保证设备周五环境卫生干净。3.确保逃生通道附近无杂物堆放，必要是进行清理。4.检查防火门的开关状态。5.查看火灾警报探测器、手动报警按钮、火灾警报装置的外观和运行状态。',
         },
         {
           label: '地点',
@@ -131,10 +125,11 @@ export default {
       this.show = true;
     },
     onConfirmDialog() {
-      Toast("任务详情弹框确认按钮点击");
+      //this.$toast("任务详情弹框确认按钮点击");
     },
-    onDoneTask() {
-      Toast("完成任务按钮点击");
+    onDoneTask(e) {
+      this.$toast("此项任务已完成");
+      
     },
   }
 }
@@ -142,6 +137,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

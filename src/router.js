@@ -56,6 +56,15 @@ const routes = [
     }
   },
   {
+    path: '/workDetail',
+    name: 'workDetail',
+    component: () => import('./views/Work/Detail.vue'),
+    meta: {
+      title: 'workDetail',
+      isShowFooter: false
+    }
+  },
+  {
     path: '/task',
     name: 'task',
     component: () => import('./views/Task/Index.vue'),
@@ -226,6 +235,24 @@ const routes = [
     component: () => import('./views/User/PasswordModify.vue'),
     meta: {
       title: 'passwordModify',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/help',
+    name: 'help',
+    component: () => import('./views/User/Help.vue'),
+    meta: {
+      title: 'help',
+      isShowFooter: false
+    }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('./views/User/About.vue'),
+    meta: {
+      title: 'about',
       isShowFooter: false
     }
   },

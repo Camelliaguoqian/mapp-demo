@@ -43,7 +43,7 @@ export default {
           title: '应急通知',
           time: '2019-10-08 09：00：00',
           status: '已读',
-          type: 'read',
+          type: 'success',
           url: '/message/messageNoticeDetail',
         },
         {
@@ -51,7 +51,7 @@ export default {
           title: '应急通知',
           time: '2019-10-09 09：00：00',
           status: '未读',
-          type: 'unread',
+          type: 'danger',
           url: '/message/messageNoticeDetail',
         },
         {
@@ -59,7 +59,7 @@ export default {
           title: '应急通知',
           time: '2019-10-11 09：00：00',
           status: '未读',
-          type: 'unread',
+          type: 'danger',
           url: '/message/messageNoticeDetail',
         },
       ],

@@ -7,9 +7,14 @@
     @click-left="goBack"></van-nav-bar>
 
     <van-cell-group class="cell-group-list">
-      <van-cell title="用户名" is-link value="王丽丽" />
+      <van-cell title="头像" is-link >
+        <template slot="default">
+          <van-image class="user-avatar" width="24" height="24" round :src="userAvatarUrl" />
+        </template>
+      </van-cell>
+      <van-cell title="用户名" is-link value="系统管理员" />
       <van-cell title="手机号" is-link value="15523231111" />
-      <van-cell title="职务" is-link value="巡检人员" />
+      <van-cell title="职务" is-link value="管理员" />
     </van-cell-group>
 
 
@@ -25,6 +30,7 @@ import { NavBar,
  DatetimePicker,
  Picker,
  Popup,
+ Image, 
  Button
 } from 'vant'
 
@@ -38,6 +44,7 @@ export default {
     [DatetimePicker.name]: DatetimePicker,
     [Picker.name]: Picker,
     [Popup.name]: Popup,
+    [Image.name]: Image,
     [Button.name]: Button,
   },
   props: {
@@ -45,7 +52,7 @@ export default {
   },
   data() {
     return {
-      
+      userAvatarUrl: require('assets/image/user/avatar.png'),
     }
   },
   methods: {

@@ -64,48 +64,48 @@ export default {
       unhandlelistdata: [
         {
           id: '1',
-          code: 'GD111111',
+          code: 'GD-20191121-000001',
           time: '2019-01-02 12:00:00',
-          title: '热力舱任务',
+          title: '综合舱传感器巡检',
           url: '/taskSub/inspectionDetail',
         },
         {
           id: '2',
-          code: 'GD222222',
+          code: 'GD-20191121-000002',
           time: '2019-01-03 16:00:00',
-          title: '综合舱任务',
+          title: '综合舱摄像头设备巡检',
           url: '/taskSub/inspectionDetail',
         },
       ],
       handlinglistdata: [
         {
           id: '3',
-          code: 'GD333333',
+          code: 'GD-20191121-000003',
           time: '2019-01-02 12:00:00',
-          title: '热力舱任务',
+          title: '综合舱传感器巡检',
           url: '/taskSub/inspectionDetail',
         },
         {
           id: '4',
-          code: 'GD444444',
+          code: 'GD-20191121-000004',
           time: '2019-01-03 16:00:00',
-          title: '综合舱任务',
+          title: '综合舱摄像头设备巡检',
           url: '/taskSub/inspectionDetail',
         },
       ],
       handledlistdata: [
         {
           id: '5',
-          code: 'GD555555',
+          code: 'GD-20191121-000005',
           time: '2019-01-02 12:00:00',
-          title: '热力舱任务',
+          title: '综合舱传感器巡检',
           url: '/taskSub/inspectionDetail',
         },
         {
           id: '6',
-          code: 'GD666666',
+          code: 'GD-20191121-000006',
           time: '2019-01-03 16:00:00',
-          title: '综合舱任务',
+          title: '综合舱摄像头设备巡检',
           url: '/taskSub/inspectionDetail',
         },
       ],
@@ -122,6 +122,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

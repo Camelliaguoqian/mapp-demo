@@ -1,6 +1,6 @@
 <template>
   <div class="task-query-page page">
-    <van-nav-bar title="结果反馈" 
+    <van-nav-bar title="咨询帮助" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -9,50 +9,16 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        <span>子单编码: {{ orderCode }}</span>
+        意见反馈
       </div>
       <div class="page-panel-content">
         <van-cell-group>
-          <van-field
-            v-model="pipe"
-            readonly
-            label="所属管廊"
-          />
-
-          <van-field
-            v-model="zone"
-            readonly
-            label="所属分区"
-          />
-
-          <van-field
-            v-model="cabin"
-            readonly
-            label="所属舱室"
-          />
-
-          <van-field 
-            readonly
-            clickable
-            label="巡检结果"
-            :value="status"
-            placeholder="请选择巡检结果"
-            @click="showStatusPicker = true"
-          />
-          <van-popup v-model="showStatusPicker" position="bottom">
-            <van-picker 
-              show-toolbar
-              :columns="statusColumns"
-              @cancel="showStatusPicker = false"
-              @confirm="onConfirmStatus"
-            />
-          </van-popup>
 
           <van-field
             v-model="marknote"
-            label="备注"
+            label="问题描述"
             type="textarea"
-            placeholder="请输入备注"
+            placeholder="请输入问题描述"
             rows="1"
             autosize
           />
@@ -112,15 +78,6 @@ export default {
   },
   data() {
     return {
-      orderCode: 'ZD091011-0045734',
-      pipe: '黑龙江路综合管廊',
-      cabin: '综合舱',
-      zone: '01#',
-      showZonePicker: false,
-      zoneColumns: ['分区01','分区02','分区03','分区04'],
-      status: '',
-      showStatusPicker: false,
-      statusColumns: ['正常','异常'],
       marknote: ''
     }
   },
@@ -128,14 +85,7 @@ export default {
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    onConfirmZone(zone) {
-      this.zone = zone;
-      this.showZonePicker = false;
-    },
-    onConfirmStatus(status) {
-      this.status = status;
-      this.showStatusPicker = false;
-    },
+    
     // 返回布尔值
     beforeRead(file) {
       if (file.type !== 'image/jpeg') {

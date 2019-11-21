@@ -89,6 +89,7 @@ export default {
                 node.content = '结束时间：' + todayTaskData[i].planEndTime;
                 node.status = DataDictionaryUtil.commonJudgeStatusType(todayTaskData[i].status).status;
                 node.type = DataDictionaryUtil.commonJudgeStatusType(todayTaskData[i].status).classNameType;
+                node.url = '/workDetail';
 
                 this.daylist.push(node);
               }
@@ -108,6 +109,7 @@ export default {
                 node.content = '结束时间：' + weekTaskData[i].planEndTime;
                 node.status = DataDictionaryUtil.commonJudgeStatusType(weekTaskData[i].status).status;
                 node.type = DataDictionaryUtil.commonJudgeStatusType(weekTaskData[i].status).classNameType;
+                node.url = '/workDetail';
 
                 //console.log(DataDictionaryUtil.commonJudgeStatusType(weekTaskData[i].status));
 

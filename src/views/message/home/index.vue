@@ -111,7 +111,7 @@
         通知统计
       </div>
       <div class="page-panel-content page-icon-panel-content">
-        <van-tag mark type="primary">未读</van-tag>
+        <van-tag mark type="danger">未读</van-tag>
         <van-grid class="infomation-list" :column-num="3">
           <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">总数</div>
@@ -129,17 +129,17 @@
 
         
 
-        <van-tag mark type="warning">已读</van-tag>
+        <van-tag mark type="success">已读</van-tag>
         <van-grid class="infomation-list" :column-num="3">
-          <van-grid-item class="infomation-list-item">
+          <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">总数</div>
             <div class="item-value">18</div>
           </van-grid-item>
-          <van-grid-item class="infomation-list-item">
+          <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">一般</div>
             <div class="item-value">16</div>
           </van-grid-item>
-          <van-grid-item class="infomation-list-item">
+          <van-grid-item class="infomation-list-item" to="/message/messageNotice">
             <div class="item-label">紧急</div>
             <div class="item-value">2</div>
           </van-grid-item>
@@ -212,7 +212,7 @@ export default {
     }
   },
   mounted: function() {
-    this.getNoticeData();
+    //this.getNoticeData();
   },
   methods: {
     //通知消息- 查询所有消息时，isRead='';查询未读消息时，isRead='0'

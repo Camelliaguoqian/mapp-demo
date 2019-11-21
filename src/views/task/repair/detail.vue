@@ -20,7 +20,6 @@
           type="info" 
           size="large"
           @click="onSubmit"
-          to="/taskSub/repairFeedback"
           >{{ btnType }}</van-button>
         </div>
       
@@ -70,7 +69,7 @@ export default {
         },
         {
           label: '所属管廊',
-          value: '彩虹西路综合管廊',
+          value: '黑龙江路综合管廊',
         },
         {
           label: '所属舱室',
@@ -78,7 +77,7 @@ export default {
         },
         {
           label: '所属分区',
-          value: '分区06',
+          value: '06#',
         },
         {
           label: '工单备注',
@@ -93,7 +92,7 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     onSubmit() {
-      Toast("提交按钮点击");
+      this.$router.push('repairFeedback');
     },
   }
 }
@@ -101,6 +100,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

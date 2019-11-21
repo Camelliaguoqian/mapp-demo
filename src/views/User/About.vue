@@ -1,23 +1,21 @@
 <template>
   <div class="page">
-    <van-nav-bar title="基本信息" 
+    <van-nav-bar title="关于助手" 
     fixed 
     :zIndex="100" 
     left-arrow 
     @click-left="goBack"></van-nav-bar>
 
-    <van-cell-group class="cell-group-list">
-      <van-cell title="头像" is-link >
-        <template slot="default">
-          <van-image class="user-avatar" width="24" height="24" round :src="userAvatarUrl" />
-        </template>
-      </van-cell>
-      <van-cell title="用户名" is-link value="系统管理员" />
-      <van-cell title="手机号" is-link value="15523231111" />
-      <van-cell title="职务" is-link value="管理员" />
-    </van-cell-group>
-
-
+    <section class="page-wrapper bg-white">
+      <h2 class="info-title">综合管廊智慧运维助手</h2>
+      <ul>
+        <li class="info-li">1.定位为“现场作业小助手”。</li>
+        <li class="info-li">2.人性化的自然交互模式为现场工作人员提供辅助。</li>
+        <li class="info-li">3.为现场工作提供信息支持。</li>
+        <li class="info-li">4.便捷的事件记录和上报。</li>
+        <li class="info-li">5.结合移动互联技术支持现场作业、远程监控、主动告警、信息推送及交流协同等，提升管廊作业及管理的便捷性。</li>
+      </ul>
+    </section>
 
   </div>  
 </template>
@@ -30,7 +28,6 @@ import { NavBar,
  DatetimePicker,
  Picker,
  Popup,
- Image, 
  Button
 } from 'vant'
 
@@ -44,7 +41,6 @@ export default {
     [DatetimePicker.name]: DatetimePicker,
     [Picker.name]: Picker,
     [Popup.name]: Popup,
-    [Image.name]: Image,
     [Button.name]: Button,
   },
   props: {
@@ -52,7 +48,7 @@ export default {
   },
   data() {
     return {
-      userAvatarUrl: require('assets/image/user/avatar.png'),
+      
     }
   },
   methods: {
@@ -105,6 +101,24 @@ export default {
         margin-top: 4px;
       }
     }
+  }
+
+  .bg-white {
+    margin: 0;
+    padding: 10px 20px;
+    height: 100vh;
+    background-color: #fff;
+  }
+
+  .info-title {
+    line-height: 30px;
+    font-size: 16px;
+  }
+
+  .info-li {
+    line-height: 24px;
+    font-size: 14px;
+    color: #323233;
   }
 
 }

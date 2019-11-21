@@ -58,7 +58,7 @@ export default {
         },
         {
           id: '2',
-          code: '已完成',
+          code: '执行中',
           time: '2019-01-03 16:00:00',
           title: '温湿度传感器',
           url: '/taskSub/inspectionTodoDetail',
@@ -77,6 +77,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

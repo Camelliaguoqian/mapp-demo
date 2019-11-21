@@ -98,7 +98,7 @@ export default {
       navIconUrlScan: require('assets/image/nav/scan.png'),
       navIconUrlWork: require('assets/image/nav/work.png'),
       navIconUrlMore: require('assets/image/nav/more-query.png'),
-      noticeMsg: '2019年10月10日 黑龙江路综合管廊燃气舱温度过高发出告警，请相关人员及时进行处理',
+      noticeMsg: '2019年11月21日 黑龙江路管廊综合舱温度过高发出告警，请相关人员及时进行处理',
       navs: [{
         id: 1,
         name: '任务查询',
@@ -158,11 +158,11 @@ export default {
       }],
       tasks: [{
         id: 1,
-        title:  '电力舱巡检完成',
+        title:  '综合舱氧气传感器巡检完成',
         time: '2019-07-12 12:40'
       },{
         id: 2,
-        title:  '热力舱巡检完成',
+        title:  '综合舱温湿度传感器巡检完成',
         time: '2019-06-12 12:40'
       },{
         id: 3,
@@ -174,7 +174,7 @@ export default {
         time: '2019-04-12 12:40'
       },{
         id: 5,
-        title:  '燃气舱巡检完成',
+        title:  '综合舱摄像头设备巡检完成',
         time: '2019-03-12 12:40'
       }],
     }

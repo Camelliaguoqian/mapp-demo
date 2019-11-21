@@ -40,7 +40,7 @@ export default {
       alarmlist: [
         {
           id: '1',
-          title: '黑龙江路 04# 综合舱 入侵告警',
+          title: '黑龙江路 04# 综合舱 温度告警',
           time: '2019-10-08 09：00：00',
           system: '监控与报警系统',
           url: '/message/messageAlarmDetail',
@@ -54,7 +54,7 @@ export default {
         },
         {
           id: '2',
-          title: '黑龙江路 09#-10# 公共设备夹层 风机故障',
+          title: '黑龙江路 09#-10# 综合夹层 风机故障',
           time: '2019-10-11 09：00：00',
           system: '监控与报警系统',
           url: '/message/messageAlarmDetail',

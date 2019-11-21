@@ -37,12 +37,30 @@ export default {
   },
   data() {
     return {
-      devicelist: [],
+      devicelist: [{
+        id: '1',
+        title: '综合舱摄像头005',
+        system: '监控与报警系统',
+        time: '2019-11-01',
+        url: '/scan'
+      },{
+        id: '2',
+        title: '综合舱氧气传感器001',
+        system: '监控与报警系统',
+        time: '2019-05-21',
+        url: '/scan'
+      },{
+        id: '3',
+        title: '综合舱温湿度传感器003',
+        system: '监控与报警系统',
+        time: '2019-06-06',
+        url: '/scan'
+      },],
       isdatahide: 'hide'
     }
   },
   mounted: function() {
-    this.initData();
+    //this.initData();
   },
   methods: {
     goBack() {
@@ -59,7 +77,7 @@ export default {
       let cabinId = this.$route.query.cabinId;
       let systemId = this.$route.query.systemId;
       let devTypeId = this.$route.query.devTypeId;
-     
+      
       //数据查询-瀑布流滚动加载长列表
       this.request.httpPost(this.requestUrl.deviceSearch, {
         pipeId: pipeId,

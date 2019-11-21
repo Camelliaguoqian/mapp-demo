@@ -1,6 +1,6 @@
 <template>
   <div class="task-query-page page">
-    <van-nav-bar title="任务详情" 
+    <van-nav-bar title="工单详情" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -9,22 +9,11 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        项目清单
-        <van-button class="panel-title-link" type="info" size="small" 
-        to="/taskSub/inspectionTodo">查看</van-button>
+        <span>工单编码: {{ orderCode }}</span>
       </div>
       <div class="page-panel-content">
         <!-- 简单信息列表组件 -->
         <simple-list :listdata="tasklistdata"></simple-list>
-        
-        <div class="page-wrapper">
-          <van-button 
-          type="info" 
-          size="large"
-          @click="onSignIn"
-          >签到</van-button>
-        </div>
-      
       </div>
     </van-panel>
 
@@ -53,7 +42,7 @@ Vue.use(NavBar)
 .use(Toast)
 
 export default {
-  name: 'TaskInspectionDetailPage',
+  name: 'TaskRepairDetailPage',
   components: {
     'simple-list': SimpleList
   },
@@ -62,22 +51,12 @@ export default {
   },
   data() {
     return {
+      orderCode: 'ZD091011-0045734',
+      btnType: '反馈', //签到 、反馈
       tasklistdata: [
         {
-          label: '任务编码',
-          value: 'GD-20191121-000001',
-        },
-        {
-          label: '任务名称',
-          value: '综合舱传感器巡检',
-        },
-        {
-          label: '巡检频次',
-          value: '日检',
-        },
-        {
-          label: '巡检方式',
-          value: '人工巡检类',
+          label: '工单名称',
+          value: '无线AP12巡检',
         },
         {
           label: '所属管廊',
@@ -88,15 +67,11 @@ export default {
           value: '综合舱',
         },
         {
-          label: '起始分区',
-          value: '01#',
+          label: '所属分区',
+          value: '分区06',
         },
         {
-          label: '终止分区',
-          value: '11#',
-        },
-        {
-          label: '巡检备注',
+          label: '工单备注',
           value: '',
         },
       ]
@@ -107,9 +82,7 @@ export default {
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
-    onSignIn() {
-      Toast("签到成功");
-    },
+    
   }
 }
 </script>

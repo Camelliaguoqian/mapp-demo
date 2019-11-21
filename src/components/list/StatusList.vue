@@ -4,6 +4,7 @@
     <van-cell
       v-for="item in listdata"
       :key="item.id"
+      :to="item.url"
       size="large" 
     >
       <template slot="default">
@@ -44,6 +45,7 @@ export default {
       content: String,
       status: Array,
       type: Array,
+      url: String,
     },
   },
   data() {

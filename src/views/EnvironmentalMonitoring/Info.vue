@@ -44,7 +44,7 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        综合舱001
+        综合舱
       </div>
       <div class="page-panel-content">
         <!-- 简单信息列表组件 -->
@@ -55,22 +55,22 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        综合中层001
+        综合中层
       </div>
       <div class="page-panel-content">
         <!-- 简单信息列表组件 -->
-        <simple-list :listdata="envlistdata"></simple-list>
+        <simple-list :listdata="envlistdatalayer01"></simple-list>
       </div>
     </van-panel>
 
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        综合中层002
+        综合中层
       </div>
       <div class="page-panel-content">
         <!-- 简单信息列表组件 -->
-        <simple-list :listdata="envlistdata"></simple-list>
+        <simple-list :listdata="envlistdatalayer02"></simple-list>
       </div>
     </van-panel>
 
@@ -129,13 +129,35 @@ export default {
           label: '氧气含量',
           value: '15%',
         },
+        
+      ],
+      envlistdatalayer01: [
         {
-          label: '甲烷含量',
-          value: '0.9%LEL',
+          label: '温度',
+          value: '33℃',
         },
         {
-          label: '硫化氢含量',
-          value: '16mg/m3',
+          label: '湿度',
+          value: '20%RH',
+        },
+        {
+          label: '氧气含量',
+          value: '22%',
+        },
+        
+      ],
+      envlistdatalayer02: [
+        {
+          label: '温度',
+          value: '76℃',
+        },
+        {
+          label: '湿度',
+          value: '29%RH',
+        },
+        {
+          label: '氧气含量',
+          value: '25%',
         },
         
       ]
@@ -293,11 +315,11 @@ export default {
     height: 30px;
     font-size: 18px;
     line-height: 30px;
-    color: #666;
+    color: #6888c7;
   }
 
   .zone-list-wrapper {
-    height: 300px;
+    height: 500px;
     overflow-y: scroll;
   }
 

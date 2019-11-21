@@ -318,6 +318,18 @@ export default {
       this.zoneName = zoneName;
       switch(zoneName) {
         case '01#':
+          this.zoneId = '201';
+          break;
+        case '02#':
+          this.zoneId = '202';
+          break;
+        case '03#':
+          this.zoneId = '203';
+          break;
+        case '04#':
+          this.zoneId = '204';
+          break;
+        case '05#':
           this.zoneId = '205';
           break;
       }
@@ -338,6 +350,18 @@ export default {
     },
     onConfirmCabin: function(cabinName) {
       this.cabinName = cabinName;
+      switch(cabinName) {
+        case '综合舱001':
+          this.cabinId = '601';
+          break;
+        case '综合中层001':
+          this.cabinId = '612';
+          break;
+        case '综合中层002':
+          this.cabinId = '613';
+          break;
+        
+      }
       this.showCabinPicker = false;
     },
     onConfirmSystem: function(system) {
@@ -348,17 +372,18 @@ export default {
     },
     onConfirmDeviceType: function(deviceType) {
       this.deviceType = deviceType;
+      this.devTypeId = '104027';
       this.showDeviceTypePicker = false;
     },
-    onSubmit: function (e) {
+    onSubmit: function (e) { console.log(this.pipeId + ''+ this.zoneId+ ''+ this.cabinId+''+this.systemId+ ''+ this.devTypeId);
       e.preventDefault();
       //校验
       if(this.pipeId == ''
-      && this.zoneId == ''
-      && this.cabinId == ''
-      && this.systemId == ''
-      && this.devTypeId == ''){
-        this.$toast("请至少选择一项查询条件");
+      || this.zoneId == ''
+      || this.cabinId == ''
+      || this.systemId == ''
+      || this.devTypeId == ''){
+        this.$toast("请选择所有必填选择");
         return false;
       }else {
         //带参数的跳转页面

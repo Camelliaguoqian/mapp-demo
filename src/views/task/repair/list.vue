@@ -64,14 +64,14 @@ export default {
       unhandlelistdata: [
         {
           id: '1',
-          code: 'GD111111',
+          code: 'GD-20191121-000001',
           time: '2019-01-02 12:00:00',
           title: '无线AP',
           url: '/taskSub/repairDetail',
         },
         {
           id: '2',
-          code: 'GD222222',
+          code: 'GD-20191121-000002',
           time: '2019-01-03 16:00:00',
           title: '声光报警器08',
           url: '/taskSub/repairDetail',
@@ -80,14 +80,14 @@ export default {
       handlinglistdata: [
         {
           id: '3',
-          code: 'GD333333',
+          code: 'GD-20191121-000003',
           time: '2019-01-02 12:00:00',
           title: '门禁控制器20',
           url: '/taskSub/repairDetail',
         },
         {
           id: '4',
-          code: 'GD444444',
+          code: 'GD-20191121-000004',
           time: '2019-01-03 16:00:00',
           title: '声光报警器08',
           url: '/taskSub/repairDetail',
@@ -96,14 +96,14 @@ export default {
       handledlistdata: [
         {
           id: '5',
-          code: 'GD555555',
+          code: 'GD-20191121-000005',
           time: '2019-01-02 12:00:00',
           title: '门禁控制器66',
           url: '/taskSub/repairDetail',
         },
         {
           id: '6',
-          code: 'GD666666',
+          code: 'GD-20191121-000006',
           time: '2019-01-03 16:00:00',
           title: '门禁控制器11',
           url: '/taskSub/repairDetail',
@@ -122,6 +122,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
+  padding: 46px 0 0 0;
   &-wrapper {
     padding: 0 10px;
     margin: 10px auto;

@@ -28,9 +28,9 @@
     </van-cell-group>
 
     <van-cell-group class="cell-group-list">
-      <van-cell icon="service-o" title="咨询帮助" is-link />
-      <van-cell icon="comment-o" title="问题反馈" is-link />
-      <van-cell icon="desktop-o" title="关于" is-link />
+      <van-cell icon="service-o" title="咨询帮助" is-link to="help" />
+      <!-- <van-cell icon="comment-o" title="问题反馈" is-link /> -->
+      <van-cell icon="desktop-o" title="关于" is-link to="about" />
     </van-cell-group>
 
     <!-- 退出登录 -->
@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       userAvatarUrl: require('assets/image/user/avatar.png'),
-      userName: '王丽丽',
+      userName: '系统管理员',
       telCode: '15223231111'
     }
   },
