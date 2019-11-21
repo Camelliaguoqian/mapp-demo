@@ -1,6 +1,6 @@
 <template>
   <div class="page-inner">
-    <van-nav-bar title="告警消息" 
+    <van-nav-bar title="报警消息" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -40,14 +40,14 @@ export default {
       alarmlist: [
         {
           id: '1',
-          title: '黑龙江路 04# 综合舱 温度告警',
+          title: '黑龙江路 04# 综合舱 温度报警',
           time: '2019-10-08 09：00：00',
           system: '监控与报警系统',
           url: '/message/messageAlarmDetail',
         },
         {
           id: '2',
-          title: '黑龙江路 01# 综合舱 湿度告警',
+          title: '黑龙江路 01# 综合舱 湿度报警',
           time: '2019-10-09 09：00：00',
           system: '监控与报警系统',
           url: '/message/messageAlarmDetail',

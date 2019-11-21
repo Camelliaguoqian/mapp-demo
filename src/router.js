@@ -293,6 +293,15 @@ const routes = [
     }
   },
   {
+    path: '/alarmQueryDetail',
+    name: 'alarmQueryDetail',
+    component: () => import('./views/AlarmQuery/Detail.vue'),
+    meta: {
+      title: 'alarmQueryDetail',
+      isShowFooter: false
+    }
+  },
+  {
     path: '/pipeQuery',
     name: 'pipeQuery',
     component: () => import('./views/PipeQuery/Index.vue'),

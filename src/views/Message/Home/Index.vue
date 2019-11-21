@@ -5,13 +5,13 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        告警分析
+        报警分析
       </div>
       <div class="page-panel-content page-icon-panel-content">
         <van-tabs v-model="activeName">
           <van-tab name="todayAlarm">
             <div slot="title">
-              <van-icon name="bulb-o" />今日告警
+              <van-icon name="bulb-o" />今日报警
             </div>
             <!-- 内容 -->
             <div class="pd-top-10">
@@ -60,7 +60,7 @@
           </van-tab>
           <van-tab name="historyAlarm">
             <div slot="title">
-              <van-icon name="bulb-o" />历史告警
+              <van-icon name="bulb-o" />历史报警
             </div>
             <!-- 内容 -->
             <div class="pd-top-10">

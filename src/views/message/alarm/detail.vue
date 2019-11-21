@@ -1,6 +1,6 @@
 <template>
   <div class="page-inner">
-    <van-nav-bar title="告警详情" 
+    <van-nav-bar title="报警详情" 
     fixed 
     :zIndex="100" 
     left-arrow 
@@ -9,7 +9,7 @@
     <van-panel class="page-panel page-icon-panel">
       <div class="panel-title van-hairline--bottom" slot="header">
         <van-icon class="panel-title-icon" name="diamond" />
-        告警详情
+        报警详情
       </div>
       <div class="page-panel-content">
         <!-- 简单信息列表组件 -->

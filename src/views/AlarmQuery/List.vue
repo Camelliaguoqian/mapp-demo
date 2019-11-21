@@ -43,12 +43,44 @@ export default {
   },
   data() {
     return {
-      alarmquerylist: [],
+      alarmquerylist: [{
+        id: '1',
+        title: '综合舱氧气浓度过低',
+        time: '报警时间：2019-11-06 12:00:24',
+        content: '报警位置：综合舱 01#',
+        status: '一级',
+        type: 'danger',
+        url: 'alarmQueryDetail'
+      },{
+        id: '2',
+        title: '综合舱温度过高',
+        time: '报警时间：2019-11-05 06:00:00',
+        content: '报警位置：综合舱 02#',
+        status: '二级',
+        type: 'warning',
+        url: 'alarmQueryDetail'
+      },{
+        id: '3',
+        title: '综合舱湿度过高',
+        time: '报警时间：2019-11-04 11:02:04',
+        content: '报警位置：综合舱 09#',
+        status: '三级',
+        type: 'primary',
+        url: 'alarmQueryDetail'
+      },{
+        id: '4',
+        title: '入侵报警',
+        time: '报警时间：2019-11-03 09:09:09',
+        content: '报警位置：综合舱 03#',
+        status: '四级',
+        type: 'success',
+        url: 'alarmQueryDetail'
+      }],
       isdatahide: 'hide'
     }
   },
   mounted: function() {
-    this.initData();
+    //this.initData();
   },
   methods: {
     initData: function() {
