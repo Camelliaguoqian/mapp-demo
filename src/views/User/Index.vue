@@ -15,7 +15,7 @@
             <li class="account-item">
               <van-icon class="account-item-icon" name="contact" />
               <span class="account-item-phone">{{ telCode }}</span>
-              <van-tag class="account-item-status" type="warning">审核中</van-tag>
+              <van-tag class="account-item-status" type="warning">管理员</van-tag>
             </li>
           </ul>
         </van-col>

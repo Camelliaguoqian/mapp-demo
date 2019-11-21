@@ -21,27 +21,27 @@
         <van-row class="infomation-list">
           <van-col class="infomation-list-item van-hairline--surround" span="6">
             <div class="item-label">已完成</div>
-            <div class="item-value">2</div>
+            <div class="item-value">3</div>
           </van-col>
           <van-col class="infomation-list-item van-hairline--surround" span="6">
             <div class="item-label">执行中</div>
-            <div class="item-value">6</div>
+            <div class="item-value">7</div>
           </van-col>
           <van-col class="infomation-list-item van-hairline--surround" span="6">
             <div class="item-label">未完成</div>
-            <div class="item-value">4</div>
+            <div class="item-value">2</div>
           </van-col>
           <van-col class="infomation-list-item van-hairline--surround" span="6">
             <div class="item-label">完成度</div>
             <div class="item-value">
               <van-circle
-                v-model="currentRate"
+                v-model="currentRate0"
                 size="50px"
                 :color="gradientColor"
                 layer-color="#f8f8f8"
-                :rate="30"
+                :rate="25"
                 :speed="100"         
-                :text="text"
+                :text="text0"
               />
             </div>
           </van-col>
@@ -76,24 +76,24 @@
 
         <van-row class="infomation-list">
           <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">正常任务数</div>
+            <div class="item-label">正常</div>
             <div class="item-value">8</div>
           </van-col>
           <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">异常任务数</div>
+            <div class="item-label">异常</div>
             <div class="item-value">4</div>
           </van-col>       
           <van-col class="infomation-list-item van-hairline--surround" span="8">
             <div class="item-label">异常占比</div>
             <div class="item-value">
               <van-circle
-                v-model="currentRate"
+                v-model="currentRate1"
                 size="50px"
                 :color="gradientColor"
                 layer-color="#f8f8f8"
                 :rate="33.3"
                 :speed="100"         
-                :text="text"
+                :text="text1"
               />
             </div>
           </van-col>
@@ -131,13 +131,13 @@
             <div class="item-label">完成度</div>
             <div class="item-value">
               <van-circle
-                v-model="currentRate"
+                v-model="currentRate2"
                 size="50px"
                 :color="gradientColor"
                 layer-color="#f8f8f8"
                 :rate="16.7"
                 :speed="100"         
-                :text="text"
+                :text="text2"
               />
             </div>
           </van-col>
@@ -145,24 +145,24 @@
 
         <van-row class="infomation-list">
           <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">正常任务数</div>
+            <div class="item-label">正常</div>
             <div class="item-value">2</div>
           </van-col>
           <van-col class="infomation-list-item van-hairline--surround" span="8">
-            <div class="item-label">异常任务数</div>
-            <div class="item-value">4</div>
+            <div class="item-label">异常</div>
+            <div class="item-value">5</div>
           </van-col>       
           <van-col class="infomation-list-item van-hairline--surround" span="8">
             <div class="item-label">异常占比</div>
             <div class="item-value">
               <van-circle
-                v-model="currentRate"
+                v-model="currentRate3"
                 size="50px"
                 :color="gradientColor"
                 layer-color="#f8f8f8"
-                :rate="16.7"
+                :rate="41.7"
                 :speed="100"         
-                :text="text"
+                :text="text3"
               />
             </div>
           </van-col>
@@ -223,7 +223,10 @@ export default {
   },
   data () {
     return {
-      currentRate: 0,
+      currentRate0: 0,
+      currentRate1: 0,
+      currentRate2: 0,
+      currentRate3: 0,
       gradientColor: {
         '0%': '#3fecff',
         '100%': '#6149f6'
@@ -252,9 +255,19 @@ export default {
     }
   },
   computed: {
-    text() {
-      return this.currentRate.toFixed(0) + '%';
+    text0() {
+      return this.currentRate0.toFixed(0) + '%';
+    },
+    text1() {
+      return this.currentRate1.toFixed(0) + '%';
+    },
+    text2() {
+      return this.currentRate2.toFixed(0) + '%';
+    },
+    text3() {
+      return this.currentRate3.toFixed(0) + '%';
     }
+    
   },
   methods: {
     onClickNavLink: function () {
