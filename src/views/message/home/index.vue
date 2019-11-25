@@ -212,7 +212,7 @@ export default {
     }
   },
   mounted: function() {
-    //this.getNoticeData();
+    this.getNoticeData();
   },
   methods: {
     //通知消息- 查询所有消息时，isRead='';查询未读消息时，isRead='0'

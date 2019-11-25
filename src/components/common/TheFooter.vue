@@ -43,11 +43,11 @@ export default {
   data() {
     return {
       active: 'home',
-      NoticeNum: '8'
+      NoticeNum: ''
     }
   },
   mounted: function() {
-    //this.getNoticeNum();
+    this.getNoticeNum();
   },
   methods: {
     //通知消息- 查询所有消息时，isRead='';查询未读消息时，isRead='0'

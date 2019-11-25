@@ -43,7 +43,8 @@ export default {
   },
   data() {
     return {
-      alarmquerylist: [{
+      alarmquerylist: [],
+      alarmquerylist0: [{
         id: '1',
         title: '综合舱氧气浓度过低',
         time: '报警时间：2019-11-06 12:00:24',
@@ -80,7 +81,7 @@ export default {
     }
   },
   mounted: function() {
-    //this.initData();
+    this.initData();
   },
   methods: {
     initData: function() {
